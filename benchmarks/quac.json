@@ -1,0 +1,24 @@
+{
+  "name": "quac",
+  "description": "Question Answering in Context",
+  "version": "1.0",
+  "citation": "Choi et al., 2018",
+  "input_format": {
+    "question": "str",
+    "context": "str",
+    "conversation": "List[Dict]",
+    "can_retrieve": "bool"
+  },
+  "output_fields": [
+    "ambiguous_utterance",
+    "total_candidates",
+    "explanation",
+    "conditions"
+  ],
+  "metrics": [
+    "ambiguity_accuracy",
+    "condition_f1",
+    "candidate_count_mae",
+    "explanation_bleu"
+  ]
+}
