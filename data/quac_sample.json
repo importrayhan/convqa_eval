@@ -1,0 +1,30 @@
+[
+  {
+    "id": "quac_001",
+    "question": "What did he do after that?",
+    "context": "John went to the store. He bought some groceries. Then he went home.",
+    "conversation": [
+      {"speaker": "USER", "text": "Tell me about John"},
+      {"speaker": "SYSTEM", "text": "John is a person who went shopping"}
+    ],
+    "can_retrieve": true,
+    "ambiguous_utterance": true,
+    "total_candidates": 2,
+    "explanation": "The pronoun 'he' is ambiguous without context",
+    "conditions": {
+      "referent_unclear": "Need to identify who 'he' refers to",
+      "temporal_sequence": "Need to determine which action comes 'after'"
+    }
+  },
+  {
+    "id": "quac_002",
+    "question": "Where is the Eiffel Tower located?",
+    "context": "The Eiffel Tower is an iron lattice tower in Paris, France.",
+    "conversation": [],
+    "can_retrieve": false,
+    "ambiguous_utterance": false,
+    "total_candidates": 1,
+    "explanation": "Direct factual question with clear answer",
+    "conditions": {}
+  }
+]
