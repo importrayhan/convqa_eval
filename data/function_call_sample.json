@@ -1,0 +1,116 @@
+[
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "Search for hotels in Tokyo for next weekend"
+      },
+      {
+        "from": "function_call",
+        "value": "search_hotels(location='Tokyo', check_in='2026-02-13', check_out='2026-02-15')"
+      },
+      {
+        "from": "observation",
+        "value": "Found 12 hotels in Tokyo. Price range: $80-$500 per night."
+      },
+      {
+        "from": "gpt",
+        "value": "I found 12 hotels in Tokyo for next weekend, with prices ranging from $80 to $500 per night. Would you like to see specific options, or do you have a budget preference?"
+      },
+      {
+        "from": "human",
+        "value": "Show me mid-range ones"
+      },
+      {
+        "from": "gpt",
+        "value": "Here are some mid-range options around $150-$250: Hotel Gracery Shinjuku ($180/night), Shibuya Excel Hotel ($210/night), and Akasaka Excel Hotel ($190/night). All have great reviews."
+      }
+    ],
+    "system": "You are a helpful travel assistant with access to booking tools",
+    "tools": "search_hotels, book_hotel, check_availability"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "What's the weather like today?"
+      },
+      {
+        "from": "function_call",
+        "value": "get_weather(location='current', date='today')"
+      },
+      {
+        "from": "observation",
+        "value": "Temperature: 15°C, Condition: Partly cloudy, Humidity: 65%, Wind: 10 km/h"
+      },
+      {
+        "from": "gpt",
+        "value": "It's currently 15°C with partly cloudy skies. The humidity is at 65% with light winds around 10 km/h. A pleasant day overall!"
+      },
+      {
+        "from": "human",
+        "value": "Will it rain?"
+      },
+      {
+        "from": "function_call",
+        "value": "get_forecast(location='current', hours=24)"
+      },
+      {
+        "from": "observation",
+        "value": "Next 24 hours: 20% chance of rain at 6 PM, otherwise clear"
+      },
+      {
+        "from": "gpt",
+        "value": "There's only a 20% chance of rain around 6 PM today. Otherwise, it should stay clear. You probably won't need an umbrella, but you might want to check again closer to evening."
+      }
+    ],
+    "system": "You are a weather assistant",
+    "tools": "get_weather, get_forecast, get_alerts"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "Calculate 15% tip on $84.50"
+      },
+      {
+        "from": "function_call",
+        "value": "calculate(expression='84.50 * 0.15')"
+      },
+      {
+        "from": "observation",
+        "value": "Result: 12.68"
+      },
+      {
+        "from": "gpt",
+        "value": "A 15% tip on $84.50 would be $12.68, making your total $97.18."
+      },
+      {
+        "from": "human",
+        "value": "What about 20%?"
+      },
+      {
+        "from": "function_call",
+        "value": "calculate(expression='84.50 * 0.20')"
+      },
+      {
+        "from": "observation",
+        "value": "Result: 16.90"
+      },
+      {
+        "from": "gpt",
+        "value": "For a 20% tip, that would be $16.90, bringing your total to $101.40."
+      },
+      {
+        "from": "human",
+        "value": "Thanks"
+      },
+      {
+        "from": "gpt",
+        "value": "You're welcome! Enjoy your meal!"
+      }
+    ],
+    "system": "You are a helpful calculator assistant",
+    "tools": "calculate, convert_currency"
+  }
+]
