@@ -1,249 +1,157 @@
 """
-Preprocessor for MuSIc-style SIP with Function Calls
-Handles human/observation (odd) and gpt/function (even) positions
+Preprocessor for MuSIc SIP Model
+
+Key Points from Paper:
+- Process utterances SEQUENTIALLY (no odd/even distinction)
+- During training: Use X1:T (all utterances including current system)
+- During inference: Use X1:T-1 (hide the unobservable system utterance at turn T)
+- User and system utterances alternate: [user1, sys1, user2, sys2, ...]
 """
 
 import json
 import torch
-from typing import List, Dict, Tuple, Optional
-from collections import Counter
+from typing import List, Dict, Tuple
 from transformers import BertTokenizer
-import numpy as np
 
 
-class MuSIcPreprocessor:
+class SIPPreprocessor:
     """
-    Preprocesses conversation data for MuSIc SIP model.
+    Preprocesses conversation data for SIP (System Initiative Prediction).
     
-    Data Format:
-        - human/observation: Odd positions (1, 3, 5, ...)
-        - gpt/function_call: Even positions (2, 4, 6, ...)
-        - Model learns to predict gpt/function responses
+    Format: Alternating user-system utterances
+    - Turn 1: user_utterance_1, system_utterance_1
+    - Turn 2: user_utterance_2, system_utterance_2
+    - ...
     
-    Turn Structure:
-        Turn 1: human (odd) → gpt/function (even)
-        Turn 2: observation (odd) → gpt/function (even)
-        ...
+    Each turn has:
+    - user_utterance: Input from user
+    - system_utterance: System response  
+    - system_I_label: Whether system takes initiative (0/1)
     """
     
     def __init__(
         self,
         bert_model: str = 'bert-base-multilingual-cased',
-        max_len: int = 128,
-        num_tags: int = 2
+        max_len: int = 128
     ):
-        """
-        Initialize preprocessor.
-        
-        Args:
-            bert_model: BERT model name
-            max_len: Maximum sequence length
-            num_tags: Number of SIP tags (2=binary initiative)
-        """
-        print(f"[MuSIcPreprocessor] Initializing...")
+        print(f"[SIPPreprocessor] Initializing...")
         print(f"  BERT model: {bert_model}")
         print(f"  Max length: {max_len}")
-        print(f"  Num tags: {num_tags}")
         
         self.tokenizer = BertTokenizer.from_pretrained(bert_model)
         self.max_len = max_len
-        self.num_tags = num_tags
         
-        print(f"[MuSIcPreprocessor] Initialized successfully")
+        print(f"[SIPPreprocessor] Initialized\n")
     
-    def parse_conversations(self, data: Dict) -> Tuple[List[str], List[str], List[str]]:
+    def parse_conversations(self, data: Dict) -> Tuple[List[str], List[str]]:
         """
-        Parse conversation data into odd/even positions.
+        Parse conversation into user-system pairs.
+        
+        From your format:
+        [human, function_call, observation, gpt, human, gpt, ...]
+        
+        We convert to alternating user-system:
+        - Merge (human + observation) -> user context
+        - Merge (function_call + gpt) -> system response
         
         Args:
-            data: Conversation dictionary
+            data: Conversation dict with 'conversations' list
         
         Returns:
-            odd_utterances: human/observation (input context)
-            even_utterances: gpt/function (model predictions)
-            turn_types: Type of each turn (human/observation/gpt/function)
+            user_utterances: List of user utterances
+            system_utterances: List of system responses
         """
         conversations = data.get('conversations', [])
         
-        odd_utterances = []  # human/observation
-        even_utterances = []  # gpt/function
-        turn_types = []
+        user_utterances = []
+        system_utterances = []
         
-        for i, turn in enumerate(conversations):
-            role = turn.get('from', '')
-            text = turn.get('value', '')
+        i = 0
+        while i < len(conversations):
+            # Collect user context (human + possibly observation)
+            user_parts = []
             
-            if i % 2 == 0:  # Odd position (0-indexed, so even index = position 1, 3, 5...)
-                # Should be human or observation
-                if role not in ['human', 'observation']:
-                    print(f"  Warning: Expected human/observation at position {i+1}, got {role}")
-                odd_utterances.append(text)
-                turn_types.append(role)
-            else:  # Even position (position 2, 4, 6...)
-                # Should be gpt or function_call
-                if role not in ['gpt', 'function_call']:
-                    print(f"  Warning: Expected gpt/function_call at position {i+1}, got {role}")
-                even_utterances.append(text)
-                turn_types.append(role)
+            # First should be human
+            if i < len(conversations) and conversations[i]['from'] == 'human':
+                user_parts.append(conversations[i]['value'])
+                i += 1
+            
+            # System response (function_call + gpt, or just gpt)
+            system_parts = []
+            
+            # Might be function_call
+            if i < len(conversations) and conversations[i]['from'] == 'function_call':
+                system_parts.append(f"[TOOL] {conversations[i]['value']}")
+                i += 1
+            
+            # Then observation (becomes part of next user context)
+            if i < len(conversations) and conversations[i]['from'] == 'observation':
+                user_parts.append(f"[RESULT] {conversations[i]['value']}")
+                i += 1
+            
+            # Then gpt response
+            if i < len(conversations) and conversations[i]['from'] == 'gpt':
+                system_parts.append(conversations[i]['value'])
+                i += 1
+            
+            # Create turn pair
+            if user_parts and system_parts:
+                user_utterances.append(' '.join(user_parts))
+                system_utterances.append(' '.join(system_parts))
         
-        return odd_utterances, even_utterances, turn_types
+        return user_utterances, system_utterances
     
     def detect_initiative(
         self,
-        even_utterance: str,
-        turn_type: str,
+        system_utterance: str,
+        user_utterance: str,
         context: List[str]
     ) -> int:
         """
-        Detect if system takes initiative at this turn.
+        Detect if system takes initiative.
         
         Initiative indicators:
-        - Function calls (proactive tool use)
-        - Clarification questions
-        - Suggestions/recommendations
-        - Asking for more information
+        - Contains [TOOL] (function call)
+        - Asks clarification questions
+        - Makes proactive suggestions
         
         Args:
-            even_utterance: gpt/function response
-            turn_type: 'gpt' or 'function_call'
+            system_utterance: System's response
+            user_utterance: User's input
             context: Previous utterances
         
         Returns:
-            Initiative label (0=no initiative, 1=takes initiative)
+            1 if takes initiative, 0 otherwise
         """
-        text_lower = even_utterance.lower().strip()
-        
         # Function calls always indicate initiative
-        if turn_type == 'function_call':
+        if '[TOOL]' in system_utterance:
             return 1
         
-        # For gpt responses, check for initiative patterns
-        initiative_score = 0
+        system_lower = system_utterance.lower()
         
-        # 1. Clarification questions
+        # Clarification questions
         clarification_patterns = [
             'could you clarify', 'can you specify', 'do you mean',
-            'which one', 'what do you mean by', 'to clarify'
+            'which one', 'what do you mean', 'could you tell me more'
         ]
-        if any(pattern in text_lower for pattern in clarification_patterns):
-            initiative_score += 2
+        if any(p in system_lower for p in clarification_patterns):
+            return 1
         
-        # 2. Proactive suggestions
+        # Proactive suggestions
         suggestion_patterns = [
             'i suggest', 'i recommend', 'you might want',
-            'have you considered', 'you could also', 'let me help'
+            'have you considered', 'would you like', 'shall i'
         ]
-        if any(pattern in text_lower for pattern in suggestion_patterns):
-            initiative_score += 2
+        if any(p in system_lower for p in suggestion_patterns):
+            return 1
         
-        # 3. Questions (proactive engagement)
-        if '?' in even_utterance:
-            initiative_score += 1
+        # Questions asking for more info
+        if '?' in system_utterance and any(
+            word in system_lower for word in ['would', 'could', 'should', 'do you']
+        ):
+            return 1
         
-        # 4. Tool mention (even without calling)
-        tool_patterns = ['use a tool', 'call', 'function', 'search', 'fetch']
-        if any(pattern in text_lower for pattern in tool_patterns):
-            initiative_score += 1
-        
-        return 1 if initiative_score >= 2 else 0
-    
-    def extract_multiturn_features(
-        self,
-        turn_idx: int,
-        initiative_history: List[int],
-        turn_types: List[str]
-    ) -> Dict[str, int]:
-        """
-        Extract multi-turn features for CRF.
-        
-        Features:
-        1. Who2Who: odd→even (human/observation→gpt/function) vs even→odd
-        2. Position: Turn position in conversation (1→2, 2→3, etc.)
-        3. Initiative Count (Intime): Number of prior system initiatives
-        4. Initiative Distance: Distance from last system initiative
-        
-        Args:
-            turn_idx: Current turn index (0-based)
-            initiative_history: History of system initiatives
-            turn_types: Types of each turn
-        
-        Returns:
-            Feature dictionary
-        """
-        features = {
-            'who2who': -1,
-            'position': -1,
-            'intime': -1,
-            'distance': -1
-        }
-        
-        # First turn has no transitions
-        if turn_idx == 0:
-            return features
-        
-        # Who2Who: Check if previous turn is odd or even
-        # Odd positions (human/observation) are at even indices
-        # Even positions (gpt/function) are at odd indices
-        prev_is_odd = (turn_idx - 1) % 2 == 0
-        curr_is_odd = turn_idx % 2 == 0
-        
-        if prev_is_odd and not curr_is_odd:
-            features['who2who'] = 0  # odd→even (user→system)
-        elif not prev_is_odd and curr_is_odd:
-            features['who2who'] = 1  # even→odd (system→user)
-        else:
-            features['who2who'] = 2  # Same type (shouldn't happen)
-        
-        # Position (0-indexed, up to 19)
-        position_idx = turn_idx - 1
-        if position_idx < 20:
-            features['position'] = position_idx
-        
-        # Only compute initiative features for even positions (system turns)
-        if turn_idx % 2 == 1:  # Even position (gpt/function)
-            # Count prior system initiatives
-            system_turn_idx = turn_idx // 2
-            prior_initiatives = sum(initiative_history[:system_turn_idx])
-            
-            if prior_initiatives == 0:
-                features['intime'] = 0
-            elif prior_initiatives == 1:
-                features['intime'] = 1
-            else:
-                features['intime'] = 2
-            
-            # Distance from last initiative
-            if prior_initiatives > 0:
-                # Find last initiative position
-                last_init_pos = -1
-                for i in range(system_turn_idx - 1, -1, -1):
-                    if initiative_history[i] == 1:
-                        last_init_pos = i * 2 + 1  # Convert to turn index
-                        break
-                
-                if last_init_pos >= 0:
-                    distance = turn_idx - last_init_pos
-                    if distance == 2:
-                        features['distance'] = 0  # Consecutive
-                    else:
-                        features['distance'] = 1  # Non-consecutive
-        
-        return features
-    
-    def tokenize_bert(self, text: str) -> Tuple[List[int], List[int]]:
-        """Tokenize text using BERT."""
-        encoding = self.tokenizer(
-            text,
-            max_length=self.max_len,
-            padding='max_length',
-            truncation=True,
-            return_tensors='pt'
-        )
-        
-        input_ids = encoding['input_ids'].squeeze(0).tolist()
-        attention_mask = encoding['attention_mask'].squeeze(0).tolist()
-        
-        return input_ids, attention_mask
+        return 0
     
     def process_conversation(
         self,
@@ -253,150 +161,108 @@ class MuSIcPreprocessor:
         """
         Process a single conversation.
         
-        Args:
-            data: Conversation dictionary
-            auto_label: Automatically generate initiative labels
-        
         Returns:
-            Processed data with:
-                - odd_utterances: human/observation texts
-                - even_utterances: gpt/function texts
-                - odd_tokens/masks: Tokenized odd utterances
-                - even_tokens/masks: Tokenized even utterances
-                - system_I_labels: Initiative labels for even positions
-                - multiturn_features: Features for each turn
-                - metadata: Conversation metadata
+            user_utterance: [num_pairs, max_len] - tokenized user utterances
+            system_utterance: [num_pairs, max_len] - tokenized system utterances  
+            user_I_label: [num_pairs] - always 0 (users don't take initiative)
+            system_I_label: [num_pairs] - initiative labels for system
+            metadata: conversation metadata
         """
-        print(f"\n[MuSIcPreprocessor] Processing conversation...")
+        print(f"\n[Process] Processing conversation...")
         
-        # Parse conversations
-        odd_utterances, even_utterances, turn_types = self.parse_conversations(data)
+        # Parse into user-system pairs
+        user_utterances, system_utterances = self.parse_conversations(data)
+        num_pairs = len(user_utterances)
         
-        num_pairs = min(len(odd_utterances), len(even_utterances))
-        odd_utterances = odd_utterances[:num_pairs]
-        even_utterances = even_utterances[:num_pairs]
-        
-        print(f"  Found {num_pairs} turn pairs")
-        print(f"  Odd positions (input): {len(odd_utterances)}")
-        print(f"  Even positions (system): {len(even_utterances)}")
+        print(f"  Found {num_pairs} user-system pairs")
         
         # Tokenize
-        odd_tokens = []
-        even_tokens = []
-        odd_masks = []
-        even_masks = []
+        user_tokens = []
+        system_tokens = []
         
-        for odd_text, even_text in zip(odd_utterances, even_utterances):
-            odd_ids, odd_mask = self.tokenize_bert(odd_text)
-            even_ids, even_mask = self.tokenize_bert(even_text)
+        for user_text, system_text in zip(user_utterances, system_utterances):
+            # User
+            user_enc = self.tokenizer(
+                user_text,
+                max_length=self.max_len,
+                padding='max_length',
+                truncation=True,
+                return_tensors='pt'
+            )
+            user_tokens.append(user_enc['input_ids'].squeeze(0))
             
-            odd_tokens.append(odd_ids)
-            even_tokens.append(even_ids)
-            odd_masks.append(odd_mask)
-            even_masks.append(even_mask)
+            # System
+            system_enc = self.tokenizer(
+                system_text,
+                max_length=self.max_len,
+                padding='max_length',
+                truncation=True,
+                return_tensors='pt'
+            )
+            system_tokens.append(system_enc['input_ids'].squeeze(0))
         
-        # Generate initiative labels (only for even positions - system turns)
+        # Generate labels
+        user_I_labels = [0] * num_pairs  # Users never take initiative
         system_I_labels = []
-        odd_I_labels = []  # Always 0 for user turns
         
         if auto_label:
             context = []
             for i in range(num_pairs):
-                # Odd position (user/observation) - no initiative
-                odd_I_labels.append(0)
-                context.append(odd_utterances[i])
-                
-                # Even position (system) - detect initiative
-                turn_type = turn_types[i*2 + 1] if i*2 + 1 < len(turn_types) else 'gpt'
-                initiative = self.detect_initiative(even_utterances[i], turn_type, context)
+                # Detect system initiative
+                initiative = self.detect_initiative(
+                    system_utterances[i],
+                    user_utterances[i],
+                    context
+                )
                 system_I_labels.append(initiative)
-                context.append(even_utterances[i])
                 
-                print(f"  Turn {i+1}: {turn_types[i*2] if i*2 < len(turn_types) else 'unknown'} → {turn_type}, Initiative={initiative}")
+                # Update context
+                context.extend([user_utterances[i], system_utterances[i]])
+                
+                print(f"  Pair {i+1}: Initiative={initiative}")
         else:
-            odd_I_labels = [0] * num_pairs
             system_I_labels = [0] * num_pairs
         
-        # Extract multi-turn features
-        multiturn_features = []
-        total_turns = num_pairs * 2
+        # Stack tensors
+        user_tokens_tensor = torch.stack(user_tokens)  # [num_pairs, max_len]
+        system_tokens_tensor = torch.stack(system_tokens)
         
-        for turn_idx in range(total_turns):
-            system_turn_idx = turn_idx // 2
-            features = self.extract_multiturn_features(
-                turn_idx,
-                system_I_labels[:system_turn_idx],
-                turn_types
-            )
-            multiturn_features.append(features)
-        
-        # Metadata
         metadata = {
             'num_pairs': num_pairs,
-            'num_turns': total_turns,
             'system_initiatives': sum(system_I_labels),
-            'initiative_rate': sum(system_I_labels) / num_pairs if num_pairs > 0 else 0,
-            'system_prompt': data.get('system', ''),
-            'tools': data.get('tools', '')
+            'initiative_rate': sum(system_I_labels) / num_pairs if num_pairs > 0 else 0
         }
         
         result = {
-            'odd_utterances': odd_utterances,
-            'even_utterances': even_utterances,
-            'odd_tokens': odd_tokens,
-            'even_tokens': even_tokens,
-            'odd_masks': odd_masks,
-            'even_masks': even_masks,
-            'odd_I_labels': odd_I_labels,
-            'system_I_labels': system_I_labels,
-            'multiturn_features': multiturn_features,
-            'turn_types': turn_types,
+            'user_utterance': user_tokens_tensor,
+            'system_utterance': system_tokens_tensor,
+            'user_I_label': torch.tensor(user_I_labels, dtype=torch.long),
+            'system_I_label': torch.tensor(system_I_labels, dtype=torch.long),
             'metadata': metadata
         }
         
-        print(f"[MuSIcPreprocessor] Processing complete")
         print(f"  Metadata: {metadata}")
         
         return result
-    
-    def to_tensor_batch(self, processed_data: Dict) -> Dict:
-        """Convert processed data to PyTorch tensors."""
-        return {
-            'odd_utterance': torch.tensor([processed_data['odd_tokens']], dtype=torch.long),
-            'even_utterance': torch.tensor([processed_data['even_tokens']], dtype=torch.long),
-            'odd_mask': torch.tensor([processed_data['odd_masks']], dtype=torch.long),
-            'even_mask': torch.tensor([processed_data['even_masks']], dtype=torch.long),
-            'odd_I_label': torch.tensor([processed_data['odd_I_labels']], dtype=torch.long),
-            'system_I_label': torch.tensor([processed_data['system_I_labels']], dtype=torch.long),
-            'multiturn_features': processed_data['multiturn_features'],
-            'metadata': processed_data['metadata']
-        }
 
 
 if __name__ == "__main__":
-    # Test with new data format
+    # Test
     sample_data = {
         "conversations": [
-            {"from": "human", "value": "Search for flights to Paris"},
-            {"from": "function_call", "value": "search_flights(destination='Paris')"},
-            {"from": "observation", "value": "Found 5 flights to Paris"},
-            {"from": "gpt", "value": "I found 5 flights to Paris. Would you like to see options?"},
-            {"from": "human", "value": "Yes, show me the cheapest one"},
-            {"from": "gpt", "value": "The cheapest flight is $450 with Air France."}
-        ],
-        "system": "You are a helpful travel assistant",
-        "tools": "search_flights, book_flight"
+            {"from": "human", "value": "Book a hotel in Paris"},
+            {"from": "function_call", "value": "search_hotels(city='Paris')"},
+            {"from": "observation", "value": "Found 10 hotels"},
+            {"from": "gpt", "value": "I found 10 hotels. Would you like to see options?"},
+            {"from": "human", "value": "Yes please"},
+            {"from": "gpt", "value": "Here are the top 3: Hotel A, B, C"}
+        ]
     }
     
-    preprocessor = MuSIcPreprocessor(num_tags=2)
-    processed = preprocessor.process_conversation(sample_data, auto_label=True)
+    preprocessor = SIPPreprocessor()
+    processed = preprocessor.process_conversation(sample_data)
     
-    print("\n=== Processed Output ===")
-    print(f"Num pairs: {processed['metadata']['num_pairs']}")
-    print(f"System initiative labels: {processed['system_I_labels']}")
-    print(f"Initiative rate: {processed['metadata']['initiative_rate']:.1%}")
-    
-    # Show multi-turn features
-    print(f"\nMulti-turn features:")
-    for i, feat in enumerate(processed['multiturn_features'][:6]):
-        print(f"  Turn {i+1}: {feat}")
+    print("\n=== Output ===")
+    print(f"User utterances: {processed['user_utterance'].shape}")
+    print(f"System utterances: {processed['system_utterance'].shape}")
+    print(f"System I labels: {processed['system_I_label']}")
