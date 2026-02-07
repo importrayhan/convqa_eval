@@ -1,22 +1,50 @@
 [
   {
+    "prompt": "Help user book travel arrangements",
+    "context": "Travel booking assistant with access to flight and hotel search tools",
+    "can_retrieve": true,
+    "tools": "search_flights, search_hotels, book_flight, book_hotel, req_clarification(2-4)",
+    "ambiguous": "true",
+    "ambiguous_type": 2,
     "conversations": [
-      {"from": "human", "value": "I need to book a flight to Paris"},
+      {"from": "human", "value": "Book a flight to Paris"},
       {"from": "function_call", "value": "search_flights(destination='Paris')"},
-      {"from": "observation", "value": "Found 12 flights, prices $300-$800"},
-      {"from": "gpt", "value": "I found 12 flights to Paris ranging from $300 to $800. Would you like to see specific options or filter by time?"},
-      {"from": "human", "value": "Morning flights please"},
-      {"from": "gpt", "value": "Here are morning flights: Flight 1 at 8am ($450), Flight 2 at 9:30am ($520), Flight 3 at 11am ($380)."}
-    ]
+      {"from": "observation", "value": "Found 12 flights to Paris, prices $300-$800"},
+      {"from": "gpt", "value": "I found 12 flights. Would you like morning or evening departure?"},
+      {"from": "human", "value": "Morning"},
+      {"from": "gpt", "value": "Here are morning flights: 8AM ($450), 9:30AM ($520), 11AM ($380)"}
+    ],
+    "system": "You are a helpful travel booking assistant"
   },
   {
+    "prompt": "Provide weather information",
+    "context": "Weather assistant",
+    "can_retrieve": true,
+    "tools": "get_weather, get_forecast, req_clarification(2-4)",
+    "ambiguous": "false",
+    "ambiguous_type": 0,
     "conversations": [
-      {"from": "human", "value": "Check weather tomorrow"},
-      {"from": "function_call", "value": "get_weather(date='tomorrow')"},
-      {"from": "observation", "value": "Tomorrow: 22°C, sunny, wind 15km/h"},
-      {"from": "gpt", "value": "Tomorrow will be sunny with 22°C and light winds around 15km/h. Perfect weather!"},
-      {"from": "human", "value": "Thanks"},
-      {"from": "gpt", "value": "You're welcome! Enjoy your day!"}
+      {"from": "human", "value": "What's the weather in London tomorrow?"},
+      {"from": "function_call", "value": "get_weather(location='London', date='tomorrow')"},
+      {"from": "observation", "value": "London tomorrow: 15°C, cloudy, 60% rain chance"},
+      {"from": "gpt", "value": "Tomorrow in London will be 15°C and cloudy with 60% chance of rain"}
+    ],
+    "system": "You are a weather information assistant"
+  },
+  {
+    "prompt": "Help with calculations",
+    "context": "Calculator assistant",
+    "can_retrieve": false,
+    "tools": "calculate, convert_currency, req_clarification(2-4)",
+    "ambiguous": "true",
+    "ambiguous_type": 3,
+    "conversations": [
+      {"from": "human", "value": "Calculate it"},
+      {"from": "gpt", "value": "req_clarification(3)"},
+      {"from": "human", "value": "The tip on $84.50"},
+      {"from": "function_call", "value": "calculate(expression='84.50 * 0.15')"},
+      {"from": "observation", "value": "12.68"},
+      {"from": "gpt", "value": "15% tip is $12.68, total $97.18"}
     ]
   }
 ]
