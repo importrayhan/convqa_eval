@@ -1,0 +1,22 @@
+[
+  {
+    "conversations": [
+      {"from": "human", "value": "I need to book a flight to Paris"},
+      {"from": "function_call", "value": "search_flights(destination='Paris')"},
+      {"from": "observation", "value": "Found 12 flights, prices $300-$800"},
+      {"from": "gpt", "value": "I found 12 flights to Paris ranging from $300 to $800. Would you like to see specific options or filter by time?"},
+      {"from": "human", "value": "Morning flights please"},
+      {"from": "gpt", "value": "Here are morning flights: Flight 1 at 8am ($450), Flight 2 at 9:30am ($520), Flight 3 at 11am ($380)."}
+    ]
+  },
+  {
+    "conversations": [
+      {"from": "human", "value": "Check weather tomorrow"},
+      {"from": "function_call", "value": "get_weather(date='tomorrow')"},
+      {"from": "observation", "value": "Tomorrow: 22°C, sunny, wind 15km/h"},
+      {"from": "gpt", "value": "Tomorrow will be sunny with 22°C and light winds around 15km/h. Perfect weather!"},
+      {"from": "human", "value": "Thanks"},
+      {"from": "gpt", "value": "You're welcome! Enjoy your day!"}
+    ]
+  }
+]
