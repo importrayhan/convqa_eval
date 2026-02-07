@@ -12,8 +12,8 @@ import numpy as np
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from model.preprocessor import SIPPreprocessor
-from model.music_model import MuSIc
+from ..models.preprocessor import SIPPreprocessor
+from ..models.music_model import MuSIc
 
 class SIPDataset(Dataset):
     def __init__(self, processed_data):
