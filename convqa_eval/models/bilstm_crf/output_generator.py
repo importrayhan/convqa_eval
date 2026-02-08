@@ -13,7 +13,7 @@ Generates structured output with metadata:
 
 import torch
 import numpy as np
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 
 
 class SIPOutputGenerator:
