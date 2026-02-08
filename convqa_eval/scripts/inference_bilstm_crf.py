@@ -21,7 +21,7 @@ import numpy as np
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from models.bilstm_crf.preprocessor import SIPPreprocessor
-from models.bilstm_crf.music_baselines_complete import create_model
+from models.bilstm_crf.music_baselines import create_model
 from models.bilstm_crf.output_generator import SIPOutputGenerator
 
 
