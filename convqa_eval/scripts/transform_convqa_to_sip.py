@@ -1,80 +1,48 @@
 """
-Transform ConvQA JSON to SIP Format
+Revised ConvQA to SIP Transformation with Per-GPT Labels
 
-FIELD MAPPING:
-==============
+CRITICAL: Each GPT utterance gets its own ambiguous_type label!
 
-ConvQA → SIP:
--------------
-table.table → Used in observation field (formatted)
-paragraphs → context field (concatenated)
-questions → conversations list (multi-turn dialogue)
-questions[i].question → human value
-questions[i].answer → gpt value or req_clarification
-questions[i].req_clari → Determines if gpt requests clarification
-questions[i].original_question → Used for conditions generation
-questions[-1].req_clari or answer_type → ambiguous_type label
-
-Conversation Structure:
------------------------
-Turn 1: human asks → gpt responds (or req_clarification)
-Turn 2: human clarifies → gpt responds
-...
-Turn N: human asks → gpt responds (LABELED)
-
-For first turn with table:
-- human: question
-- function_call: "retrieve_table()"
-- observation: table content (formatted)
-- gpt: answer or req_clarification
-
-Label Extraction:
------------------
-- If req_clari=True → ambiguous_type=2 (needs clarification)
-- If answer_type='question' → ambiguous_type=3 (highly ambiguous)
-- If follow_up=True → ambiguous_type=1 (slightly ambiguous)
-- Otherwise → ambiguous_type=0 (clear)
+Output Format:
+{
+  "conversations": [
+    {"from": "human", "value": "...", "turn_id": 1},
+    {"from": "gpt", "value": "...", "turn_id": 1, "ambiguous_type": 2, "metadata": {...}},
+    {"from": "human", "value": "...", "turn_id": 2},
+    {"from": "gpt", "value": "...", "turn_id": 2, "ambiguous_type": 0, "metadata": {...}}
+  ],
+  "metadata": {
+    "num_turns": 2,
+    "turn_labels": [2, 0]
+  }
+}
 """
 
 import json
 import argparse
-from typing import Dict, List, Tuple, Any
+from typing import Dict, List, Tuple
 from pathlib import Path
 
 
 class ConvQAToSIPTransformer:
-    """Transform ConvQA format to SIP format"""
+    """Transform ConvQA with per-GPT labels"""
     
     def __init__(self):
-        # Class name mapping for 4-class configuration
         self.class_names = {
             0: "clear",
-            1: "slightly_ambiguous",  # follow_up questions
-            2: "needs_clarification",  # req_clari=True
-            3: "highly_ambiguous"      # answer_type='question'
+            1: "slightly_ambiguous",
+            2: "needs_clarification",
+            3: "highly_ambiguous"
         }
     
     def format_table(self, table_data: List[List[str]], max_rows: int = 10) -> str:
-        """
-        Format table data as readable string for observation field.
-        
-        Args:
-            table_data: 2D array of table content
-            max_rows: Maximum rows to include
-        
-        Returns:
-            Formatted table string
-        """
+        """Format table as text"""
         if not table_data:
             return ""
         
-        # Take first max_rows
         rows = table_data[:max_rows]
-        
-        # Simple text table format
         lines = []
         for row in rows:
-            # Clean and join cells
             cells = [str(cell).strip() for cell in row if str(cell).strip()]
             if cells:
                 lines.append(" | ".join(cells))
@@ -82,62 +50,24 @@ class ConvQAToSIPTransformer:
         return "\n".join(lines)
     
     def extract_context(self, paragraphs: List[Dict]) -> str:
-        """
-        Extract context from paragraphs.
-        
-        Args:
-            paragraphs: List of paragraph objects
-        
-        Returns:
-            Concatenated context string
-        """
+        """Extract context from paragraphs"""
         if not paragraphs:
             return ""
         
-        # Sort by order and concatenate
         sorted_paras = sorted(paragraphs, key=lambda p: p.get('order', 0))
         texts = [p.get('text', '') for p in sorted_paras]
         return " ".join(texts)
     
-    def determine_ambiguity_type(self, question: Dict, is_last: bool = False) -> int:
+    def determine_ambiguity_type(self, question: Dict) -> int:
         """
-        Determine ambiguity type from question metadata.
+        Determine ambiguity type for THIS specific question.
         
         Priority:
-        1. answer_type='question' → 3 (highly ambiguous)
-        2. req_clari=True → 2 (needs clarification)
-        3. follow_up=True → 1 (slightly ambiguous)
-        4. Otherwise → 0 (clear)
-        
-        Args:
-            question: Question object
-            is_last: Whether this is the last question (to be labeled)
-        
-        Returns:
-            Ambiguity type (0-3)
+        1. answer_type='question' → 3
+        2. req_clari=True → 2
+        3. follow_up=True → 1
+        4. Otherwise → 0
         """
-        # For last question, use its metadata to determine label
-        if is_last:
-            answer_type = question.get('answer_type', '')
-            req_clari = question.get('req_clari', False)
-            follow_up = question.get('follow_up', False)
-            
-            # Highest priority: answer is a question
-            if answer_type == 'question':
-                return 3
-            
-            # Requires clarification
-            if req_clari:
-                return 2
-            
-            # Follow-up question
-            if follow_up:
-                return 1
-            
-            # Clear
-            return 0
-        
-        # For non-last questions, same logic
         answer_type = question.get('answer_type', '')
         req_clari = question.get('req_clari', False)
         follow_up = question.get('follow_up', False)
@@ -151,215 +81,184 @@ class ConvQAToSIPTransformer:
         return 0
     
     def format_answer(self, question: Dict) -> str:
-        """
-        Format answer from question object.
-        
-        Args:
-            question: Question object
-        
-        Returns:
-            Formatted answer string
-        """
+        """Format answer from question"""
         answer = question.get('answer', [])
         
-        # If answer is a list
         if isinstance(answer, list):
             if len(answer) == 1:
                 return str(answer[0])
-            else:
-                # Multiple values
-                return ", ".join(str(a) for a in answer)
+            return ", ".join(str(a) for a in answer)
         
-        # If answer is a number/string
         return str(answer)
     
-    def create_gpt_response(self, question: Dict) -> str:
+    def create_gpt_utterance(
+        self,
+        question: Dict,
+        turn_id: int
+    ) -> Dict:
         """
-        Create GPT response based on question metadata.
+        Create GPT utterance with PER-TURN label and metadata.
         
-        If req_clari=True or answer_type='question':
-            Return clarification request with label
-        Otherwise:
-            Return the answer
-        
-        Args:
-            question: Question object
-        
-        Returns:
-            GPT response string
+        CRITICAL: Each GPT gets its own ambiguous_type!
         """
+        # Determine ambiguity type for THIS turn
+        ambig_type = self.determine_ambiguity_type(question)
+        
+        # Create response
         req_clari = question.get('req_clari', False)
         answer_type = question.get('answer_type', '')
         
-        # Determine ambiguity level for this response
-        ambig_type = self.determine_ambiguity_type(question)
-        
-        # If requires clarification or answer is question
         if req_clari or answer_type == 'question':
-            # Get the clarification question from answer
+            # Clarification request
             answer = question.get('answer', [])
             if isinstance(answer, list) and answer:
-                clarification_text = str(answer[0])
+                clari_text = str(answer[0])
             else:
-                clarification_text = "Could you please clarify?"
+                clari_text = "Could you please clarify?"
             
-            # Include req_clarification label
-            return f"{clarification_text} req_clarification({ambig_type})"
+            gpt_value = f"{clari_text} req_clarification({ambig_type})"
+        else:
+            # Normal answer
+            gpt_value = self.format_answer(question)
+            
+            # Add scale if present
+            scale = question.get('scale', '')
+            if scale:
+                gpt_value = f"{gpt_value} ({scale})"
         
-        # Otherwise, return the actual answer
-        return self.format_answer(question)
+        return {
+            "from": "gpt",
+            "value": gpt_value,
+            "turn_id": turn_id,
+            "ambiguous_type": ambig_type,  # PER-TURN LABEL!
+            "metadata": {
+                "answers": question.get('answer', []),
+                "original_question": question.get('original_question', ''),
+                "answer_type": question.get('answer_type', ''),
+                "answer_from": question.get('answer_from', ''),
+                "scale": question.get('scale', ''),
+                "derivation": question.get('derivation', ''),
+                "req_clari": question.get('req_clari', False),
+                "follow_up": question.get('follow_up', False)
+            }
+        }
     
     def build_conversations(
         self,
         questions: List[Dict],
-        table: Dict,
-        include_table: bool = True
-    ) -> Tuple[List[Dict], int, List[Dict]]:
+        table: Dict
+    ) -> Tuple[List[Dict], List[int]]:
         """
-        Build conversations list from questions.
-        
-        Args:
-            questions: List of question objects
-            table: Table data
-            include_table: Whether to include table retrieval in first turn
+        Build conversations with per-turn labels.
         
         Returns:
-            Tuple of (conversations, ambiguous_type, conditions)
+            conversations: List of conversation turns
+            turn_labels: List of labels (one per system turn)
         """
         conversations = []
-        conditions = []
+        turn_labels = []
         
-        # Process each question as a turn
-        for i, question in enumerate(questions):
+        for turn_idx, question in enumerate(questions, start=1):
             user_question = question.get('question', '')
             
-            # Add human turn
+            # Human turn
             conversations.append({
                 "from": "human",
-                "value": user_question
+                "value": user_question,
+                "turn_id": turn_idx
             })
             
-            # For first question with table, add table retrieval
-            if i == 0 and include_table and table:
+            # First question: add table retrieval
+            if turn_idx == 1 and table and table.get('table'):
                 table_data = table.get('table', [])
                 if table_data:
-                    # Function call
                     conversations.append({
                         "from": "function_call",
-                        "value": "retrieve_table()"
+                        "value": "retrieve_table()",
+                        "turn_id": turn_idx
                     })
                     
-                    # Observation with table content
                     formatted_table = self.format_table(table_data)
                     conversations.append({
                         "from": "observation",
-                        "value": formatted_table
+                        "value": formatted_table,
+                        "turn_id": turn_idx
                     })
             
-            # Add GPT response
-            gpt_response = self.create_gpt_response(question)
-            conversations.append({
-                "from": "gpt",
-                "value": gpt_response
-            })
+            # GPT turn with per-turn label
+            gpt_utt = self.create_gpt_utterance(question, turn_idx)
+            conversations.append(gpt_utt)
             
-            # Extract conditions from original_question if different from question
-            original = question.get('original_question', '')
-            if original and original != user_question:
-                conditions.append({
-                    "condition": user_question,
-                    "clarified": original
-                })
+            # Collect label
+            turn_labels.append(gpt_utt['ambiguous_type'])
         
-        # Determine final ambiguity type from last question
-        if questions:
-            ambiguous_type = self.determine_ambiguity_type(questions[-1], is_last=True)
-        else:
-            ambiguous_type = 0
-        
-        return conversations, ambiguous_type, conditions
+        return conversations, turn_labels
     
     def transform_single(self, convqa_data: Dict) -> Dict:
         """
-        Transform a single ConvQA item to SIP format.
-        
-        Args:
-            convqa_data: Single ConvQA data item
-        
-        Returns:
-            SIP formatted data
+        Transform single ConvQA item to SIP format with per-GPT labels.
         """
         table = convqa_data.get('table', {})
         paragraphs = convqa_data.get('paragraphs', [])
         questions = convqa_data.get('questions', [])
         
-        # Build conversations
-        conversations, ambiguous_type, conditions = self.build_conversations(
-            questions, table
-        )
+        # Build conversations with per-turn labels
+        conversations, turn_labels = self.build_conversations(questions, table)
         
-        # Extract context from paragraphs
+        # Extract context
         context = self.extract_context(paragraphs)
         
-        # Create prompt from first paragraph title
+        # Create prompt
         prompt = ""
         if paragraphs and len(paragraphs) > 0:
-            prompt = paragraphs[0].get('text', '')[:100]  # First 100 chars
-        
-        # Determine if ambiguous
-        is_ambiguous = ambiguous_type > 0
+            prompt = paragraphs[0].get('text', '')[:100]
         
         # Build SIP format
         sip_data = {
-            "prompt": prompt or "Answer questions about table and text",
-            "context": context,
-            "can_retrieve": bool(table),
-            "tools": "retrieve_table(), req_clarification(2-4)",
-            "ambiguous": str(is_ambiguous).lower(),
-            "ambiguous_type": ambiguous_type,
             "conversations": conversations,
-            "system": "You are a helpful assistant that answers questions about financial tables and documents",
             "metadata": {
-                "table_uid": table.get('uid', ''),
-                "num_questions": len(questions),
-                "conditions": conditions,
-                "original_format": "ConvQA"
+                "num_turns": len(turn_labels),
+                "turn_labels": turn_labels,
+                "label_distribution": {
+                    self.class_names[i]: turn_labels.count(i)
+                    for i in range(4)
+                },
+                "source": {
+                    "format": "ConvQA",
+                    "table_uid": table.get('uid', ''),
+                    "num_questions": len(questions),
+                    "has_table": bool(table.get('table')),
+                    "has_paragraphs": bool(paragraphs)
+                },
+                "context": context,
+                "prompt": prompt or "Answer questions about table and text"
             }
         }
         
         return sip_data
     
     def transform_batch(self, convqa_list: List[Dict]) -> List[Dict]:
-        """
-        Transform a list of ConvQA items.
-        
-        Args:
-            convqa_list: List of ConvQA data items
-        
-        Returns:
-            List of SIP formatted data
-        """
+        """Transform batch"""
         return [self.transform_single(item) for item in convqa_list]
     
     def save_to_file(self, data: List[Dict], output_path: str):
-        """Save transformed data to JSON file"""
+        """Save to JSON"""
         with open(output_path, 'w') as f:
             json.dump(data, f, indent=2)
         print(f"Saved {len(data)} items to {output_path}")
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Transform ConvQA to SIP format')
-    parser.add_argument('--input', required=True, help='Input ConvQA JSON file')
-    parser.add_argument('--output', required=True, help='Output SIP JSON file')
+    parser = argparse.ArgumentParser(description='Transform ConvQA to SIP (Per-GPT Labels)')
+    parser.add_argument('--input', required=True, help='Input ConvQA JSON')
+    parser.add_argument('--output', required=True, help='Output SIP JSON')
     args = parser.parse_args()
     
-    # Load input
+    # Load
     print(f"Loading from {args.input}...")
     with open(args.input, 'r') as f:
         convqa_data = json.load(f)
     
-    # Ensure list
     if isinstance(convqa_data, dict):
         convqa_data = [convqa_data]
     
@@ -374,7 +273,16 @@ def main():
     # Print sample
     if sip_data:
         print("\nSample output (first item):")
-        print(json.dumps(sip_data[0], indent=2)[:500] + "...")
+        sample = sip_data[0]
+        print(f"  Num turns: {sample['metadata']['num_turns']}")
+        print(f"  Turn labels: {sample['metadata']['turn_labels']}")
+        print(f"  Label distribution: {sample['metadata']['label_distribution']}")
+        
+        print("\n  First 2 turns:")
+        for i, conv in enumerate(sample['conversations'][:6]):
+            print(f"    {i+1}. [{conv['from']:12}] {conv.get('value', '')[:50]}...")
+            if 'ambiguous_type' in conv:
+                print(f"        Label: {conv['ambiguous_type']}")
 
 
 if __name__ == "__main__":
