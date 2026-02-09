@@ -1,20 +1,23 @@
 """
-Revised ConvQA to SIP Transformation with Per-GPT Labels
+Revised ConvQA to SIP Transformation with Paragraphs as Observations
 
-CRITICAL: Each GPT utterance gets its own ambiguous_type label!
+CRITICAL CHANGES:
+1. Paragraphs included as observations in second turn
+2. Per-GPT labels maintained
+3. Observations treated as context input
 
 Output Format:
 {
   "conversations": [
     {"from": "human", "value": "...", "turn_id": 1},
-    {"from": "gpt", "value": "...", "turn_id": 1, "ambiguous_type": 2, "metadata": {...}},
+    {"from": "function_call", "value": "retrieve_table()", "turn_id": 1},
+    {"from": "observation", "value": "table data...", "turn_id": 1},
+    {"from": "gpt", "value": "...", "turn_id": 1, "ambiguous_type": 2},
     {"from": "human", "value": "...", "turn_id": 2},
-    {"from": "gpt", "value": "...", "turn_id": 2, "ambiguous_type": 0, "metadata": {...}}
-  ],
-  "metadata": {
-    "num_turns": 2,
-    "turn_labels": [2, 0]
-  }
+    {"from": "function_call", "value": "retrieve_context()", "turn_id": 2},
+    {"from": "observation", "value": "paragraph text...", "turn_id": 2},
+    {"from": "gpt", "value": "...", "turn_id": 2, "ambiguous_type": 0}
+  ]
 }
 """
 
@@ -25,7 +28,7 @@ from pathlib import Path
 
 
 class ConvQAToSIPTransformer:
-    """Transform ConvQA with per-GPT labels"""
+    """Transform ConvQA with per-GPT labels and paragraphs as observations"""
     
     def __init__(self):
         self.class_names = {
@@ -56,7 +59,7 @@ class ConvQAToSIPTransformer:
         
         sorted_paras = sorted(paragraphs, key=lambda p: p.get('order', 0))
         texts = [p.get('text', '') for p in sorted_paras]
-        return " ".join(texts)
+        return "\n\n".join(texts)
     
     def determine_ambiguity_type(self, question: Dict) -> int:
         """
@@ -146,10 +149,16 @@ class ConvQAToSIPTransformer:
     def build_conversations(
         self,
         questions: List[Dict],
-        table: Dict
+        table: Dict,
+        paragraphs: List[Dict]
     ) -> Tuple[List[Dict], List[int]]:
         """
         Build conversations with per-turn labels.
+        
+        IMPORTANT CHANGES:
+        - First turn: Table retrieval if available
+        - Second turn: Paragraph retrieval if available
+        - Observations provide context for model
         
         Returns:
             conversations: List of conversation turns
@@ -168,7 +177,7 @@ class ConvQAToSIPTransformer:
                 "turn_id": turn_idx
             })
             
-            # First question: add table retrieval
+            # First turn: Add table retrieval if available
             if turn_idx == 1 and table and table.get('table'):
                 table_data = table.get('table', [])
                 if table_data:
@@ -182,7 +191,25 @@ class ConvQAToSIPTransformer:
                     conversations.append({
                         "from": "observation",
                         "value": formatted_table,
+                        "turn_id": turn_idx,
+                        "observation_type": "table"
+                    })
+            
+            # Second turn: Add paragraph retrieval if available
+            if turn_idx == 2 and paragraphs:
+                paragraph_text = self.extract_context(paragraphs)
+                if paragraph_text:
+                    conversations.append({
+                        "from": "function_call",
+                        "value": "retrieve_context()",
                         "turn_id": turn_idx
+                    })
+                    
+                    conversations.append({
+                        "from": "observation",
+                        "value": paragraph_text,
+                        "turn_id": turn_idx,
+                        "observation_type": "context"
                     })
             
             # GPT turn with per-turn label
@@ -203,7 +230,7 @@ class ConvQAToSIPTransformer:
         questions = convqa_data.get('questions', [])
         
         # Build conversations with per-turn labels
-        conversations, turn_labels = self.build_conversations(questions, table)
+        conversations, turn_labels = self.build_conversations(questions, table, paragraphs)
         
         # Extract context
         context = self.extract_context(paragraphs)
@@ -228,7 +255,8 @@ class ConvQAToSIPTransformer:
                     "table_uid": table.get('uid', ''),
                     "num_questions": len(questions),
                     "has_table": bool(table.get('table')),
-                    "has_paragraphs": bool(paragraphs)
+                    "has_paragraphs": bool(paragraphs),
+                    "num_observations": sum(1 for c in conversations if c['from'] == 'observation')
                 },
                 "context": context,
                 "prompt": prompt or "Answer questions about table and text"
@@ -249,7 +277,7 @@ class ConvQAToSIPTransformer:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Transform ConvQA to SIP (Per-GPT Labels)')
+    parser = argparse.ArgumentParser(description='Transform ConvQA to SIP (Per-GPT Labels + Paragraphs)')
     parser.add_argument('--input', required=True, help='Input ConvQA JSON')
     parser.add_argument('--output', required=True, help='Output SIP JSON')
     args = parser.parse_args()
@@ -276,11 +304,13 @@ def main():
         sample = sip_data[0]
         print(f"  Num turns: {sample['metadata']['num_turns']}")
         print(f"  Turn labels: {sample['metadata']['turn_labels']}")
+        print(f"  Num observations: {sample['metadata']['source']['num_observations']}")
         print(f"  Label distribution: {sample['metadata']['label_distribution']}")
         
-        print("\n  First 2 turns:")
-        for i, conv in enumerate(sample['conversations'][:6]):
-            print(f"    {i+1}. [{conv['from']:12}] {conv.get('value', '')[:50]}...")
+        print("\n  Conversation structure:")
+        for i, conv in enumerate(sample['conversations'][:10]):
+            obs_type = f" ({conv.get('observation_type', '')})" if 'observation_type' in conv else ""
+            print(f"    {i+1}. [{conv['from']:12}]{obs_type} {conv.get('value', '')[:50]}...")
             if 'ambiguous_type' in conv:
                 print(f"        Label: {conv['ambiguous_type']}")
 
