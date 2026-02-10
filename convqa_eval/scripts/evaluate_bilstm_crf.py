@@ -37,8 +37,8 @@ from sklearn.metrics import (
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from model.preprocessor_final import SIPPreprocessor
-from model.music_baselines_complete import create_model
+from models.bilstm_crf.preprocessor import SIPPreprocessor
+from models.bilstm_crf.music_baselines import create_model
 from torch.utils.data import Dataset, DataLoader
 
 
@@ -374,7 +374,7 @@ def main():
     test_dataset = SIPDataset(test_processed)
     test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False, collate_fn=collate_fn)
     
-    baselines = ['vanillacrf', 'who2who', 'position', 'who2who_position', 'intime', 'distance']
+    baselines = ['distance']
     
     # Store results across seeds
     baseline_results_seeds = {b: [] for b in baselines}
@@ -387,7 +387,7 @@ def main():
         set_seed(seed)
         
         for baseline in baselines:
-            checkpoint_path = os.path.join(args.checkpoint_dir, baseline, 'best_f1_model.pt')
+            checkpoint_path = os.path.join(args.checkpoint_dir,  'best_f1_model.pt')
             
             if not os.path.exists(checkpoint_path):
                 continue
