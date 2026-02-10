@@ -1,21 +1,12 @@
 """
-Complete Training Script for MuSIc SIP Models
+Complete Training Script with Advanced Features
 
-Evaluation Metrics:
-- Accuracy
-- F1 Score (weighted for multiclass)
-- Precision (weighted)
-- Recall (weighted)
-- AUC-ROC (weighted for multiclass)
-- Per-class metrics
-- Confusion matrix
-
-Features:
-- All 6 baselines supported
-- 2-4 class configuration
-- Training curves with matplotlib
-- Best model checkpointing
-- Per-epoch evaluation
+NEW FEATURES:
+1. Validation split percentage option
+2. Multiple optimizer support (Adam, Adamax, RMSprop, SGD)
+3. Train vs Validation loss plotting
+4. Best and worst prediction examples
+5. Model architecture visualization
 """
 
 import os
@@ -23,21 +14,17 @@ import sys
 import json
 import torch
 import torch.optim as optim
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset, DataLoader, random_split
 import argparse
 from tqdm import tqdm
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
-
 from sklearn.metrics import (
     accuracy_score,
     precision_recall_fscore_support,
-    confusion_matrix,
-    classification_report,
-    roc_auc_score,
-    roc_curve
+    f1_score
 )
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
@@ -47,7 +34,6 @@ from models.bilstm_crf.music_baselines import create_model
 
 
 class SIPDataset(Dataset):
-    """Dataset for SIP conversations"""
     def __init__(self, processed_data):
         self.data = processed_data
     def __len__(self):
@@ -57,210 +43,246 @@ class SIPDataset(Dataset):
 
 
 def collate_fn(batch):
-    """Batch size must be 1 for incremental processing"""
-    assert len(batch) == 1, "Batch size must be 1"
+    assert len(batch) == 1
     return batch[0]
 
 
-def load_data(data_path):
-    """Load conversations from JSON"""
-    print(f"\n[Data] Loading from {data_path}...")
-    with open(data_path, 'r') as f:
-        data = json.load(f)
+def get_optimizer(name: str, parameters, lr: float):
+    """Create optimizer by name"""
+    optimizers = {
+        'adam': optim.Adam,
+        'adamax': optim.Adamax,
+        'rmsprop': optim.RMSprop,
+        'sgd': optim.SGD
+    }
     
-    if isinstance(data, dict):
-        data = [data]
+    if name.lower() not in optimizers:
+        raise ValueError(f"Unknown optimizer: {name}. Choose from {list(optimizers.keys())}")
     
-    print(f"[Data] Loaded {len(data)} conversations")
-    return data
+    optimizer_class = optimizers[name.lower()]
+    
+    # SGD needs momentum
+    if name.lower() == 'sgd':
+        return optimizer_class(parameters, lr=lr, momentum=0.9)
+    else:
+        return optimizer_class(parameters, lr=lr)
 
 
-def evaluate_with_auc(model, dataloader, device, num_classes, class_names):
+def print_model_architecture(model, baseline: str):
+    """Print top-level architecture of the model"""
+    print("\n" + "="*70)
+    print(f"Model Architecture: {baseline.upper()}")
+    print("="*70)
+    
+    print("\n📊 Component Breakdown:\n")
+    
+    # Count parameters
+    total_params = sum(p.numel() for p in model.parameters())
+    trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    
+    # Component-wise breakdown
+    components = {
+        'BERT Encoder': 0,
+        'Prior BiLSTM': 0,
+        'Posterior BiLSTM': 0,
+        'Emission Layers': 0,
+        'CRF Transitions': 0
+    }
+    
+    for name, param in model.named_parameters():
+        if 'utterance_encoder' in name or 'bert' in name:
+            components['BERT Encoder'] += param.numel()
+        elif 'prior_encoder' in name:
+            components['Prior BiLSTM'] += param.numel()
+        elif 'posterior_encoder' in name:
+            components['Posterior BiLSTM'] += param.numel()
+        elif 'emission' in name:
+            components['Emission Layers'] += param.numel()
+        elif 'trans' in name or 'crf' in name:
+            components['CRF Transitions'] += param.numel()
+    
+    # Print architecture
+    print("┌─────────────────────────────────────────────────────────────────┐")
+    print("│                     MUSIC ARCHITECTURE                          │")
+    print("├─────────────────────────────────────────────────────────────────┤")
+    print("│                                                                 │")
+    print("│  ┌──────────────────────────────────────────────────────────┐  │")
+    print("│  │  1. BERT Utterance Encoder                               │  │")
+    print(f"│  │     - Parameters: {components['BERT Encoder']:,}".ljust(65) + "│  │")
+    print("│  │     - Encodes each utterance → [768]                     │  │")
+    print("│  └──────────────────────────────────────────────────────────┘  │")
+    print("│                          ↓                                      │")
+    print("│  ┌──────────────────────────────────────────────────────────┐  │")
+    print("│  │  2. Prior Inter-Utterance Encoder (BiLSTM)               │  │")
+    print(f"│  │     - Parameters: {components['Prior BiLSTM']:,}".ljust(65) + "│  │")
+    print("│  │     - Processes X1:T-1 (missing system_T)                │  │")
+    print("│  │     - Used for INFERENCE                                 │  │")
+    print("│  └──────────────────────────────────────────────────────────┘  │")
+    print("│                          ↓                                      │")
+    print("│  ┌──────────────────────────────────────────────────────────┐  │")
+    print("│  │  3. Posterior Inter-Utterance Encoder (BiLSTM)           │  │")
+    print(f"│  │     - Parameters: {components['Posterior BiLSTM']:,}".ljust(65) + "│  │")
+    print("│  │     - Processes X1:T (has system_T)                      │  │")
+    print("│  │     - Used for TRAINING                                  │  │")
+    print("│  └──────────────────────────────────────────────────────────┘  │")
+    print("│                          ↓                                      │")
+    print("│  ┌──────────────────────────────────────────────────────────┐  │")
+    print("│  │  4. Emission Projection Layers                           │  │")
+    print(f"│  │     - Parameters: {components['Emission Layers']:,}".ljust(65) + "│  │")
+    print("│  │     - BiLSTM hidden → class logits                       │  │")
+    print("│  └──────────────────────────────────────────────────────────┘  │")
+    print("│                          ↓                                      │")
+    print("│  ┌──────────────────────────────────────────────────────────┐  │")
+    print(f"│  │  5. Multi-Turn CRF ({model.crf.variant})".ljust(65) + "│  │")
+    print(f"│  │     - Parameters: {components['CRF Transitions']:,}".ljust(65) + "│  │")
+    print("│  │     - Dynamic transitions based on features              │  │")
+    
+    # List transition matrices
+    if hasattr(model.crf, 'trans_global'):
+        print("│  │     - Matrices: global".ljust(65) + "│  │")
+    if hasattr(model.crf, 'trans_u2s'):
+        print("│  │       + user→system, system→user".ljust(65) + "│  │")
+    if hasattr(model.crf, 'trans_position'):
+        print("│  │       + 20 position-specific".ljust(65) + "│  │")
+    if hasattr(model.crf, 'trans_I0'):
+        print("│  │       + I0, I1, I2+ (initiative count)".ljust(65) + "│  │")
+    if hasattr(model.crf, 'trans_consecutive'):
+        print("│  │       + consecutive, non-consecutive".ljust(65) + "│  │")
+    
+    print("│  └──────────────────────────────────────────────────────────┘  │")
+    print("│                                                                 │")
+    print("├─────────────────────────────────────────────────────────────────┤")
+    print(f"│  Total Parameters:      {total_params:,}".ljust(67) + "│")
+    print(f"│  Trainable Parameters:  {trainable_params:,}".ljust(67) + "│")
+    print("└─────────────────────────────────────────────────────────────────┘")
+    print()
+
+
+def evaluate_with_examples(model, dataloader, device, num_classes, class_names, preprocessor):
     """
-    Comprehensive evaluation with all metrics including AUC-ROC.
+    Evaluate and return best/worst examples.
     
     Returns:
-        Dict with accuracy, precision, recall, f1, auc_roc, per_class, cm
+        metrics: Dict with accuracy, f1, etc.
+        best_example: Best predicted conversation
+        worst_example: Worst predicted conversation
     """
     model.eval()
     
     all_preds = []
     all_labels = []
-    all_probs = []
-    
-    print("\n[Eval] Evaluating...")
+    all_examples = []
     
     with torch.no_grad():
-        for batch in tqdm(dataloader, desc="Evaluating"):
+        for batch_idx, batch in enumerate(dataloader):
             user_utt = batch['user_utterance'].unsqueeze(0).to(device)
             system_utt = batch['system_utterance'].unsqueeze(0).to(device)
             system_labels = batch['system_I_label']
             
             # Inference
             output = model(user_utt, system_utt, mode='inference')
-            
-            # Collect predictions
             preds = output['predictions']
-            probs = output.get('probabilities', None)
+            
+            # Calculate F1 for this conversation
+            if len(preds) > 0 and len(system_labels) > 0:
+                conv_f1 = f1_score(system_labels.tolist(), preds, average='weighted', zero_division=0)
+            else:
+                conv_f1 = 0.0
             
             all_preds.extend(preds)
             all_labels.extend(system_labels.tolist())
             
-            if probs is not None:
-                all_probs.append(probs)
+            # Store example
+            all_examples.append({
+                'predictions': preds,
+                'labels': system_labels.tolist(),
+                'f1': conv_f1,
+                'batch_idx': batch_idx,
+                'metadata': batch.get('metadata', {})
+            })
     
-    # Stack probabilities
-    if all_probs:
-        all_probs = np.vstack(all_probs)
-    
-    # Standard metrics
+    # Compute overall metrics
     accuracy = accuracy_score(all_labels, all_preds)
-    precision, recall, f1, support = precision_recall_fscore_support(
-        all_labels, all_preds,
-        average='weighted',
-        zero_division=0
+    precision, recall, f1, _ = precision_recall_fscore_support(
+        all_labels, all_preds, average='weighted', zero_division=0
     )
     
-    # Per-class metrics
-    per_class_p, per_class_r, per_class_f1, per_class_support = precision_recall_fscore_support(
-        all_labels, all_preds,
-        average=None,
-        zero_division=0,
-        labels=list(range(num_classes))
-    )
-    
-    # Confusion matrix
-    cm = confusion_matrix(all_labels, all_preds, labels=list(range(num_classes)))
-    
-    # AUC-ROC
-    auc_roc = 0.0
-    if all_probs:
-        try:
-            if num_classes == 2:
-                # Binary classification
-                auc_roc = roc_auc_score(all_labels, all_probs[:, 1])
-            else:
-                # Multiclass (one-vs-rest)
-                # Convert labels to one-hot
-                all_labels_array = np.array(all_labels)
-                all_labels_oh = np.eye(num_classes)[all_labels_array]
-                
-                auc_roc = roc_auc_score(
-                    all_labels_oh,
-                    all_probs,
-                    multi_class='ovr',
-                    average='weighted'
-                )
-        except Exception as e:
-            print(f"[Warning] Could not compute AUC-ROC: {e}")
-            auc_roc = 0.0
-    
-    # Print results
-    print(f"\n[Eval] Results:")
-    print(f"  Accuracy:  {accuracy:.4f}")
-    print(f"  Precision: {precision:.4f}")
-    print(f"  Recall:    {recall:.4f}")
-    print(f"  F1 Score:  {f1:.4f}")
-    print(f"  AUC-ROC:   {auc_roc:.4f}")
-    
-    print(f"\n[Eval] Per-Class Metrics:")
-    for i in range(num_classes):
-        print(f"  Class {i} ({class_names[i]}):")
-        print(f"    Precision: {per_class_p[i]:.4f}")
-        print(f"    Recall:    {per_class_r[i]:.4f}")
-        print(f"    F1:        {per_class_f1[i]:.4f}")
-        print(f"    Support:   {per_class_support[i]}")
-    
-    print(f"\n[Eval] Confusion Matrix:")
-    print(cm)
+    # Find best and worst examples
+    all_examples.sort(key=lambda x: x['f1'], reverse=True)
+    best_example = all_examples[0] if all_examples else None
+    worst_example = all_examples[-1] if all_examples else None
     
     return {
         'accuracy': accuracy,
         'precision': precision,
         'recall': recall,
-        'f1': f1,
-        'auc_roc': auc_roc,
-        'per_class': {
-            'precision': per_class_p.tolist(),
-            'recall': per_class_r.tolist(),
-            'f1': per_class_f1.tolist(),
-            'support': per_class_support.tolist()
-        },
-        'confusion_matrix': cm.tolist()
-    }
+        'f1': f1
+    }, best_example, worst_example
 
 
-def plot_training_curves(history, save_path, num_classes, class_names):
-    """Plot comprehensive training curves"""
-    epochs = range(1, len(history['train_loss']) + 1)
+def print_example(example, title, class_names):
+    """Print a prediction example"""
+    if not example:
+        return
     
-    fig, axes = plt.subplots(2, 3, figsize=(18, 12))
+    print("\n" + "="*70)
+    print(title)
+    print("="*70)
+    
+    preds = example['predictions']
+    labels = example['labels']
+    f1 = example['f1']
+    
+    print(f"\n📊 Conversation F1: {f1:.4f}")
+    print(f"Turns: {len(preds)}\n")
+    
+    print("Turn | True Label              | Predicted Label         | Match")
+    print("-" * 70)
+    
+    for turn_idx, (pred, label) in enumerate(zip(preds, labels), 1):
+        true_name = class_names[label]
+        pred_name = class_names[pred]
+        match = "✓" if pred == label else "✗"
+        
+        print(f"{turn_idx:4} | {true_name:23} | {pred_name:23} | {match}")
+    
+    print()
+
+
+def plot_loss_curves(history, save_path):
+    """Plot train vs validation loss"""
+    epochs = range(1, len(history['train_total_loss']) + 1)
+    
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
     
     # Total Loss
-    axes[0, 0].plot(epochs, history['train_loss'], 'b-', label='Train')
-    if 'val_loss' in history:
-        axes[0, 0].plot(epochs, history['val_loss'], 'r-', label='Val')
-    axes[0, 0].set_title('Total Loss')
-    axes[0, 0].set_xlabel('Epoch')
-    axes[0, 0].set_ylabel('Loss')
-    axes[0, 0].legend()
-    axes[0, 0].grid(True)
+    axes[0].plot(epochs, history['train_total_loss'], 'b-', label='Train', linewidth=2)
+    if 'val_total_loss' in history and history['val_total_loss']:
+        axes[0].plot(epochs, history['val_total_loss'], 'r-', label='Validation', linewidth=2)
+    axes[0].set_title('Total Loss (CRF + MLE)', fontsize=14, fontweight='bold')
+    axes[0].set_xlabel('Epoch')
+    axes[0].set_ylabel('Loss')
+    axes[0].legend()
+    axes[0].grid(True, alpha=0.3)
     
-    # CRF Loss
-    axes[0, 1].plot(epochs, history['train_crf_loss'], 'b-', label='Train CRF')
-    axes[0, 1].set_title('CRF Loss')
-    axes[0, 1].set_xlabel('Epoch')
-    axes[0, 1].set_ylabel('Loss')
-    axes[0, 1].legend()
-    axes[0, 1].grid(True)
-    
-    # MLE Loss
-    axes[0, 2].plot(epochs, history['train_mle_loss'], 'b-', label='Train MLE')
-    axes[0, 2].set_title('MLE Loss')
-    axes[0, 2].set_xlabel('Epoch')
-    axes[0, 2].set_ylabel('Loss')
-    axes[0, 2].legend()
-    axes[0, 2].grid(True)
-    
-    # Validation Metrics
-    if 'val_f1' in history:
-        axes[1, 0].plot(epochs, history['val_accuracy'], 'g-', label='Accuracy')
-        axes[1, 0].plot(epochs, history['val_f1'], 'm-', label='F1')
-        axes[1, 0].plot(epochs, history['val_precision'], 'b--', label='Precision')
-        axes[1, 0].plot(epochs, history['val_recall'], 'r--', label='Recall')
-        axes[1, 0].set_title('Validation Metrics')
-        axes[1, 0].set_xlabel('Epoch')
-        axes[1, 0].set_ylabel('Score')
-        axes[1, 0].legend()
-        axes[1, 0].grid(True)
-        
-        # AUC-ROC
-        axes[1, 1].plot(epochs, history['val_auc_roc'], 'c-', label='AUC-ROC')
-        axes[1, 1].set_title('AUC-ROC')
-        axes[1, 1].set_xlabel('Epoch')
-        axes[1, 1].set_ylabel('AUC-ROC')
-        axes[1, 1].legend()
-        axes[1, 1].grid(True)
-        
-        # Per-Class F1 (last epoch)
-        if num_classes <= 4:
-            last_per_class = history['val_per_class_f1'][-1] if history['val_per_class_f1'] else [0] * num_classes
-            axes[1, 2].bar(range(num_classes), last_per_class)
-            axes[1, 2].set_title('Per-Class F1 (Final Epoch)')
-            axes[1, 2].set_xlabel('Class')
-            axes[1, 2].set_ylabel('F1 Score')
-            axes[1, 2].set_xticks(range(num_classes))
-            axes[1, 2].set_xticklabels([name[:10] for name in class_names], rotation=45)
-            axes[1, 2].grid(True, axis='y')
+    # F1 Score
+    if 'val_f1' in history and history['val_f1']:
+        axes[1].plot(epochs, history['val_f1'], 'g-', label='Validation F1', linewidth=2)
+        axes[1].set_title('Validation F1 Score', fontsize=14, fontweight='bold')
+        axes[1].set_xlabel('Epoch')
+        axes[1].set_ylabel('F1 Score')
+        axes[1].legend()
+        axes[1].grid(True, alpha=0.3)
     
     plt.tight_layout()
     plt.savefig(save_path, dpi=150, bbox_inches='tight')
-    print(f"\n[Plot] Saved training curves to {save_path}")
     plt.close()
+    
+    print(f"\n[Plot] Loss curves saved to {save_path}")
 
 
 def train_epoch(model, dataloader, optimizer, device, epoch):
-    """Train for one epoch"""
+    """Train one epoch"""
     model.train()
     
     total_loss = 0
@@ -269,14 +291,14 @@ def train_epoch(model, dataloader, optimizer, device, epoch):
     
     pbar = tqdm(dataloader, desc=f"Epoch {epoch}")
     
-    for batch_idx, batch in enumerate(pbar):
+    for batch in pbar:
         user_utt = batch['user_utterance'].unsqueeze(0).to(device)
         system_utt = batch['system_utterance'].unsqueeze(0).to(device)
         user_labels = batch['user_I_label'].unsqueeze(0).to(device)
         system_labels = batch['system_I_label'].unsqueeze(0).to(device)
         
-        # Forward
         optimizer.zero_grad()
+        
         output = model(
             user_utt, system_utt,
             user_labels, system_labels,
@@ -284,13 +306,11 @@ def train_epoch(model, dataloader, optimizer, device, epoch):
         )
         
         loss = output['total_loss']
-        
-        # Backward
         loss.backward()
+        
         torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         optimizer.step()
         
-        # Track
         total_loss += loss.item()
         total_crf_loss += output['loss_crf'].item()
         total_mle_loss += output['loss_mle'].item()
@@ -303,18 +323,21 @@ def train_epoch(model, dataloader, optimizer, device, epoch):
     
     n = len(dataloader)
     return {
-        'loss': total_loss / n,
+        'total_loss': total_loss / n,
         'crf_loss': total_crf_loss / n,
         'mle_loss': total_mle_loss / n
     }
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Train MuSIc SIP Model with AUC-ROC')
+    parser = argparse.ArgumentParser(description='Train MuSIc SIP Model (Enhanced)')
     
     # Data
     parser.add_argument('--train_data', type=str, required=True)
-    parser.add_argument('--val_data', type=str, default=None)
+    parser.add_argument('--val_data', type=str, default=None,
+                       help='Validation data (if not provided, will split from train)')
+    parser.add_argument('--val_split', type=float, default=0.15,
+                       help='Validation split percentage (default: 0.15)')
     
     # Model
     parser.add_argument('--baseline', type=str, default='vanillacrf',
@@ -328,6 +351,9 @@ def main():
     # Training
     parser.add_argument('--epochs', type=int, default=20)
     parser.add_argument('--lr', type=float, default=1e-3)
+    parser.add_argument('--optimizer', type=str, default='adam',
+                       choices=['adam', 'adamax', 'rmsprop', 'sgd'],
+                       help='Optimizer to use')
     parser.add_argument('--device', type=str, default='cuda' if torch.cuda.is_available() else 'cpu')
     
     # Output
@@ -337,7 +363,7 @@ def main():
     args = parser.parse_args()
     
     print("\n" + "="*70)
-    print("MuSIc SIP Model Training with AUC-ROC")
+    print("MuSIc SIP Model Training (Enhanced)")
     print("="*70)
     for arg, value in vars(args).items():
         print(f"  {arg}: {value}")
@@ -346,31 +372,55 @@ def main():
     os.makedirs(args.checkpoint_dir, exist_ok=True)
     
     # Load data
-    train_data_raw = load_data(args.train_data)
-    val_data_raw = load_data(args.val_data) if args.val_data else None
+    print("[Data] Loading training data...")
+    with open(args.train_data, 'r') as f:
+        train_data_raw = json.load(f)
+    if isinstance(train_data_raw, dict):
+        train_data_raw = [train_data_raw]
     
     # Preprocess
     preprocessor = SIPPreprocessor(num_classes=args.num_classes)
     class_names = preprocessor.class_names[args.num_classes]
     
-    print("[Preprocess] Processing training data...")
+    print("[Preprocess] Processing data...")
     train_processed = [
         preprocessor.process_conversation(conv) for conv in tqdm(train_data_raw)
     ]
     
-    if val_data_raw:
-        print("[Preprocess] Processing validation data...")
+    # Split validation if needed
+    if args.val_data:
+        print(f"[Data] Loading validation data from {args.val_data}...")
+        with open(args.val_data, 'r') as f:
+            val_data_raw = json.load(f)
+        if isinstance(val_data_raw, dict):
+            val_data_raw = [val_data_raw]
+        
         val_processed = [
             preprocessor.process_conversation(conv) for conv in tqdm(val_data_raw)
         ]
+    else:
+        print(f"[Data] Splitting {args.val_split*100:.0f}% for validation...")
+        train_size = int((1 - args.val_split) * len(train_processed))
+        val_size = len(train_processed) - train_size
+        
+        train_processed, val_processed = random_split(
+            train_processed,
+            [train_size, val_size],
+            generator=torch.Generator().manual_seed(42)
+        )
+        
+        # Convert back to list
+        train_processed = [train_processed[i] for i in range(len(train_processed))]
+        val_processed = [val_processed[i] for i in range(len(val_processed))]
+    
+    print(f"[Data] Train: {len(train_processed)}, Val: {len(val_processed)}")
     
     # Datasets
     train_dataset = SIPDataset(train_processed)
     train_loader = DataLoader(train_dataset, batch_size=1, shuffle=True, collate_fn=collate_fn)
     
-    if val_data_raw:
-        val_dataset = SIPDataset(val_processed)
-        val_loader = DataLoader(val_dataset, batch_size=1, shuffle=False, collate_fn=collate_fn)
+    val_dataset = SIPDataset(val_processed)
+    val_loader = DataLoader(val_dataset, batch_size=1, shuffle=False, collate_fn=collate_fn)
     
     # Model
     model = create_model(
@@ -382,27 +432,24 @@ def main():
         lambda_mle=args.lambda_mle
     ).to(args.device)
     
-    optimizer = optim.Adam(model.parameters(), lr=args.lr)
+    # Print architecture
+    print_model_architecture(model, args.baseline)
+    
+    # Optimizer
+    optimizer = get_optimizer(args.optimizer, model.parameters(), args.lr)
+    print(f"[Optimizer] Using {args.optimizer.upper()} with lr={args.lr}\n")
     
     # Training history
     history = {
-        'train_loss': [],
+        'train_total_loss': [],
         'train_crf_loss': [],
-        'train_mle_loss': []
+        'train_mle_loss': [],
+        'val_total_loss': [],
+        'val_f1': [],
+        'val_accuracy': []
     }
     
-    if val_data_raw:
-        history.update({
-            'val_accuracy': [],
-            'val_precision': [],
-            'val_recall': [],
-            'val_f1': [],
-            'val_auc_roc': [],
-            'val_per_class_f1': []
-        })
-    
     best_f1 = 0.0
-    best_auc = 0.0
     
     # Training loop
     for epoch in range(1, args.epochs + 1):
@@ -412,53 +459,58 @@ def main():
         
         # Train
         train_metrics = train_epoch(model, train_loader, optimizer, args.device, epoch)
-        history['train_loss'].append(train_metrics['loss'])
+        history['train_total_loss'].append(train_metrics['total_loss'])
         history['train_crf_loss'].append(train_metrics['crf_loss'])
         history['train_mle_loss'].append(train_metrics['mle_loss'])
         
         print(f"\n[Train] Epoch {epoch}:")
-        print(f"  Loss: {train_metrics['loss']:.4f}")
-        print(f"  CRF:  {train_metrics['crf_loss']:.4f}")
-        print(f"  MLE:  {train_metrics['mle_loss']:.4f}")
+        print(f"  Total Loss: {train_metrics['total_loss']:.4f}")
+        print(f"  CRF Loss:   {train_metrics['crf_loss']:.4f}")
+        print(f"  MLE Loss:   {train_metrics['mle_loss']:.4f}")
         
         # Validate
-        if val_data_raw:
-            val_metrics = evaluate_with_auc(model, val_loader, args.device, args.num_classes, class_names)
-            
-            history['val_accuracy'].append(val_metrics['accuracy'])
-            history['val_precision'].append(val_metrics['precision'])
-            history['val_recall'].append(val_metrics['recall'])
-            history['val_f1'].append(val_metrics['f1'])
-            history['val_auc_roc'].append(val_metrics['auc_roc'])
-            history['val_per_class_f1'].append(val_metrics['per_class']['f1'])
-            
-            # Save best F1
-            if val_metrics['f1'] > best_f1:
-                best_f1 = val_metrics['f1']
-                checkpoint_path = os.path.join(args.checkpoint_dir, 'best_f1_model.pt')
-                torch.save({
-                    'epoch': epoch,
-                    'model_state_dict': model.state_dict(),
-                    'optimizer_state_dict': optimizer.state_dict(),
-                    'f1': best_f1,
-                    'metrics': val_metrics,
-                    'args': vars(args)
-                }, checkpoint_path)
-                print(f"\n[Checkpoint] Saved best F1 model (F1={best_f1:.4f})")
-            
-            # Save best AUC
-            if val_metrics['auc_roc'] > best_auc:
-                best_auc = val_metrics['auc_roc']
-                checkpoint_path = os.path.join(args.checkpoint_dir, 'best_auc_model.pt')
-                torch.save({
-                    'epoch': epoch,
-                    'model_state_dict': model.state_dict(),
-                    'optimizer_state_dict': optimizer.state_dict(),
-                    'auc_roc': best_auc,
-                    'metrics': val_metrics,
-                    'args': vars(args)
-                }, checkpoint_path)
-                print(f"[Checkpoint] Saved best AUC model (AUC={best_auc:.4f})")
+        val_metrics, best_ex, worst_ex = evaluate_with_examples(
+            model, val_loader, args.device, args.num_classes, class_names, preprocessor
+        )
+        
+        # Compute validation loss (approximate)
+        model.eval()
+        val_total_loss = 0
+        with torch.no_grad():
+            for batch in val_loader:
+                user_utt = batch['user_utterance'].unsqueeze(0).to(args.device)
+                system_utt = batch['system_utterance'].unsqueeze(0).to(args.device)
+                user_labels = batch['user_I_label'].unsqueeze(0).to(args.device)
+                system_labels = batch['system_I_label'].unsqueeze(0).to(args.device)
+                
+                output = model(user_utt, system_utt, user_labels, system_labels, mode='train')
+                val_total_loss += output['total_loss'].item()
+        
+        val_total_loss /= len(val_loader)
+        history['val_total_loss'].append(val_total_loss)
+        history['val_f1'].append(val_metrics['f1'])
+        history['val_accuracy'].append(val_metrics['accuracy'])
+        
+        print(f"\n[Validation] Epoch {epoch}:")
+        print(f"  Total Loss: {val_total_loss:.4f}")
+        print(f"  Accuracy:   {val_metrics['accuracy']:.4f}")
+        print(f"  Precision:  {val_metrics['precision']:.4f}")
+        print(f"  Recall:     {val_metrics['recall']:.4f}")
+        print(f"  F1:         {val_metrics['f1']:.4f}")
+        
+        # Save best
+        if val_metrics['f1'] > best_f1:
+            best_f1 = val_metrics['f1']
+            checkpoint_path = os.path.join(args.checkpoint_dir, 'best_f1_model.pt')
+            torch.save({
+                'epoch': epoch,
+                'model_state_dict': model.state_dict(),
+                'optimizer_state_dict': optimizer.state_dict(),
+                'f1': best_f1,
+                'metrics': val_metrics,
+                'args': vars(args)
+            }, checkpoint_path)
+            print(f"\n[Checkpoint] New best F1: {best_f1:.4f}")
         
         # Periodic save
         if epoch % args.save_every == 0:
@@ -469,25 +521,34 @@ def main():
                 'optimizer_state_dict': optimizer.state_dict(),
                 'args': vars(args)
             }, checkpoint_path)
-            print(f"\n[Checkpoint] Saved to {checkpoint_path}")
     
     # Save history
     history_path = os.path.join(args.checkpoint_dir, 'training_history.json')
     with open(history_path, 'w') as f:
         json.dump(history, f, indent=2)
     
-    # Plot curves
-    plot_path = os.path.join(args.checkpoint_dir, 'training_curves.png')
-    plot_training_curves(history, plot_path, args.num_classes, class_names)
+    # Plot
+    plot_path = os.path.join(args.checkpoint_dir, 'loss_curves.png')
+    plot_loss_curves(history, plot_path)
+    
+    # Final evaluation with examples
+    print("\n" + "="*70)
+    print("Final Evaluation")
+    print("="*70)
+    
+    final_metrics, best_example, worst_example = evaluate_with_examples(
+        model, val_loader, args.device, args.num_classes, class_names, preprocessor
+    )
+    
+    print_example(best_example, "🏆 BEST Prediction Example", class_names)
+    print_example(worst_example, "📉 WORST Prediction Example", class_names)
     
     print("\n" + "="*70)
     print("Training Complete!")
     print("="*70)
-    if val_data_raw:
-        print(f"Best F1 Score: {best_f1:.4f}")
-        print(f"Best AUC-ROC:  {best_auc:.4f}")
-    print(f"History saved to: {history_path}")
-    print(f"Plot saved to: {plot_path}")
+    print(f"Best F1: {best_f1:.4f}")
+    print(f"Optimizer: {args.optimizer.upper()}")
+    print(f"Final Val F1: {final_metrics['f1']:.4f}")
     print("="*70 + "\n")
 
 
