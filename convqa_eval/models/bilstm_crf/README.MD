@@ -5,7 +5,7 @@
 ## 🎯 Features
 
 ✅ **Configurable Classes**: 2, 3, or 4 ambiguity levels  
-✅ **5 Baselines**: VanillaCRF, +Features, DynamicCRF, CtxPred, MuSIc  
+✅ **6 Baselines**: All 6 CRF variants (VanillaCRF, Who2WhoCRF, PositionCRF, Who2Who_PositionCRF, IntimeCRF, DistanceCRF)  
 ✅ **Rich Output**: Confidence, conditions, token importance, metadata  
 ✅ **F1/Precision/Recall**: Full evaluation metrics  
 ✅ **Training Plots**: Matplotlib visualization  
@@ -85,42 +85,85 @@
 pip install torch transformers tqdm scikit-learn matplotlib
 ```
 
+## 📊 Data Statistics Script
+
+### Usage
+
+```bash
+# Single dataset
+python scripts/bilstmcrf_data_statistics.py \
+    --input data/sip_train.json \
+    --names "Training Set" \
+    --output_dir statistics
+
+# Multiple datasets (train + test)
+python scripts/bilstmcrf_data_statistics.py \
+    --input data/sip_train.json data/sip_test.json \
+    --names "Train" "Test" \
+    --output_dir statistics
+```
+
 ### Training
 
 ```bash
-# 2-class binary
-python scripts/train.py \
-    --train_data data/sample.json \
-    --val_data data/sample.json \
-    --baseline vanillacrf \
-    --num_classes 2 \
-    --epochs 10
-
-# 4-class multiclass
-python scripts/train.py \
-    --train_data data/sample.json \
-    --val_data data/sample.json \
-    --baseline music \
+python scripts/train_bilstm_crf.py \
+    --train_data data/sip_train.json \
+    --val_split 0.15 \
+    --baseline distance \
     --num_classes 4 \
-    --epochs 20
+    --optimizer adam \
+    --epochs 30 \
+    --lr 1e-3
+```
+```bash
+python scripts/train_bilstm_crf.py \
+    --train_data data/sip_train.json \
+    --val_split 0.15 \
+    --baseline distance \
+    --num_classes 4 \
+    --optimizer adam \
+    --epochs 30 \
+    --lr 1e-3
 ```
 
-**Outputs**:
-- `checkpoints/best_model.pt` - Best F1 model
-- `checkpoints/curves.png` - Training plots
-- `checkpoints/history.json` - Metrics history
+Compare different optimizers:
+
+```bash
+# Adam (adaptive learning rate, good default)
+python scripts/train_enhanced.py --optimizer adam
+
+# Adamax (variant of Adam, more stable)
+python scripts/train_enhanced.py --optimizer adamax
+
+# RMSprop (good for RNNs)
+python scripts/train_enhanced.py --optimizer rmsprop
+
+# SGD (with momentum=0.9)
+python scripts/train_enhanced.py --optimizer sgd --lr 0.01
+```
+
 
 ### Inference
 
 ```bash
-python scripts/inference.py \
+python scripts/inference_bilstm_crf.py \
     --input_data data/sample.json \
-    --checkpoint checkpoints/best_model.pt \
+    --checkpoint checkpoints/best_f1_model.pt \
     --baseline vanillacrf \
     --num_classes 2 \
     --output results/predictions.json
 ```
 
+### Evaluate with Variance Analysis
+
+```bash
+python scripts/evaluate_bilstm_crf.py \
+    --test_data data/sip_test.json \
+    --checkpoint_dir checkpoints \
+    --output_dir evaluation_final \
+    --num_classes 4 \
+    --seeds 42 123 456 789 1000
+```
 ## 📋 5 Baselines
 
 ### 1. VanillaCRF
@@ -150,22 +193,36 @@ python scripts/inference.py \
 - Best performance
 - Slowest training
 
-## 📁 File Structure
+!git clone -b Bi-LSTM-CRF-Baseline https://github.com/importrayhan/convqa_eval
+cd /content/convqa_eval
+cd convqa_eval
+!python scripts/transform_convqa_to_sip.py \
+    --input data/convqa_sample.json \
+    --output data/sip_format2.json
+
+## 📁 BiLSTM_CRF Baseline File Structure
 
 ```
-sip_final/
+convqa_eval/
 ├── model/
-│   ├── preprocessor.py         # Input parsing & tokenization
-│   ├── music_baselines.py      # 5 baseline models
-│   └── output_generator.py     # Structured output generation
+│   ├── bilstm_crf/
+│         ├── music_baselines_complete.py            
+│         ├── preprocessor.py             
+│         └── output_generator.py
+│
 ├── scripts/
-│   ├── train.py                # Training with F1/P/R
-│   └── inference.py            # Inference with metadata
-├── data/
-│   └── sample.json             # Example data
-└── checkpoints/                # Saved models
+│   ├── train_bilstm_crf.py      
+│   ├── compute_statistics.py             
+│   ├── evaluate_bilstm_crf.py      
+│   ├── train_bilstm_crf.py
+│   └── inference_bilstm_crf.py
+│
+└── data/
+    ├── pacific_train.json
+    ├── pacific_test.json
+    ├──  
+    └──  
 ```
-
 ## 🎓 Model Architecture
 
 ```
@@ -233,19 +290,7 @@ epochs=10-20         # Training epochs
 lr=1e-3              # Learning rate (Adam)
 ```
 
-## 📈 Expected Performance
 
-Based on binary classification:
-
-| Baseline | F1 | Precision | Recall |
-|----------|-------|-----------|--------|
-| VanillaCRF | 0.70 | 0.72 | 0.68 |
-| +Features | 0.73 | 0.75 | 0.71 |
-| DynamicCRF | 0.74 | 0.76 | 0.72 |
-| CtxPred | 0.65 | 0.68 | 0.62 |
-| **MuSIc** | **0.78** | **0.80** | **0.76** |
-
-Multiclass (4 classes) typically 5-10% lower F1.
 
 ## 🎯 Key Components
 
@@ -260,49 +305,16 @@ Multiclass (4 classes) typically 5-10% lower F1.
 - Factory function: `create_model(baseline, num_classes)`
 - Consistent interface
 
-### Output Generator
-- Structured output format
-- Confidence scores
-- Candidate conditions
-- Token importance (extensible)
-- Metadata packaging
-
-## 🐛 Troubleshooting
-
-**Issue**: Model predicts only one class  
-**Fix**: Check data balance, adjust learning rate, increase epochs
-
-**Issue**: Low multiclass performance  
-**Fix**: Ensure sufficient examples per class, try 3-class instead of 4
-
-**Issue**: Slow training  
-**Fix**: Use smaller hidden_size (128), reduce num_layers to 1
-
-## ✅ Production Checklist
-
-- [ ] Data has examples of all classes
-- [ ] Training F1 > 0.7 (binary) or > 0.6 (4-class)
-- [ ] Validation curves plateau (not overfitting)
-- [ ] Output metadata is populated correctly
-- [ ] Confidence scores are calibrated (test on holdout)
 
 ## 📚 Citation
 
 ```bibtex
-@article{sip2021,
-  title={System Initiative Prediction for Multi-turn Conversations},
-  author={Meng, Chuan and others},
-  year={2021}
+@inproceedings{meng2023system,
+  title={System initiative prediction for multi-turn conversational information seeking},
+  author={Meng, Chuan and Aliannejadi, Mohammad and de Rijke, Maarten},
+  booktitle={Proceedings of the 32nd ACM International Conference on Information and Knowledge Management},
+  pages={1807--1817},
+  year={2023}
 }
 ```
 
-## 🚀 Ready to Use!
-
-This implementation provides:
-- ✅ Binary and multiclass support (2-4 classes)
-- ✅ 5 baseline models
-- ✅ Rich metadata output
-- ✅ Complete evaluation pipeline
-- ✅ Clean, documented code
-
-**Get started**: `python scripts/train.py --train_data data/sample.json --num_classes 2`
