@@ -78,6 +78,41 @@
 - `2`: Needs clarification  
 - `3`: Highly ambiguous
 
+<details>
+<summary> ### Input/Output Flow Visualization </summary>
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                           VANILLA CRF                                   │
+└─────────────────────────────────────────────────────────────────────────┘
+
+TRAINING MODE (Supervised Learning)
+═══════════════════════════════════════════════════════════════════════════
+
+INPUT:                       PROCESSING:                      OUTPUT:
+─────────────────           ─────────────────                ─────────────────
+User Utterance ₀ ───┐                                      ───► User Label ₀
+System Utterance ₀ ──┼──► BERT → BiLSTM → CRF ─────────── ───► System Label ₀ ✓
+                     │                                       (OBSERVED)
+User Utterance ₁ ────┤                                      ───► User Label ₁
+System Utterance ₁ ───┘                                      ───► System Label ₁ ✓
+                     (FULL SEQUENCE)                         (OBSERVED)
+                     
+                     
+INFERENCE MODE (Prediction)
+═══════════════════════════════════════════════════════════════════════════
+
+INPUT:                       PROCESSING:                      OUTPUT:
+─────────────────           ─────────────────                ─────────────────
+User Utterance ₀ ───┐                                      ───► User Label ₀
+System Utterance ₀ ──┼──► BERT → BiLSTM → CRF ─────────── ───► System Label ₀ ✓
+                     │                                       (OBSERVED - given)
+User Utterance ₁ ────┤                                      ───► User Label ₁
+                     │                                      
+[SYSTEM?] ──────────┘  ←─── MISSING!                       ───► System Label ₁ ⚡
+                                                              (PREDICTED - output!)
+
+</details>
+
 ## 🚀 Quick Start
 
 ### Installation
