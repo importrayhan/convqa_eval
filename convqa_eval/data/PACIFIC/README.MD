@@ -4,10 +4,11 @@
 | Dataset | Domain  | Turn  | Modality     | Proact. | NR (Numerical Reasoning) |
 | ------- | ------- | ----- | ------------ | ------- | ------------------------ |
 | PACIFIC | Finance | Multi | Table / Text | Yes     | Yes                      |
+### Train.json, Dev.json are annotated for "req_clari": true/false and disambiguated "original_question": "_______?"  <br> 
+Open access to dataset for future studies via [github: dengyang17/PACIFIC/](https://github.com/dengyang17/PACIFIC/)<br> 
 
-
-# Dataset Annotation Details
-
+## Dataset Annotation Details:
+Rigorous quality control process for high annotation quality- maintaining the complexity and difficulty of expert-level financial question answering.
 ## Annotators
 
 ### Qualifications
@@ -46,15 +47,6 @@
 - Example template: *"What kind of _ are you asking about?"*
 - Templates use the omitted entity to construct the clarification
 
-### Entity Highlighting
-
-- Entities in questions **automatically highlighted** through lexical matching
-- Matches nouns in paragraphs and tables
-- Facilitates convenience and accuracy for annotators
-
-This rigorous quality control process ensures high annotation quality while maintaining the complexity and difficulty of expert-level financial question answering.
-
-### Train.json, Dev.json are annotated for "req_clari": true/false and disambiguated "original_question": "_______?"  <br> 
 
 ## Dataset Statistics (PACIFIC / TAT-QA)
 
