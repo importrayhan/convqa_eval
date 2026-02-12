@@ -244,9 +244,10 @@ Here is a sample conversation session from dev set: <br>
       }
     ]
   }]
-``` <br> 
+``` 
 
-<br> 
+
+ 
 📈 Method Performance <br> 
 | Method                  | Dev P | Dev R | Dev F1 | Test P | Test R | Test F1 |
 | ----------------------- | ----- | ----- | ------ | ------ | ------ | ------- |
@@ -266,7 +267,8 @@ else: ambiguous_type=0 (clear intent) <br>
 
 ## 📚 Citation <br> 
 
-```bibtex
+```
+bibtex
 @inproceedings{emnlp22-pacific,
   author    = {Yang Deng and
                Wenqiang Lei and
