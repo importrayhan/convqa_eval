@@ -6,7 +6,68 @@
 | PACIFIC | Finance | Multi | Table / Text | Yes     | Yes                      |
 
 
-### Train.json, Dev.json are annotated for "req_clari": true/false and disambiguated "original_question": "_______________?"  <br> 
+# Dataset Annotation Details
+
+## Annotators
+
+### Qualifications
+- **Well-educated postgraduate students** majored in finance or similar disciplines
+- Two annotators per conversation sample with distinct roles:
+  - **First annotator**: Acts as the seeker, performs primary annotation tasks
+  - **Second annotator**: Acts as the agent, provides clarifying questions
+
+## Quality Assurance Process
+
+### Multi-Layer Verification
+
+#### 1. **Two-Verifier System**
+- Two separate verifiers validate each turn in the constructed conversations
+- Verifiers check for:
+  - Coherence of the conversation
+  - Correctness of annotations
+  - Any mistakes or problems
+
+#### 2. **Iterative Correction Process**
+- If mistakes are found, annotators must **fix issues immediately**
+- Corrections continue **until the annotation passes checks by both verifiers**
+- No annotation is finalized without dual verification approval
+
+### Quality Metrics
+
+| Metric | Value |
+|--------|-------|
+| **First-round mistakes captured** | 212 out of 19,008 turns (1.1%) |
+| **Inter-annotator agreement** | 0.62 |
+
+### Template-Based Objectivity
+
+- **Pre-defined templates** provided for clarification questions
+- Ensures objectivity in clarification question annotations
+- Example template: *"What kind of _ are you asking about?"*
+- Templates use the omitted entity to construct the clarification
+
+### Entity Highlighting
+
+- Entities in questions **automatically highlighted** through lexical matching
+- Matches nouns in paragraphs and tables
+- Facilitates convenience and accuracy for annotators
+
+This rigorous quality control process ensures high annotation quality while maintaining the complexity and difficulty of expert-level financial question answering.
+
+### Train.json, Dev.json are annotated for "req_clari": true/false and disambiguated "original_question": "_______?"  <br> 
+
+## Dataset Statistics (PACIFIC / TAT-QA)
+
+| Metric                         | Train            | Dev              | 
+|--------------------------------|------------------|------------------|
+| # Dialogues                    | 2,201 / -        | 278 / -          |
+| # Turns (QA pairs)             | 15,087 / 13,215  | 1,982 / 1,668    | 
+| # Clarifying turns             | 1,872 / -        | 320 / -          | 
+| Avg. turns / dialogue          | 6.9 / -          | 7.1 / -          |
+| Avg. words / question          | 9.6 / 12.5       | 9.0 / 12.4       |
+| Avg. words / answer            | 4.6 / 4.1        | 4.6 / 4.1        |
+
+
 Here is a sample conversation session from dev set: <br> 
 
 ```
