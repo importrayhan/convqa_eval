@@ -79,36 +79,15 @@
 - `3`: Highly ambiguous
 
 <details>
-<summary> Input/Output Flow Visualization </summary>
-┌─────────────────────────────────────────────────────────────────────────┐
-│                           VANILLA CRF                                   │
-└─────────────────────────────────────────────────────────────────────────┘
-
-TRAINING MODE (Supervised Learning)
-═══════════════════════════════════════════════════════════════════════════
-
-INPUT:                       PROCESSING:                      OUTPUT:
-─────────────────           ─────────────────                ─────────────────
-User Utterance ₀ ───┐                                      ───► User Label ₀
-System Utterance ₀ ──┼──► BERT → BiLSTM → CRF ─────────── ───► System Label ₀ ✓
-                     │                                       (OBSERVED)
-User Utterance ₁ ────┤                                      ───► User Label ₁
-System Utterance ₁ ───┘                                      ───► System Label ₁ ✓
-                     (FULL SEQUENCE)                         (OBSERVED)
-                     
-                     
-INFERENCE MODE (Prediction)
-═══════════════════════════════════════════════════════════════════════════
-
-INPUT:                       PROCESSING:                      OUTPUT:
-─────────────────           ─────────────────                ─────────────────
-User Utterance ₀ ───┐                                      ───► User Label ₀
-System Utterance ₀ ──┼──► BERT → BiLSTM → CRF ─────────── ───► System Label ₀ ✓
-                     │                                       (OBSERVED - given)
-User Utterance ₁ ────┤                                      ───► User Label ₁
-                     │                                      
-[SYSTEM?] ──────────┘  ←─── MISSING!                       ───► System Label ₁ ⚡
-                                                              (PREDICTED - output!)
+<summary> Training vs. Inference </summary>
+┌─────────────────┐         ┌─────────────────┐
+│    TRAINING     │         │   INFERENCE     │
+├─────────────────┤         ├─────────────────┤
+│ Input: X₁:ₜ     │         │ Input: X₁:ₜ₋₁   │
+│ Uses: Posterior │         │ Uses: Prior     │
+│ Access to xₜ    │         │ No access to xₜ │
+│ Gold labels ✓   │         │ Predicts Y₁:ₜ   │
+└─────────────────┘         └─────────────────┘
 </details>
 
 ## 🚀 Quick Start
