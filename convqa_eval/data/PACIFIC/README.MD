@@ -1,4 +1,12 @@
 # PACIFIC dataset (ProActive ConversatIonal question answering in FInanCe) <br> 
+## PACIFIC: Towards Proactive Conversational Question Answering over Tabular and Textual Data in Finance
+
+**Yang Deng | Wenqiang Lei | Wenxuan Zhang | Wai Lam | Tat-Seng Chua**
+
+📍 *The 2022 Conference on Empirical Methods in Natural Language Processing (EMNLP 2022)*  
+Abu Dhabi, December 7–11, 2022  
+
+📄 [Paper (PDF)](https://arxiv.org/abs/2210.08817)
 
 📊 Dataset Overview <br> 
 | Dataset | Domain  | Turn  | Modality     | Proact. | NR (Numerical Reasoning) |
@@ -9,17 +17,13 @@ Open access to dataset for future studies via [github: dengyang17/PACIFIC/](http
 
 ## Dataset Annotation Details:
 Rigorous quality control process for high annotation quality- maintaining the complexity and difficulty of expert-level financial question answering.
-## Annotators
-
-### Qualifications
+## Annotators' qualifications
 - **Well-educated postgraduate students** majored in finance or similar disciplines
 - Two annotators per conversation sample with distinct roles:
   - **First annotator**: Acts as the seeker, performs primary annotation tasks
   - **Second annotator**: Acts as the agent, provides clarifying questions
 
-## Quality Assurance Process
-
-### Multi-Layer Verification
+### Multi-Layer Verification for Quality Assurance
 
 #### 1. **Two-Verifier System**
 - Two separate verifiers validate each turn in the constructed conversations
