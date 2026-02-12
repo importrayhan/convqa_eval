@@ -1,12 +1,4 @@
 # PACIFIC dataset (ProActive ConversatIonal question answering in FInanCe) <br> 
-## PACIFIC: Towards Proactive Conversational Question Answering over Tabular and Textual Data in Finance
-
-**Yang Deng | Wenqiang Lei | Wenxuan Zhang | Wai Lam | Tat-Seng Chua**
-
-📍 *The 2022 Conference on Empirical Methods in Natural Language Processing (EMNLP 2022)*  
-Abu Dhabi, December 7–11, 2022  
-
-📄 [Paper (PDF)](https://arxiv.org/abs/2210.08817)
 
 📊 Dataset Overview <br> 
 | Dataset | Domain  | Turn  | Modality     | Proact. | NR (Numerical Reasoning) |
@@ -339,3 +331,8 @@ bibtex
   year      = {2022},
 }
 ```
+
+📍 *The 2022 Conference on Empirical Methods in Natural Language Processing (EMNLP 2022)*  
+Abu Dhabi, December 7–11, 2022  
+
+📄 [Paper (PDF)](https://arxiv.org/abs/2210.08817)
