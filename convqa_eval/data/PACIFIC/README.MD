@@ -56,7 +56,8 @@ Rigorous quality control process for high annotation quality- maintaining the co
 | Avg. words / answer            | 4.6 / 4.1        | 4.6 / 4.1        |
 
 
-Here is a sample conversation session from dev set: <br> 
+<details>
+<summary>Here is a sample conversation session from Train set: <br></summary>
 
 ```
 [{
@@ -294,6 +295,7 @@ Here is a sample conversation session from dev set: <br>
     ]
   }]
 ``` 
+</details>
 
 
  
