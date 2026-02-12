@@ -10,222 +10,243 @@
 Here is a sample conversation session from dev set: <br> 
 
 ```
-{
+[{
     "table": {
-      "uid": "6d9e104c-a89c-4d15-bacf-47c19d8d6445",
+      "uid": "6ee29b25-8ed0-415b-858f-4147a00915f4",
       "table": [
         [
-          "October 31,",
-          "",
-          ""
+          "Product Category ",
+          "Fiscal Year 2019",
+          "Fiscal Year 2018 ",
+          "Fiscal Year 2017"
         ],
         [
-          "",
-          "2019",
-          "2018"
+          "Fresh, vacuum-sealed chicken",
+          "$1,310.2",
+          "$1,139.3",
+          "$1,339.1"
         ],
         [
-          "(In thousands)",
-          "",
-          ""
+          "Fresh, chill-packed chicken",
+          "1,137.7",
+          "1,158.3",
+          "1,044.7"
         ],
         [
-          "Live poultry-broilers (net of reserve) and breeders ",
-          "$ 179,870",
-          "$150,980"
+          "Fresh, ice-packed chicken ",
+          "511.5",
+          "503.6",
+          "547.1"
         ],
         [
-          "Feed, eggs and other ",
-          "47,417",
-          "37,965"
+          "Prepared chicken ",
+          "240.8",
+          "207.6",
+          "170.8"
         ],
         [
-          "Processed poultry",
-          "35,121",
-          "30,973"
+          "Frozen chicken ",
+          "213.0",
+          "211.5",
+          "223.9"
         ],
         [
-          "Prepared chicken",
-          "20,032",
-          "13,591"
+          "Other ",
+          "27.1",
+          "15.7",
+          "16.6"
         ],
         [
-          "Packaging materials",
-          "7,488",
-          "6,547"
-        ],
-        [
-          "Total inventories ",
-          "$289,928",
-          "$240,056"
+          "Total net sales ",
+          "$3,440.3",
+          "$3,236.0",
+          "$3,342.2"
         ]
       ]
     },
     "paragraphs": [
       {
-        "uid": "0773deff-305d-4302-8fc4-21d8ef7547fd",
+        "uid": "ce05a041-268c-491e-8d94-2a1bc07525e9",
         "order": 1,
-        "text": "3. Inventories"
+        "text": "2. Disaggregation of Revenue"
       },
       {
-        "uid": "7396c880-d7e2-4d48-bc3c-aeb25e42efbf",
+        "uid": "5b143554-0ca6-47ec-b5bc-cfec7a6221cb",
         "order": 2,
-        "text": "Inventories consisted of the following:"
-      },
-      {
-        "uid": "820f78b7-65e2-4200-895c-96873de0ddfd",
-        "order": 3,
-        "text": "The increase in live inventories is attributable to an increase in the quantity of live birds in inventory at the Company's Tyler, Texas facility as it increased production during fiscal 2019, as well as the value at which the Company's live poultry inventories of broilers are recorded. In periods where the Company estimates that the cost to grow live birds in inventory to a marketable age and then process and distribute those birds will be lower in the aggregate than the anticipated sales proceeds, the Company values the broiler inventories on hand at cost and accumulates costs as the birds are grown to a marketable age subsequent to the balance sheet date. In periods where the Company estimates that the cost to grow live birds in inventory to a marketable age and then process and distribute those birds will be higher in the aggregate than the anticipated sales proceeds, the Company will make an adjustment to lower the value of live birds in inventory to the net realizable value. The significant judgments that management makes in order to assess the net realizable value of its broiler inventory include estimating future selling prices of finished products and the related cost of sales to complete. The Company recorded a charge of $2.8 million at October 31, 2019 and of $9.6 million at October 31, 2018 to reduce the values of live broiler inventories on hand at those dates from cost to net realizable value."
-      },
-      {
-        "uid": "1a974d8d-8f40-499f-86ea-76f119f3ed05",
-        "order": 4,
-        "text": "The increases in feed, eggs and other, processed poultry and packaging materials inventories are also attributable to an increase in the inventory volume at the Tyler, Texas facility."
-      },
-      {
-        "uid": "f9601044-9b4c-4eae-8170-a72fe1dce1b0",
-        "order": 5,
-        "text": "The increase in prepared chicken inventory is attributable to the mix of the different finished products in inventory at October 31, 2019, as compared to October 31, 2018, as well as an increase in production volume at the Company's prepared chicken facility in Flowood, Mississippi. During fiscal 2019, the facility processed approximately 129.1 million pounds of prepared chicken products, as compared to approximately 107.6 million pounds during fiscal 2018. Approximately 1.2 million pounds of that increase was in inventory at October 31, 2019, representing an approximately 12% increase in inventory volume."
+        "text": "The following table disaggregates our net sales by product category (in millions):"
       }
     ],
     "questions": [
       {
-        "uid": "667874b7-6e76-4a6d-b372-925ba60aff66",
+        "uid": "6463249e-391c-414c-8ed5-b082ee8148c6",
         "derivation": "",
         "answer_type": "question",
         "rel_paragraphs": [],
         "req_comparison": false,
         "scale": "",
-        "answer_from": "table",
-        "question": "What is the value of Processed poultry?",
+        "answer_from": "table-text",
+        "question": "What is the net sales from Fresh chicken for fiscal years 2019 to 2017 respectively?",
         "answer": [
-          "Which year are you asking about?"
+          "What kind of fresh chicken are you asking about?"
         ],
         "order": 1,
         "req_clari": true,
         "follow_up": false,
-        "original_question": "What is the value of Processed poultry?"
+        "original_question": "What is the net sales from Fresh chicken for fiscal years 2019 to 2017 respectively?"
       },
       {
-        "uid": "e5417b8b-e0f4-4259-9012-dec45d2ffacd",
+        "uid": "0e6b073c-0409-48f3-aff8-66d25d01cd99",
         "order": 2,
-        "question": "As of October 31, 2019 and 2018 respectively.",
+        "question": "Fresh, vacuum-sealed chicken.",
         "answer": [
-          "35,121",
-          "30,973"
+          "$1,310.2",
+          "$1,139.3",
+          "$1,339.1"
         ],
         "derivation": "",
         "answer_type": "multi-span",
-        "answer_from": "table",
-        "rel_paragraphs": [],
-        "req_comparison": false,
-        "scale": "thousand",
-        "follow_up": false,
-        "req_clari": false,
-        "original_question": "What is the value of Processed poultry as of October 31, 2019 and 2018 respectively?"
-      },
-      {
-        "uid": "61ad7e9b-70ab-4f75-a14a-6b9fbdb1a86b",
-        "order": 3,
-        "question": "How about that of Prepared chicken?",
-        "answer": [
-          "20,032",
-          "13,591"
-        ],
-        "derivation": "",
-        "answer_type": "multi-span",
-        "answer_from": "table",
-        "rel_paragraphs": [],
-        "req_comparison": false,
-        "scale": "thousand",
-        "follow_up": true,
-        "req_clari": false,
-        "original_question": "What is the value of Prepared chicken as of October 31, 2019 and 2018 respectively?"
-      },
-      {
-        "uid": "075aa3b8-dd50-41b2-86b5-64817c242bb1",
-        "order": 4,
-        "question": "What is its increase due to?",
-        "answer": [
-          "attributable to the mix of the different finished products in inventory at October 31, 2019, as compared to October 31, 2018, as well as an increase in production volume at the Company's prepared chicken facility in Flowood, Mississippi"
-        ],
-        "derivation": "",
-        "answer_type": "span",
-        "answer_from": "text",
+        "answer_from": "table-text",
         "rel_paragraphs": [
-          "5"
+          "2"
         ],
         "req_comparison": false,
-        "scale": "",
-        "follow_up": true,
-        "req_clari": false,
-        "original_question": "What is the increase in prepared chicken inventory due to?"
-      },
-      {
-        "uid": "7707ff1b-ca2c-4d72-aad1-81315a5f54ff",
-        "order": 5,
-        "question": "What is the change in the value of Total inventories between October 31, 2019 and 2018?",
-        "answer": 49872,
-        "derivation": "289,928-240,056",
-        "answer_type": "arithmetic",
-        "answer_from": "table",
-        "rel_paragraphs": [],
-        "req_comparison": false,
-        "scale": "thousand",
+        "scale": "million",
         "follow_up": false,
         "req_clari": false,
-        "original_question": "What is the change in the value of Total inventories between October 31, 2019 and 2018?"
+        "original_question": "What is the net sales from Fresh, vacuum-sealed chicken for fiscal years 2019 to 2017 respectively?"
       },
       {
-        "uid": "888cdddd-dbe2-47ac-bcab-d76fe964a568",
+        "uid": "b0e305cc-9d2c-4dcc-a320-bb3c3f7e6690",
+        "order": 3,
+        "question": "How about Fresh, chill-packed chicken?",
+        "answer": [
+          "1,137.7",
+          "1,158.3",
+          "1,044.7"
+        ],
+        "derivation": "",
+        "answer_type": "multi-span",
+        "answer_from": "table-text",
+        "rel_paragraphs": [
+          "2"
+        ],
+        "req_comparison": false,
+        "scale": "million",
+        "follow_up": true,
+        "req_clari": false,
+        "original_question": "What is the net sales from Fresh, chill-packed chicken for fiscal years 2019 to 2017 respectively?"
+      },
+      {
+        "uid": "02213cb2-4e04-4c01-8287-81a69a9393cd",
+        "order": 4,
+        "question": "What is the average amount of them?",
+        "answer": 1113.57,
+        "derivation": "(1,137.7+1,158.3+1,044.7)/3",
+        "answer_type": "arithmetic",
+        "answer_from": "table-text",
+        "rel_paragraphs": [
+          "2"
+        ],
+        "req_comparison": false,
+        "scale": "million",
+        "follow_up": true,
+        "req_clari": false,
+        "original_question": "What is the average net sales from Fresh, chill-packed chicken for fiscal years 2019 to 2017?"
+      },
+      {
+        "uid": "1ef9a3f4-53a3-48ff-ae58-cff73397769f",
         "derivation": "",
         "answer_type": "question",
         "rel_paragraphs": [],
         "req_comparison": false,
         "scale": "",
-        "answer_from": "table",
-        "question": "What is the average value for October 31, 2019 and 2018?",
+        "answer_from": "table-text",
+        "question": "What is the net sales from Fresh, ice-packed chicken?",
         "answer": [
-          "What kind of inventories are you asking about?"
+          "Which year are you asking about?"
         ],
-        "order": 6,
+        "order": 5,
         "req_clari": true,
         "follow_up": false,
-        "original_question": "What is the average value for October 31, 2019 and 2018?"
+        "original_question": "What is the net sales from Fresh, ice-packed chicken?"
       },
       {
-        "uid": "12005950-7f78-497e-a1b4-cfc8c7389aa1",
-        "order": 7,
-        "question": "Packaging materials.",
-        "answer": 7017.5,
-        "derivation": "(7,488+6,547)/2",
-        "answer_type": "arithmetic",
-        "answer_from": "table",
-        "rel_paragraphs": [],
+        "uid": "50eb4cb7-8079-467b-ae33-a9af99e84546",
+        "order": 6,
+        "question": "For fiscal years 2019 to 2017 respectively.",
+        "answer": [
+          "511.5",
+          "503.6",
+          "547.1"
+        ],
+        "derivation": "",
+        "answer_type": "multi-span",
+        "answer_from": "table-text",
+        "rel_paragraphs": [
+          "2"
+        ],
         "req_comparison": false,
-        "scale": "thousand",
+        "scale": "million",
         "follow_up": false,
         "req_clari": false,
-        "original_question": "What is the average value of Packaging materials for October 31, 2019 and 2018?"
+        "original_question": "What is the net sales from Fresh, ice-packed chicken for fiscal years 2019 to 2017 respectively?"
       },
       {
-        "uid": "297b00ae-9c26-4401-82b5-a6de76674ee9",
-        "order": 8,
-        "question": "How about that of Prepared chicken?",
-        "answer": 16811.5,
-        "derivation": "(20,032+ 13,591)/2",
+        "uid": "9225b117-650b-4734-ba5d-15d17279ba1f",
+        "order": 7,
+        "question": "What is the average of its amount for fiscal years 2019 to 2017??",
+        "answer": 520.73,
+        "derivation": "(511.5+503.6+547.1)/3",
         "answer_type": "arithmetic",
-        "answer_from": "table",
-        "rel_paragraphs": [],
+        "answer_from": "table-text",
+        "rel_paragraphs": [
+          "2"
+        ],
         "req_comparison": false,
-        "scale": "thousand",
+        "scale": "million",
         "follow_up": true,
         "req_clari": false,
-        "original_question": "What is the average value of Prepared chicken for October 31, 2019 and 2018?"
+        "original_question": "What is the average net sales from Fresh, ice-packed chicken for fiscal years 2019 to 2017?"
+      },
+      {
+        "uid": "0eefe9da-a997-4215-a8d4-a08240049d60",
+        "derivation": "",
+        "answer_type": "question",
+        "rel_paragraphs": [],
+        "req_comparison": false,
+        "scale": "",
+        "answer_from": "table-text",
+        "question": "What is the change in value of frozen chicken?",
+        "answer": [
+          "Which period are you asking about?"
+        ],
+        "order": 8,
+        "req_clari": true,
+        "follow_up": false,
+        "original_question": "What is the change in value of frozen chicken?"
+      },
+      {
+        "uid": "c1fa3fc3-62f6-42c9-93fc-015b9e79d1d0",
+        "order": 9,
+        "question": "Between fiscal year 2019 and 2018.",
+        "answer": 1.5,
+        "derivation": "213.0-211.5",
+        "answer_type": "arithmetic",
+        "answer_from": "table-text",
+        "rel_paragraphs": [
+          "2"
+        ],
+        "req_comparison": false,
+        "scale": "million",
+        "follow_up": false,
+        "req_clari": false,
+        "original_question": "What is the change in value of frozen chicken between fiscal year 2019 and 2018?"
       }
     ]
-  }
+  }]
 ``` <br> 
+
+<br> 
 📈 Method Performance <br> 
 | Method                  | Dev P | Dev R | Dev F1 | Test P | Test R | Test F1 |
 | ----------------------- | ----- | ----- | ------ | ------ | ------ | ------- |
