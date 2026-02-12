@@ -57,7 +57,7 @@ Rigorous quality control process for high annotation quality- maintaining the co
 
 
 <details>
-<summary>Here is a sample conversation session from Train set: <br></summary>
+<summary> #### Preview of a sample conversation session from Train set: <br></summary>
 
 ```
 [{
