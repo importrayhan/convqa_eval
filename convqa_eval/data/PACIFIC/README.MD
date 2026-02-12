@@ -1,7 +1,13 @@
-# PACIFIC dataset
+# PACIFIC dataset (ProActive ConversatIonal question answering in FInanCe) <br> 
 
-### Train.json, Dev.json are annotated for "req_clari": true/false and disambiguated "original_question": "_______________?" 
-Here is a sample conversation session from dev set:
+📊 Dataset Overview <br> 
+| Dataset | Domain  | Turn  | Modality     | Proact. | NR (Numerical Reasoning) |
+| ------- | ------- | ----- | ------------ | ------- | ------------------------ |
+| PACIFIC | Finance | Multi | Table / Text | Yes     | Yes                      |
+
+
+### Train.json, Dev.json are annotated for "req_clari": true/false and disambiguated "original_question": "_______________?"  <br> 
+Here is a sample conversation session from dev set: <br> 
 
 ```
 {
@@ -219,17 +225,25 @@ Here is a sample conversation session from dev set:
       }
     ]
   }
-```
-Possible to do-
-**Multi-class ambiguity detection (2-4 classes) with detailed metadata output.**
+``` <br> 
+📈 Method Performance <br> 
+| Method                  | Dev P | Dev R | Dev F1 | Test P | Test R | Test F1 |
+| ----------------------- | ----- | ----- | ------ | ------ | ------ | ------- |
+| BERT<sub>large</sub>    | 84.5  | 85.4  | 84.9   | 80.0   | 83.9   | 81.7    |
+| RoBERTa<sub>large</sub> | 93.1  | 89.4  | 91.2   | 90.0   | 90.8   | 90.2    |
+| UniPCQA (T5)            | 93.7  | 91.0  | 92.3   | 90.6   | 91.6   | 91.1    |
 
-questions[].follow_up=True → ambiguous_type=1
-questions[].req_clari=True → ambiguous_type=2
-questions[].answer_type='question' → ambiguous_type=3
-else: ambiguous_type=0 (clear intent)
+
+Possible to do- <br> 
+**Multi-class ambiguity detection (2-4 classes) with detailed metadata output.** <br> 
+
+questions[].follow_up=True → ambiguous_type=1 <br> 
+questions[].req_clari=True → ambiguous_type=2 <br> 
+questions[].answer_type='question' → ambiguous_type=3 <br> 
+else: ambiguous_type=0 (clear intent) <br> 
 
 
-## 📚 Citation
+## 📚 Citation <br> 
 
 ```bibtex
 @inproceedings{emnlp22-pacific,
