@@ -43,7 +43,7 @@ class SIPPreprocessor:
         
         # Class names
         self.class_names = {
-            2: ['clear', 'ambiguous'],
+            2: ['clear', 'highly_ambiguous'], #two-extrema
             3: ['clear', 'needs_clarification', 'highly_ambiguous'],
             4: ['clear', 'slightly_ambiguous', 'needs_clarification', 'highly_ambiguous']
         }
