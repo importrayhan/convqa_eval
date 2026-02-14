@@ -1,4 +1,4 @@
-SIMMC 2.1 Dataset
+SIMMC 2.1 Dataset available at [SIMMIC 2.1](https://github.com/facebookresearch/simmc2/tree/main/data)
 Summary
 Our challenge focuses on the new SIMMC 2.1 dataset, which is grounded in an immersive virtual environment in the shopping domain: furniture and fashion.
 
