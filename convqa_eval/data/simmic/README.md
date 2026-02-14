@@ -1,5 +1,7 @@
 SIMMC 2.1 Dataset available at [SIMMIC 2.1](https://github.com/facebookresearch/simmc2/tree/main/data)
-Summary
+
+Or, use it from huggingface: git clone https://huggingface.co/datasets/MdRayhanEnuCC/simmic_2.1
+
 Our challenge focuses on the new SIMMC 2.1 dataset, which is grounded in an immersive virtual environment in the shopping domain: furniture and fashion.
 
 The dataset was collected through the multimodal dialog simulator, followed by a manual paraphrasing step.
