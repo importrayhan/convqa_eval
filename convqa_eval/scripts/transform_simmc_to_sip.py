@@ -1,4 +1,16 @@
 """
+Works with python 3.10
+---------------------------
+Change this snippet according to your need:
+                    # Add observation
+                    conversations.append({
+                        "from": "observation",
+                        "value": ----> observation_text,
+                        "turn_id": turn_idx + 1,
+                        "observation_type": "scene",
+                        "scene_id": scene_id,
+                        "scene_data": -----> obs_data
+---------------------------
 Converts SIMMC 2.1 dialogue data to SIP format with:
 - Scene observations with positional grouping (up, down, left, right, center)
 - Disambiguation labels from REQUEST:DISAMBIGUATE or disambiguation_label=1
