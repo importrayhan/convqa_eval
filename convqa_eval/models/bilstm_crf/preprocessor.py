@@ -1,276 +1,336 @@
 """
-Final Preprocessor for SIP with Observations as User Utterances
-
-CRITICAL CHANGES:
-1. Observations are NOT skipped
-2. Observations are treated as user utterances (additional context)
-3. Per-GPT labels maintained
-4. Sequence: [human, observation?, human, observation?, ..., gpt]
+SIP Preprocessor 
+1. num_classes=2: groups 'clear'+'slightly_ambiguous' → 0,
+   'needs_clarification'+'highly_ambiguous' → 1
+2. Prints per-class statistics vs total turns for any num_classes
 """
 
 import json
 import torch
+from collections import Counter
 from typing import List, Dict, Tuple
 from transformers import BertTokenizer
 
 
+# Raw 4-class names as stored in SIP data
+_CLASS4_NAMES = ['clear', 'slightly_ambiguous', 'needs_clarification', 'highly_ambiguous']
+_CLASS3_NAMES = ['clear', 'needs_clarification', 'highly_ambiguous']
+_CLASS2_NAMES = ['clear', 'ambiguous']
+
+# For 2-class grouping: original labels 0,1 → 0 ; 2,3 → 1
+_BINARY_MAP = {0: 0, 1: 0, 2: 1, 3: 1}
+
+
+def remap_label(raw_label: int, num_classes: int) -> int:
+    """
+    Remap a raw 4-level label to the target number of classes.
+
+    raw_label ∈ {0,1,2,3}  (clear / slightly_ambiguous /
+                             needs_clarification / highly_ambiguous)
+    num_classes == 2 → {0,1}   groups: (0,1)→0,  (2,3)→1
+    num_classes == 3 → {0,1,2} groups: 0→0, (1,2)→1, 3→2
+    num_classes == 4 → identity
+    """
+    raw_label = max(0, min(raw_label, 3))
+    if num_classes == 4:
+        return raw_label
+    if num_classes == 2:
+        return _BINARY_MAP[raw_label]
+    if num_classes == 3:
+        # 0→0, 1→1, 2→1, 3→2
+        return {0: 0, 1: 1, 2: 1, 3: 2}[raw_label]
+    raise ValueError(f"num_classes must be 2, 3 or 4, got {num_classes}")
+
+
+def print_label_statistics(
+    labels: List[int],
+    num_classes: int,
+    title: str = "Label Statistics"
+) -> None:
+    """
+    Print per-class count and percentage against total turns.
+
+    Example output (2-class, 100 turns):
+    ┌─────────────────────────────────────────────┐
+    │ Label Statistics (2 classes, 100 turns)     │
+    ├──────────────────────┬────────┬─────────────┤
+    │ Class                │  Count │     %       │
+    ├──────────────────────┼────────┼─────────────┤
+    │ 0  clear/slight      │     72 │   72.0 %    │
+    │ 1  ambiguous         │     28 │   28.0 %    │
+    ├──────────────────────┼────────┼─────────────┤
+    │ Total turns          │    100 │  100.0 %    │
+    └──────────────────────┴────────┴─────────────┘
+    """
+    total = len(labels)
+    counts = Counter(labels)
+
+    class_labels = _get_display_names(num_classes)
+
+    bar   = "─" * 48
+    hline = "├" + bar[:24] + "┬" + bar[:8] + "┬" + bar[:13] + "┤"
+    top   = "┌" + bar[:24] + "┬" + bar[:8] + "┬" + bar[:13] + "┐"
+    bot   = "└" + bar[:24] + "┴" + bar[:8] + "┴" + bar[:13] + "┘"
+
+    print(f"\n┌{'─'*46}┐")
+    print(f"│  {title} ({num_classes} classes, {total} turns){' '*(max(0,46-len(title)-len(str(num_classes))-len(str(total))-15))}│")
+    print(f"├{'─'*24}┬{'─'*8}┬{'─'*13}┤")
+    print(f"│ {'Class':<22} │{'Count':>7} │{'%':>12} │")
+    print(f"├{'─'*24}┼{'─'*8}┼{'─'*13}┤")
+
+    for idx, display in class_labels.items():
+        cnt = counts.get(idx, 0)
+        pct = 100.0 * cnt / total if total > 0 else 0.0
+        print(f"│ {display:<22} │{cnt:>7} │{pct:>11.1f}% │")
+
+    print(f"├{'─'*24}┼{'─'*8}┼{'─'*13}┤")
+    print(f"│ {'Total turns':<22} │{total:>7} │{'100.0':>11}% │")
+    print(f"└{'─'*24}┴{'─'*8}┴{'─'*13}┘")
+
+
+def _get_display_names(num_classes: int) -> Dict[int, str]:
+    if num_classes == 2:
+        return {
+            0: "0  clear/slight_ambig",
+            1: "1  needs_clari/highly",
+        }
+    if num_classes == 3:
+        return {
+            0: "0  clear",
+            1: "1  needs_clarification",
+            2: "2  highly_ambiguous",
+        }
+    # 4-class
+    return {
+        0: "0  clear",
+        1: "1  slightly_ambiguous",
+        2: "2  needs_clarification",
+        3: "3  highly_ambiguous",
+    }
+
+
 class SIPPreprocessor:
     """
-    Final preprocessor with observations treated as user context.
-    
-    Key Features:
-    - Observations included as user utterances
+    SIP Preprocessor with:
+    - 2-class grouping: (clear, slightly_ambiguous) → 0,
+                        (needs_clarification, highly_ambiguous) → 1
+    - Class statistics printed for any num_classes
+    - Observations merged into user utterances
     - Per-GPT-utterance labels
-    - Handles 2-4 class configurations
     """
-    
+
     def __init__(
         self,
         bert_model: str = 'bert-base-multilingual-cased',
         max_len: int = 128,
-        num_classes: int = 2
+        num_classes: int = 2,
     ):
-        print(f"[SIPPreprocessor] Initializing...")
-        print(f"  BERT: {bert_model}")
-        print(f"  Max length: {max_len}")
-        print(f"  Num classes: {num_classes}")
-        
         assert num_classes in [2, 3, 4], "num_classes must be 2, 3, or 4"
-        
-        self.tokenizer = BertTokenizer.from_pretrained(bert_model)
         self.max_len = max_len
         self.num_classes = num_classes
-        
-        # Class names
+
+        self.tokenizer = BertTokenizer.from_pretrained(bert_model)
+
         self.class_names = {
-            2: ['clear', 'highly_ambiguous'], #two-extrema
+            2: ['clear/slightly_ambiguous', 'needs_clarification/highly_ambiguous'],
             3: ['clear', 'needs_clarification', 'highly_ambiguous'],
-            4: ['clear', 'slightly_ambiguous', 'needs_clarification', 'highly_ambiguous']
+            4: ['clear', 'slightly_ambiguous', 'needs_clarification', 'highly_ambiguous'],
         }
-        
+
+        print(f"[SIPPreprocessor] bert={bert_model}  max_len={max_len}  "
+              f"num_classes={num_classes}")
         print(f"  Classes: {self.class_names[num_classes]}")
-        print()
-    
+
+    # ------------------------------------------------------------------
     def parse_conversations(
         self,
         data: Dict
     ) -> Tuple[List[str], List[str], List[int], List[Dict]]:
         """
-        Parse conversations and extract PER-TURN labels.
-        
-        CRITICAL CHANGE: Observations are merged into user utterances!
-        
-        Sequence flow:
-        - human → user_text
-        - observation (if exists) → append to user_text
-        - gpt → system_text (with label)
-        
-        Returns:
-            user_utterances: List of user inputs (including observations)
-            system_utterances: List of system responses  
-            system_labels: List of labels (ONE PER SYSTEM UTTERANCE)
-            turn_metadata: List of metadata per system turn
+        Walk the conversation list and build aligned (user, system, label) triples.
+
+        - function_call turns are skipped
+        - observation turns are appended to the preceding human utterance
+        - label is read from gpt['ambiguous_type'] then remapped to num_classes
         """
         conversations = data.get('conversations', [])
-        
-        user_utterances = []
-        system_utterances = []
-        system_labels = []
-        turn_metadata = []
-        
+
+        user_utterances: List[str] = []
+        system_utterances: List[str] = []
+        system_labels: List[int] = []
+        turn_metadata: List[Dict] = []
+
         i = 0
-        turn_id = 0
-        
         while i < len(conversations):
             conv = conversations[i]
-            
-            # Skip function_call
-            if conv['from'] == 'function_call':
+
+            if conv['from'] in ('function_call',):
                 i += 1
                 continue
-            
-            # Human utterance - start of turn
+
             if conv['from'] == 'human':
                 user_parts = [conv['value']]
                 i += 1
-                turn_id += 1
-                
-                # Collect observations and merge into user context
+
+                # Collect observations + find matching gpt
                 while i < len(conversations):
-                    curr = conversations[i]
-                    
-                    if curr['from'] == 'function_call':
+                    cur = conversations[i]
+                    if cur['from'] == 'function_call':
                         i += 1
-                        continue
-                    
-                    elif curr['from'] == 'observation':
-                        # CRITICAL: Include observation as part of user context
-                        obs_type = curr.get('observation_type', 'general')
-                        user_parts.append(f"[{obs_type.upper()}] {curr['value']}")
+                    elif cur['from'] == 'observation':
+                        obs_type = cur.get('observation_type', 'context').upper()
+                        user_parts.append(f"[{obs_type}] {cur['value']}")
                         i += 1
-                    
-                    elif curr['from'] == 'gpt':
-                        # GPT response - end of turn
+                    elif cur['from'] == 'gpt':
                         break
-                    
-                    elif curr['from'] == 'human':
-                        # Next turn starting
-                        break
-                    
+                    elif cur['from'] == 'human':
+                        break  # missing gpt – skip
                     else:
                         i += 1
-                
-                # Combine user parts (human + observations)
+
                 user_text = " ".join(user_parts)
-                user_utterances.append(user_text)
-                
-                # Now get GPT response
+
                 if i < len(conversations) and conversations[i]['from'] == 'gpt':
-                    gpt_conv = conversations[i]
-                    system_text = gpt_conv['value']
-                    
-                    # CRITICAL: Extract label from THIS specific GPT utterance
-                    label = gpt_conv.get('ambiguous_type', 0)
-                    label = max(0, min(label, self.num_classes - 1))
-                    
-                    system_utterances.append(system_text)
+                    gpt = conversations[i]
+                    raw_label = int(gpt.get('ambiguous_type', 0))
+                    label = remap_label(raw_label, self.num_classes)
+
+                    user_utterances.append(user_text)
+                    system_utterances.append(gpt.get('value', ''))
                     system_labels.append(label)
-                    
-                    # Extract metadata
-                    metadata = gpt_conv.get('metadata', {})
-                    metadata['turn_id'] = gpt_conv.get('turn_id', turn_id)
-                    turn_metadata.append(metadata)
-                    
+
+                    meta = dict(gpt.get('metadata', {}))
+                    meta['turn_id'] = gpt.get('turn_id', len(system_labels))
+                    meta['raw_label'] = raw_label
+                    turn_metadata.append(meta)
                     i += 1
-        
+            else:
+                i += 1
+
         return user_utterances, system_utterances, system_labels, turn_metadata
-    
+
+    # ------------------------------------------------------------------
     def process_conversation(
         self,
         data: Dict,
-        use_ground_truth: bool = True
+        use_ground_truth: bool = True,
+        print_stats: bool = False,
     ) -> Dict:
-        """
-        Process a single conversation.
-        
-        Args:
-            data: Input data dict
-            use_ground_truth: Use provided labels (training) vs zeros (inference)
-        
-        Returns:
-            Processed data ready for model
-        """
-        print(f"\n[Process] Processing conversation...")
-        
-        # Parse
-        user_utterances, system_utterances, system_labels, turn_metadata = \
+        """Process a single conversation dict into tensors."""
+        user_utts, sys_utts, sys_labels, meta_list = \
             self.parse_conversations(data)
-        
-        num_pairs = len(user_utterances)
-        
-        print(f"  Found {num_pairs} user-system pairs")
-        print(f"  User utterances include observations: {any('[TABLE]' in u or '[CONTEXT]' in u for u in user_utterances)}")
-        if use_ground_truth:
-            print(f"  Labels (per GPT): {system_labels}")
-        
-        # Tokenize
-        user_tokens = []
-        system_tokens = []
-        
-        for user_text, system_text in zip(user_utterances, system_utterances):
-            # User (with observations merged in)
-            user_enc = self.tokenizer(
-                user_text,
+
+        if print_stats and use_ground_truth:
+            print_label_statistics(
+                sys_labels,
+                self.num_classes,
+                title="Conversation Label Distribution"
+            )
+
+        # Tokenise
+        def tok(texts: List[str]) -> torch.Tensor:
+            enc = self.tokenizer(
+                texts,
                 max_length=self.max_len,
                 padding='max_length',
                 truncation=True,
-                return_tensors='pt'
+                return_tensors='pt',
             )
-            user_tokens.append(user_enc['input_ids'].squeeze(0))
-            
-            # System
-            system_enc = self.tokenizer(
-                system_text,
-                max_length=self.max_len,
-                padding='max_length',
-                truncation=True,
-                return_tensors='pt'
-            )
-            system_tokens.append(system_enc['input_ids'].squeeze(0))
-        
-        # Stack
-        user_tokens_tensor = torch.stack(user_tokens) if user_tokens else torch.empty(0, self.max_len, dtype=torch.long)
-        system_tokens_tensor = torch.stack(system_tokens) if system_tokens else torch.empty(0, self.max_len, dtype=torch.long)
-        
-        # Labels
-        if use_ground_truth:
-            system_labels_tensor = torch.tensor(system_labels, dtype=torch.long)
-        else:
-            system_labels_tensor = torch.zeros(num_pairs, dtype=torch.long)
-        
-        # Metadata
-        metadata = {
-            'num_pairs': num_pairs,
-            'num_classes': self.num_classes,
-            'class_names': self.class_names[self.num_classes],
-            'turn_metadata': turn_metadata,
-            'label_distribution': {
-                self.class_names[self.num_classes][i]: system_labels.count(i)
-                for i in range(self.num_classes)
-            } if use_ground_truth else {},
-            'has_observations': any('[TABLE]' in u or '[CONTEXT]' in u for u in user_utterances)
-        }
-        
-        result = {
-            'user_utterance': user_tokens_tensor,
-            'system_utterance': system_tokens_tensor,
-            'user_I_label': torch.zeros(num_pairs, dtype=torch.long),
-            'system_I_label': system_labels_tensor,
-            'metadata': metadata
-        }
-        
-        print(f"  Processed: {num_pairs} pairs with observations merged")
-        
-        return result
-    
-    def get_class_name(self, class_idx: int) -> str:
-        """Get human-readable class name"""
-        return self.class_names[self.num_classes][class_idx]
+            return enc['input_ids']
 
+        n = len(user_utts)
+        user_ids  = tok(user_utts)  if n else torch.empty(0, self.max_len, dtype=torch.long)
+        sys_ids   = tok(sys_utts)   if n else torch.empty(0, self.max_len, dtype=torch.long)
+        labels_t  = torch.tensor(sys_labels, dtype=torch.long) if use_ground_truth \
+                    else torch.zeros(n, dtype=torch.long)
 
-if __name__ == "__main__":
-    # Test with observations
-    sample_data = {
-        "conversations": [
-            {"from": "human", "value": "What is X?", "turn_id": 1},
-            {"from": "function_call", "value": "retrieve_table()", "turn_id": 1},
-            {"from": "observation", "value": "Table: Col1 | Col2\n100 | 200", "turn_id": 1, "observation_type": "table"},
-            {
-                "from": "gpt",
-                "value": "Which year? req_clarification(2)",
-                "turn_id": 1,
-                "ambiguous_type": 2,
-                "metadata": {"answers": ["Which year?"]}
+        return {
+            'user_utterance':  user_ids,
+            'system_utterance': sys_ids,
+            'user_I_label':    torch.zeros(n, dtype=torch.long),
+            'system_I_label':  labels_t,
+            'metadata': {
+                'num_pairs':    n,
+                'num_classes':  self.num_classes,
+                'class_names':  self.class_names[self.num_classes],
+                'turn_metadata': meta_list,
+                'label_distribution': {
+                    self.class_names[self.num_classes][i]: sys_labels.count(i)
+                    for i in range(self.num_classes)
+                } if use_ground_truth else {},
+                'has_observations': any(
+                    '[TABLE]' in u or '[CONTEXT]' in u or '[SCENE]' in u
+                    for u in user_utts
+                ),
             },
-            {"from": "human", "value": "2019", "turn_id": 2},
-            {"from": "function_call", "value": "retrieve_context()", "turn_id": 2},
-            {"from": "observation", "value": "Context: This is about revenue.", "turn_id": 2, "observation_type": "context"},
-            {
-                "from": "gpt",
-                "value": "The value is 100",
-                "turn_id": 2,
-                "ambiguous_type": 0,
-                "metadata": {"answers": ["100"]}
-            }
+        }
+
+    # ------------------------------------------------------------------
+    def process_dataset(
+        self,
+        dataset: List[Dict],
+        use_ground_truth: bool = True,
+        print_stats: bool = True,
+    ) -> Tuple[List[Dict], List[int]]:
+        """
+        Process a full list of SIP conversations.
+
+        Returns (processed_list, all_labels).
+        Prints aggregate class statistics at the end.
+        """
+        processed = []
+        all_labels: List[int] = []
+
+        for item in dataset:
+            p = self.process_conversation(item, use_ground_truth=use_ground_truth)
+            processed.append(p)
+            all_labels.extend(p['metadata']['label_distribution'].get(
+                name, 0
+            ) * [idx]
+            for idx, name in enumerate(self.class_names[self.num_classes]))
+
+        # Flatten — easier to collect directly
+        all_labels = []
+        for item in dataset:
+            _, _, labels, _ = self.parse_conversations(item)
+            all_labels.extend(labels)
+
+        if print_stats:
+            print_label_statistics(
+                all_labels,
+                self.num_classes,
+                title="Dataset Label Distribution"
+            )
+
+        return processed, all_labels
+
+    def get_class_name(self, idx: int) -> str:
+        return self.class_names[self.num_classes][idx]
+
+
+# ──────────────────────────────────────────────────────────────────────
+if __name__ == "__main__":
+    sample = {
+        "conversations": [
+            {"from": "human",         "value": "What is X?",          "turn_id": 1},
+            {"from": "function_call", "value": "retrieve_table()",     "turn_id": 1},
+            {"from": "observation",   "value": "Col1|Col2\n100|200",   "turn_id": 1, "observation_type": "table"},
+            {"from": "gpt",           "value": "Which year?",          "turn_id": 1, "ambiguous_type": 2},
+            {"from": "human",         "value": "2019",                 "turn_id": 2},
+            {"from": "gpt",           "value": "The value is 100",     "turn_id": 2, "ambiguous_type": 1},
+            {"from": "human",         "value": "Thanks",               "turn_id": 3},
+            {"from": "gpt",           "value": "You're welcome",       "turn_id": 3, "ambiguous_type": 0},
         ]
     }
-    
-    preprocessor = SIPPreprocessor(num_classes=4)
-    processed = preprocessor.process_conversation(sample_data)
-    
-    print("\n=== Output ===")
-    print(f"User utterances shape: {processed['user_utterance'].shape}")
-    print(f"System utterances shape: {processed['system_utterance'].shape}")
-    print(f"System labels: {processed['system_I_label']}")
-    print(f"Has observations: {processed['metadata']['has_observations']}")
-    print(f"Metadata: {processed['metadata']}")
+
+    for nc in [2, 3, 4]:
+        print(f"\n{'='*55}")
+        print(f"  num_classes = {nc}")
+        print('='*55)
+        pre = SIPPreprocessor(
+            bert_model='bert-base-uncased',
+            max_len=64,
+            num_classes=nc,
+        )
+        result = pre.process_conversation(sample, print_stats=True)
+        print(f"  labels tensor: {result['system_I_label'].tolist()}")
