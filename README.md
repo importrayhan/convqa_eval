@@ -1,6 +1,13 @@
 # ConvQA-Eval: Conversational Query Intent Detection Evaluation Suite
-
+<p align="center">
+  <img src="examples/banner.png" alt="MyProject Banner" width="60%"/>
+</p>
 A comprehensive evaluation framework for conversational query intent detection and ambiguity resolution, inspired by the [CoIR](https://github.com/CoIR-team/coir) architecture.
+
+<!-- Visitor Badge -->
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=importrayhan&repo=convqa_eval&style=for-the-badge&color=0f3460&label=VISITORS" alt="Visitor Count"/>
+</p>
 
 ## 🎯 Overview
 
