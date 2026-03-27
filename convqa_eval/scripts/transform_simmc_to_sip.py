@@ -506,7 +506,7 @@ def main():
         print("\nConversation structure:")
         for i, conv in enumerate(sample['conversations'][:8]):
             obs_info = f" ({conv.get('observation_type', '')})" if 'observation_type' in conv else ""
-            value_preview = conv.get('value', '')[:50]
+            value_preview = conv.get('value', '') #[:50]
             print(f"  {i+1}. [{conv['from']:12}]{obs_info} {value_preview}...")
             
             if 'ambiguous_type' in conv:
