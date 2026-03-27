@@ -77,10 +77,10 @@ class ConvQAToSIPTransformer:
         
         if answer_type == 'question':
             return 3
-        if req_clari:
+        if str(req_clari).lower() == 'true':
             return 2
         if follow_up:
-            return 1
+            return 0
         return 0
     
     def format_answer(self, question: Dict) -> str:
