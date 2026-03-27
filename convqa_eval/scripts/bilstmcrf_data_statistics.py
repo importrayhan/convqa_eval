@@ -21,7 +21,7 @@ from collections import Counter
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import seaborn as sns
+#import seaborn as sns
 
 
 def analyze_conversation(conv: Dict) -> Dict:
@@ -344,12 +344,12 @@ def main():
     # Plot label distribution
     print("\n[Plotting] Label distribution...")
     plot_path = os.path.join(args.output_dir, 'label_distribution.png')
-    plot_label_distribution(stats_list, plot_path)
+    #plot_label_distribution(stats_list, plot_path)
     
     # Plot conversation lengths
     print("[Plotting] Conversation length distribution...")
     length_path = os.path.join(args.output_dir, 'conversation_lengths.png')
-    plot_conversation_length_distribution(datasets, dataset_names, length_path)
+    #plot_conversation_length_distribution(datasets, dataset_names, length_path)
     
     # Generate detailed report
     print("[Generating] Detailed report...")
