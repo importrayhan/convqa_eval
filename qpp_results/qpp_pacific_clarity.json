@@ -2,7 +2,7 @@
   "benchmark": "pacific",
   "score_key": "clarity",
   "threshold_method": "best_f1",
-  "threshold_used": 0.06451464435980699,
+  "threshold_used": 0.06451464435980711,
   "per_turn": true,
   "mock_ranked_list": false,
   "metrics": {
@@ -77,7 +77,7 @@
       "f1_weighted": 0.7458873320824098,
       "f1_macro": 0.5157955356636734,
       "accuracy": 0.7542885973763875,
-      "threshold": 0.06451464435980699,
+      "threshold": 0.06451464435980711,
       "direction": "hi"
     },
     "max_idf": {
