@@ -1,0 +1,47 @@
+{
+  "benchmark": "claqua",
+  "model_path": "../Llama-3.1-8B-Instruct/Llama-3.1-8B-Instruct/",
+  "num_classes": 2,
+  "per_turn": false,
+  "total_predictions": 828,
+  "unparseable": 0,
+  "metrics": {
+    "accuracy": 0.4577294685990338,
+    "precision": 0.46454155051376106,
+    "recall": 0.4577294685990338,
+    "f1": 0.36285280414161825,
+    "auc_roc": 0.0,
+    "false_positive_rates": {
+      "clear": 0.12239583333333333,
+      "ambiguous": 0.9054054054054054
+    },
+    "per_class": {
+      "precision": [
+        0.47191011235955055,
+        0.456021650879567
+      ],
+      "recall": [
+        0.0945945945945946,
+        0.8776041666666666
+      ],
+      "f1": [
+        0.1575984990619137,
+        0.6001780943900267
+      ],
+      "support": [
+        444,
+        384
+      ]
+    },
+    "confusion_matrix": [
+      [
+        42,
+        402
+      ],
+      [
+        47,
+        337
+      ]
+    ]
+  }
+}

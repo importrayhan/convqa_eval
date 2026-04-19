@@ -1,0 +1,47 @@
+{
+  "benchmark": "claqua",
+  "model_path": "../Qwen2.5-72B-Instruct/",
+  "num_classes": 2,
+  "per_turn": false,
+  "total_predictions": 828,
+  "unparseable": 0,
+  "metrics": {
+    "accuracy": 0.4613526570048309,
+    "precision": 0.474986449614122,
+    "recall": 0.4613526570048309,
+    "f1": 0.3768984766358816,
+    "auc_roc": 0.0,
+    "false_positive_rates": {
+      "clear": 0.13802083333333334,
+      "ambiguous": 0.8851351351351351
+    },
+    "per_class": {
+      "precision": [
+        0.49038461538461536,
+        0.457182320441989
+      ],
+      "recall": [
+        0.11486486486486487,
+        0.8619791666666666
+      ],
+      "f1": [
+        0.18613138686131386,
+        0.5974729241877256
+      ],
+      "support": [
+        444,
+        384
+      ]
+    },
+    "confusion_matrix": [
+      [
+        51,
+        393
+      ],
+      [
+        53,
+        331
+      ]
+    ]
+  }
+}
