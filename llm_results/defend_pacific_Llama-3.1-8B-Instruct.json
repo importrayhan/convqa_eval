@@ -1,0 +1,21 @@
+{
+  "benchmark": "pacific",
+  "model_path": "../Llama-3.1-8B-Instruct/Llama-3.1-8B-Instruct/",
+  "defense": "anomaly_shift",
+  "model_type": "isolation_forest",
+  "train_suffix": ".navCtrl!!!!!!!!!!!!!!!!\u040b(/^\\!\"",
+  "n_suffix_choices": 4,
+  "n_train": 1704,
+  "n_train_flipped": 94,
+  "n_test": 1781,
+  "n_test_normal": 1268,
+  "n_test_flipped": 513,
+  "metrics": {
+    "tpr": 0.949317738791423,
+    "fpr": 0.32413249211356465,
+    "f1": 0.6902905740609497,
+    "precision": 0.5423162583518931,
+    "recall": 0.949317738791423,
+    "auroc": 0.8512323131698858
+  }
+}
