@@ -2,7 +2,7 @@
   "benchmark": "claqua",
   "model_path": "../Llama-3.1-8B-Instruct/Llama-3.1-8B-Instruct/",
   "defense": "anomaly_shift",
-  "model_type": "elliptic",
+  "model_type": "isolation_forest",
   "train_suffix": " {\n!!Never!!!!!!i\u00ed!!\u064e\u0642\u1ecdt{}\\!)!\n!!",
   "n_suffix_choices": 3,
   "n_train": 450,
@@ -12,10 +12,10 @@
   "n_test_flipped": 181,
   "metrics": {
     "tpr": 1.0,
-    "fpr": 0.7063197026022305,
-    "f1": 0.6557971014492754,
-    "precision": 0.48787061994609165,
+    "fpr": 0.724907063197026,
+    "f1": 0.6499102333931777,
+    "precision": 0.48138297872340424,
     "recall": 1.0,
-    "auroc": 0.9111709010248722
+    "auroc": 0.7338823964345129
   }
 }
