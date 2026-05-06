@@ -42,19 +42,19 @@ PARSE_MAP_2 = {"0": 0, "1": 1, "clear": 0, "ambiguous": 1,
                "yes": 1, "no": 0}
 
 
-SYSTEM_PROMPT_4CLASS = """You are an expert at evaluating conversational information seeking systems.
-Your task: given a multi-turn conversation between a user and a system, predict the ambiguity level of the NEXT system response.
+SYSTEM_PROMPT_4CLASS = """You are a conversational AI assistant that detects when user queries are ambiguous.
+Your task: given a multi-turn conversation between a user and a system, predict the ambiguity level of the NEXT system response. Given the user request, do you think you have a clearly specified search query? 
 
 The ambiguity levels are:
   0 = clear: The user's query is unambiguous and can be answered directly.
-  1 = slightly_ambiguous: Minor ambiguity, but the system can still provide a reasonable answer.
+  1 = slightly_ambiguous: Minor ambiguity, answer can be multiple but the system can still provide a reasonable answer.
   2 = needs_clarification: The query is ambiguous enough that the system should ask a clarifying question.
   3 = highly_ambiguous: The query is very unclear and the system cannot provide a useful answer without clarification.
 
-You must respond with ONLY the number (0, 1, 2, or 3). Nothing else."""
+You task is not to provide answer, You must respond with ONLY the number (0, 1, 2, or 3). Nothing else."""
 
-SYSTEM_PROMPT_2CLASS = """You are an expert at evaluating conversational information seeking systems.
-Your task: given a multi-turn conversation between a user and a system, predict whether the NEXT system response will be ambiguous.
+SYSTEM_PROMPT_2CLASS = """You are a conversational AI assistant that detects when user queries are ambiguous.
+Your task: given a multi-turn conversation between a user and a system, predict the ambiguity level of the NEXT system response. Given the user request, do you think you have a clearly specified search query? 
 
   0 = clear: The system can answer directly without clarification.
   1 = ambiguous: The query is unclear and the system should ask for clarification.
@@ -111,7 +111,7 @@ def build_classification_prompt(
         if role == "human":
             history_lines.append(f"[User]: {value}")
         elif role == "observation" and include_observations:
-            history_lines.append(f"[Retrieved Context]: {value[:500]}")
+            history_lines.append(f"[Retrieved Context]: {value}") #{value[:500]}
         elif role == "gpt":
             history_lines.append(f"[System]: {value}")
         elif role == "function_call":
@@ -157,7 +157,7 @@ def build_per_turn_prompts(
     Build prompts for all target system turns in a conversation.
 
     Returns: list of (messages, gpt_turn_index, gold_label) tuples.
-
+`
     per_turn=True:  one prompt per gpt turn
     per_turn=False: one prompt for the last gpt turn only
     """

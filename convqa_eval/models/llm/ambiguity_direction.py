@@ -59,7 +59,7 @@ def extract_hidden_states(
 
     if layers is None:
         n_layers = model.config.num_hidden_layers
-        layers = list(range(n_layers + 1))  # 0 = embedding, 1..N = layers
+        layers = list(range(n_layers + 1))
 
     all_hidden = {l: [] for l in layers}
 
@@ -72,11 +72,11 @@ def extract_hidden_states(
         with torch.no_grad():
             outputs = model(**inputs, output_hidden_states=True)
 
-        hidden_states = outputs.hidden_states  # tuple of [1, seq_len, d]
+        hidden_states = outputs.hidden_states
 
         for l in layers:
             if l < len(hidden_states):
-                h = hidden_states[l][0]  # [seq_len, d]
+                h = hidden_states[l][0]
                 if pool == "last":
                     vec = h[-1]
                 elif pool == "mean":
@@ -88,6 +88,123 @@ def extract_hidden_states(
                 all_hidden[l].append(vec.cpu().float().numpy())
 
     return {l: np.stack(vecs) for l, vecs in all_hidden.items() if vecs}
+
+
+def extract_utterance_embeddings(
+    model, tokenizer,
+    utterance_texts: List[str],
+    layer: int = 0,
+) -> np.ndarray:
+    """
+    Encode each utterance SEPARATELY through the LLM's embedding layer
+    (or a specified layer), returning one vector per utterance.
+
+    This gives the CRF a proper SEQUENCE of turn embeddings rather than
+    a single classification-prompt embedding.
+
+    Args:
+        model: HuggingFace causal LM
+        tokenizer: tokenizer
+        utterance_texts: list of utterance strings (one per turn)
+        layer: which layer to use (0 = embedding layer, >0 = transformer layer)
+
+    Returns: np.ndarray [n_utterances, hidden_dim]
+    """
+    import torch
+
+    embeddings = []
+    for text in utterance_texts:
+        inputs = tokenizer(text, return_tensors="pt",
+                           truncation=True, max_length=512).to(model.device)
+        with torch.no_grad():
+            if layer == 0:
+                # Use the embedding layer directly (fastest)
+                emb = model.get_input_embeddings()(inputs.input_ids)  # [1, L, d]
+                # Average pool
+                mask = inputs.attention_mask.unsqueeze(-1).float()
+                vec = (emb * mask).sum(dim=1) / mask.sum(dim=1).clamp(min=1)
+                embeddings.append(vec[0].cpu().float().numpy())
+            else:
+                outputs = model(**inputs, output_hidden_states=True)
+                h = outputs.hidden_states[min(layer, len(outputs.hidden_states)-1)]
+                # Average pool
+                mask = inputs.attention_mask.unsqueeze(-1).float()
+                vec = (h * mask).sum(dim=1) / mask.sum(dim=1).clamp(min=1)
+                embeddings.append(vec[0].cpu().float().numpy())
+
+    return np.stack(embeddings) if embeddings else np.empty((0, 0))
+
+
+def extract_prediction_logits(
+    model, tokenizer,
+    messages: List[Dict],
+    num_classes: int = 2,
+) -> Dict[str, float]:
+    """
+    Extract the LLM's prediction logits at the last token position.
+
+    Under adversarial attack, the logit distribution shifts — the model
+    becomes more confident about the wrong class, or the entropy changes.
+
+    Returns:
+      logit_entropy: Shannon entropy of softmax over full vocabulary
+      top1_prob: probability of the most likely next token
+      label_logits: logits for tokens "0", "1", "2", "3"
+      label_probs: softmax over label tokens only
+      label_entropy: entropy of the label-token distribution
+      logit_gap: gap between top label logit and second label logit
+    """
+    import torch
+    import torch.nn.functional as F
+
+    text = tokenizer.apply_chat_template(
+        messages, tokenize=False, add_generation_prompt=True)
+    inputs = tokenizer(text, return_tensors="pt",
+                       truncation=True, max_length=2048).to(model.device)
+
+    with torch.no_grad():
+        outputs = model(**inputs)
+        logits = outputs.logits[0, -1, :]  # [vocab_size]
+
+    # Full vocabulary entropy
+    probs = F.softmax(logits, dim=0)
+    log_probs = F.log_softmax(logits, dim=0)
+    entropy = -float((probs * log_probs).sum())
+    top1_prob = float(probs.max())
+
+    # Label-specific logits
+    label_tokens = {}
+    for i in range(min(num_classes, 4)):
+        tok_ids = tokenizer.encode(str(i), add_special_tokens=False)
+        if tok_ids:
+            label_tokens[i] = tok_ids[0]
+
+    label_logit_vals = []
+    for i in range(min(num_classes, 4)):
+        if i in label_tokens:
+            label_logit_vals.append(float(logits[label_tokens[i]]))
+        else:
+            label_logit_vals.append(-100.0)
+
+    label_logits_tensor = torch.tensor(label_logit_vals)
+    label_probs_tensor = F.softmax(label_logits_tensor, dim=0)
+    label_log_probs = F.log_softmax(label_logits_tensor, dim=0)
+    label_entropy = -float((label_probs_tensor * label_log_probs).sum())
+
+    # Logit gap between top two labels
+    sorted_label_logits = sorted(label_logit_vals, reverse=True)
+    logit_gap = sorted_label_logits[0] - sorted_label_logits[1] if len(sorted_label_logits) > 1 else 0.0
+
+    features = {
+        "logit_entropy": entropy,
+        "top1_prob": top1_prob,
+        "label_entropy": label_entropy,
+        "logit_gap": logit_gap,
+    }
+    for i, lp in enumerate(label_probs_tensor.tolist()):
+        features[f"label_{i}_prob"] = lp
+
+    return features
 
 
 def compute_ambiguity_direction(
