@@ -1,0 +1,21 @@
+{
+  "benchmark": "simmic",
+  "model_path": "../Llama-3.1-8B-Instruct/Llama-3.1-8B-Instruct/",
+  "defense": "anomaly_shift",
+  "model_type": "isolation_forest",
+  "train_suffix": "!!!!!!!!emade!!!!!!!!!!!",
+  "n_suffix_choices": 3,
+  "n_train": 2374,
+  "n_train_flipped": 33,
+  "n_test": 1559,
+  "n_test_normal": 1027,
+  "n_test_flipped": 532,
+  "metrics": {
+    "tpr": 0.9699248120300752,
+    "fpr": 0.18889970788704966,
+    "f1": 0.8309178743961352,
+    "precision": 0.7267605633802817,
+    "recall": 0.9699248120300752,
+    "auroc": 0.9242263399491915
+  }
+}
