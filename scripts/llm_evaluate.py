@@ -27,6 +27,7 @@ Usage:
 import sys, os, json, argparse, logging, time
 from pathlib import Path
 from collections import Counter
+from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 from tqdm import tqdm
@@ -363,6 +364,403 @@ def run_gcg(args, model, tokenizer):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# Defend mode — RGRC defense evaluation
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Defend mode — suffix-sensitivity defense
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Defend mode — anomaly detection on suffix-induced distribution shifts
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Defend mode — suffix-sensitivity anomaly detection
+# ══════════════════════════════════════════════════════════════════════════════
+def _load_suffix_choices(suffix_file: str, single_suffix: str) -> List[str]:
+    """Load suffix choices from file or use single suffix."""
+    suffixes = []
+    if suffix_file and Path(suffix_file).exists():
+        p = Path(suffix_file)
+        if p.suffix == ".json":
+            import json as _json
+            data = _json.load(open(p))
+            if isinstance(data, list):
+                suffixes = [str(s) for s in data if s]
+            elif isinstance(data, dict):
+                suffixes = [str(v) for v in data.values() if v]
+        else:
+            suffixes = [l.strip() for l in open(p) if l.strip()]
+    if single_suffix and single_suffix not in suffixes:
+        suffixes.append(single_suffix)
+    return suffixes if suffixes else [single_suffix or ""]
+
+
+def _compute_shift(h_clean, h_adv, logits_clean, logits_adv,
+                   d_hat, r_features, num_classes):
+    """Compute the 16-dim shift vector between clean and suffix runs."""
+    proj_c = float(np.dot(h_clean, d_hat))
+    proj_a = float(np.dot(h_adv, d_hat))
+    hn_c, hn_a = np.linalg.norm(h_clean), np.linalg.norm(h_adv)
+    cos_c = proj_c / max(hn_c, 1e-8)
+    cos_a = proj_a / max(hn_a, 1e-8)
+    h_sim = float(np.dot(h_clean, h_adv) / (max(hn_c, 1e-8) * max(hn_a, 1e-8)))
+
+    n_lab = max(num_classes, 4)
+    cp = np.clip([logits_clean.get(f"label_{i}_prob", 1.0/n_lab)
+                  for i in range(n_lab)], 1e-8, 1)
+    ap = np.clip([logits_adv.get(f"label_{i}_prob", 1.0/n_lab)
+                  for i in range(n_lab)], 1e-8, 1)
+    cp, ap = cp/cp.sum(), ap/ap.sum()
+    kl = float(np.sum(cp * np.log(cp / ap)))
+    js = float(0.5*np.sum(cp*np.log(2*cp/(cp+ap))) +
+               0.5*np.sum(ap*np.log(2*ap/(cp+ap))))
+    pred_c, pred_a = int(np.argmax(cp)), int(np.argmax(ap))
+    flipped = 1.0 if pred_c != pred_a else 0.0
+
+    return {
+        "cos_delta": cos_c - cos_a,
+        "proj_delta": proj_c - proj_a,
+        "h_similarity": h_sim,
+        "logit_kl": kl,
+        "logit_js": js,
+        "pred_flipped": flipped,
+        "entropy_clean": logits_clean.get("label_entropy", 0),
+        "entropy_adv": logits_adv.get("label_entropy", 0),
+        "entropy_delta": logits_clean.get("label_entropy", 0) - logits_adv.get("label_entropy", 0),
+        "top1_prob_clean": logits_clean.get("top1_prob", 0),
+        "top1_prob_adv": logits_adv.get("top1_prob", 0),
+        "logit_gap_clean": logits_clean.get("logit_gap", 0),
+        "logit_gap_adv": logits_adv.get("logit_gap", 0),
+        "r_avg_idf": r_features.get("avg_idf", 0),
+        "r_coverage": r_features.get("coverage", 0),
+    }, flipped > 0.5, pred_c, pred_a
+
+
+def run_defend(args, model, tokenizer):
+    """Suffix-sensitivity anomaly detection with multi-suffix support
+    and interactive demo mode."""
+    import re as re_mod
+    from convqa_eval.models.llm.ambiguity_direction import (
+        extract_hidden_states, compute_ambiguity_direction,
+        extract_prediction_logits,
+    )
+    from convqa_eval.models.llm.rgrc_defense import (
+        compute_channel_r, evaluate_defense, plot_triangulated_defense,
+        TriangulatedSeparator,
+    )
+    from convqa_eval.models.llm.prompts import (
+        build_classification_prompt, parse_llm_label, LABEL_NAMES_2, LABEL_NAMES_4,
+    )
+    from QPP_measures import (
+        PseudoCollection, QPPScorer, parse_sip_for_qpp,
+    )
+    import random as rand_mod
+    from sklearn.ensemble import IsolationForest
+    from sklearn.covariance import EllipticEnvelope
+    from sklearn.preprocessing import StandardScaler
+
+    rand_mod.seed(args.seed)
+    names = CLASS_NAMES[args.num_classes]
+
+    # Load suffix choices
+    suffix_choices = _load_suffix_choices(
+        getattr(args, "suffix_file", ""), args.adv_suffix)
+    train_suffix = args.adv_suffix or suffix_choices[0]
+    if not train_suffix:
+        log.error("Need --adv_suffix or --suffix_file. Run gcg first.")
+        return
+    log.info(f"Train suffix: \"{train_suffix[:50]}...\"")
+    log.info(f"Test suffix pool: {len(suffix_choices)} choices")
+
+    # ── Load data ────────────────────────────────────────────────────
+    raw_train = load_benchmark(args.benchmark, "train", args.data_dir)
+    try:
+        raw_test = load_benchmark(args.benchmark, "test", args.data_dir)
+    except FileNotFoundError:
+        raw_train, raw_test = train_val_split(raw_train, 0.1, args.seed)
+    if len(raw_train) > args.max_samples:
+        raw_train = rand_mod.sample(raw_train, args.max_samples)
+    if len(raw_test) > args.max_samples:
+        raw_test = rand_mod.sample(raw_test, args.max_samples)
+
+    collection = PseudoCollection()
+    for conv in raw_train + raw_test:
+        for turn in conv.get("conversations", conv.get("turns", [])):
+            if turn.get("from", turn.get("role", "")) == "observation":
+                t = turn.get("value", "")
+                if t.strip():
+                    collection.add_document(t)
+    scorer = QPPScorer(collection)
+
+    # Direction
+    if args.direction_path and Path(args.direction_path).exists():
+        direction = np.load(args.direction_path)
+        layer = args.direction_layer
+        if layer < 0:
+            m = re_mod.search(r"layer(\d+)", args.direction_path)
+            layer = int(m.group(1)) if m else model.config.num_hidden_layers // 2
+    else:
+        log.info("Computing direction...")
+        cl_m, am_m = [], []
+        for conv in raw_train[:30]:
+            for msgs, _, lab in build_per_turn_prompts(conv, args.num_classes, args.per_turn):
+                (cl_m if lab == 0 else am_m).append(msgs)
+        cl_m, am_m = cl_m[:25], am_m[:25]
+        layer = model.config.num_hidden_layers * 2 // 3
+        hc = extract_hidden_states(model, tokenizer, cl_m, layers=[layer], pool=args.pool)
+        ha = extract_hidden_states(model, tokenizer, am_m, layers=[layer], pool=args.pool)
+        direction, sep = compute_ambiguity_direction(hc[layer], ha[layer])
+    d_hat = direction / max(np.linalg.norm(direction), 1e-8)
+
+    # ── Helper: process one turn ─────────────────────────────────────
+    def process_turn(conv, rec, suffix):
+        convs_list = conv.get("conversations", conv.get("turns", []))
+        gpt_indices = [i for i, c in enumerate(convs_list)
+                       if c.get("from", c.get("role", "")) == "gpt"]
+        if rec["turn_idx"] >= len(gpt_indices):
+            return None
+        gpt_idx = gpt_indices[rec["turn_idx"]]
+        clean_msgs = build_classification_prompt(conv, gpt_idx, args.num_classes)
+        hc_d = extract_hidden_states(model, tokenizer, [clean_msgs],
+                                      layers=[layer], pool=args.pool)
+        if layer not in hc_d or not len(hc_d[layer]):
+            return None
+        h_clean = hc_d[layer][0]
+        logits_clean = extract_prediction_logits(model, tokenizer, clean_msgs,
+                                                  args.num_classes)
+        adv_msgs = build_classification_prompt(conv, gpt_idx, args.num_classes,
+                                                adversarial_suffix=suffix)
+        ha_d = extract_hidden_states(model, tokenizer, [adv_msgs],
+                                      layers=[layer], pool=args.pool)
+        if layer not in ha_d or not len(ha_d[layer]):
+            return None
+        h_adv = ha_d[layer][0]
+        logits_adv = extract_prediction_logits(model, tokenizer, adv_msgs,
+                                                args.num_classes)
+        r = compute_channel_r(rec["query"], rec["observations"], scorer=scorer)
+        shift, flipped, pred_c, pred_a = _compute_shift(
+            h_clean, h_adv, logits_clean, logits_adv,
+            d_hat, r, args.num_classes)
+        return {
+            "shift": shift, "flipped": flipped,
+            "pred_clean": pred_c, "pred_adv": pred_a,
+            "query": rec["query"], "label": rec["label"],
+            "logits_clean": logits_clean, "logits_adv": logits_adv,
+            "h_clean": h_clean, "h_adv": h_adv,
+        }
+
+    # ── Phase 1: Train on TRAIN set (single suffix) ─────────────────
+    log.info(f"\nPhase 1: Train shifts ({len(raw_train)} convs)...")
+    train_shifts, train_flipped = [], []
+    train_h_clean_pairs, train_h_adv_pairs = [], []  # for GammaGuard
+    for conv in tqdm(raw_train, desc="Train"):
+        records = parse_sip_for_qpp(conv, args.num_classes)
+        if not records: continue
+        targets = [records[-1]] if not args.per_turn else records
+        for rec in targets:
+            out = process_turn(conv, rec, train_suffix)
+            if out:
+                train_shifts.append(out["shift"])
+                train_flipped.append(out["flipped"])
+                train_h_clean_pairs.append(out["h_clean"])
+                train_h_adv_pairs.append(out["h_adv"])
+
+    shift_keys = sorted(train_shifts[0].keys()) if train_shifts else []
+    X_train = np.array([[s[k] for k in shift_keys] for s in train_shifts])
+    scaler = StandardScaler()
+    X_train_s = scaler.fit_transform(X_train)
+    normal_mask = np.array([not f for f in train_flipped])
+    log.info(f"Train: {len(train_shifts)} shifts, "
+             f"normal={normal_mask.sum()}, flipped={sum(train_flipped)}")
+
+    if args.model_type == "isolation_forest":
+        contam = max(0.01, sum(train_flipped) / max(len(train_flipped), 1))
+        detector = IsolationForest(contamination=contam, random_state=42,
+                                    n_estimators=200)
+        detector.fit(X_train_s[normal_mask] if normal_mask.any() else X_train_s)
+    elif args.model_type == "elliptic":
+        contam = max(0.01, min(0.49, sum(train_flipped)/max(len(train_flipped),1)))
+        detector = EllipticEnvelope(contamination=contam, random_state=42)
+        detector.fit(X_train_s[normal_mask] if normal_mask.any() else X_train_s)
+    else:
+        from sklearn.svm import SVC
+        detector = SVC(kernel="rbf", probability=True, class_weight="balanced")
+        detector.fit(X_train_s, np.array([int(f) for f in train_flipped]))
+
+    # ── Phase 2: Test (random suffix from pool) ──────────────────────
+    log.info(f"\nPhase 2: Test ({len(raw_test)} convs, "
+             f"{len(suffix_choices)} suffix choices)...")
+    test_results = []
+    for conv in tqdm(raw_test, desc="Test"):
+        records = parse_sip_for_qpp(conv, args.num_classes)
+        if not records: continue
+        targets = [records[-1]] if not args.per_turn else records
+        for rec in targets:
+            test_suf = rand_mod.choice(suffix_choices)
+            out = process_turn(conv, rec, test_suf)
+            if not out: continue
+            x = np.array([[out["shift"][k] for k in shift_keys]])
+            x_s = scaler.transform(x)
+            if args.model_type in ("isolation_forest", "elliptic"):
+                raw_sc = -detector.decision_function(x_s)[0]
+                is_adv = detector.predict(x_s)[0] == -1
+            else:
+                probs = detector.predict_proba(x_s)[0]
+                raw_sc = probs[1]
+                is_adv = raw_sc > 0.5
+            out["is_adversarial"] = bool(is_adv)
+            out["anomaly_score"] = float(raw_sc)
+            out["suffix_used"] = test_suf[:50]
+            test_results.append(out)
+
+    # Normalize scores
+    all_raw = [r["anomaly_score"] for r in test_results]
+    s_min, s_max = min(all_raw), max(all_raw)
+    for r in test_results:
+        r["adversarial_prob"] = (r["anomaly_score"]-s_min) / max(s_max-s_min, 1e-8)
+        r["clean_prob"] = 1.0 - r["adversarial_prob"]
+        r["merged"] = r["shift"]
+
+    clean_res = [r for r in test_results if not r["flipped"]]
+    adv_res = [r for r in test_results if r["flipped"]]
+    log.info(f"Test: {len(clean_res)} normal, {len(adv_res)} flipped")
+
+    # Metrics
+    if clean_res and adv_res:
+        metrics = evaluate_defense(clean_res, adv_res)
+        log.info(f"\n{'='*72}")
+        log.info(f"  Defense — {args.benchmark} ({args.model_type})")
+        log.info(f"{'='*72}")
+        for k, v in metrics.items():
+            log.info(f"  {k:12s} = {v:.4f}")
+
+    # ── Baseline comparison ──────────────────────────────────────────
+    comparison_metrics = None
+    if getattr(args, "compare", False) and clean_res and adv_res:
+        from convqa_eval.models.llm.defense_baselines import (
+            UnguardedDefense, PromptGuardDefense, GammaGuardDefense,
+        )
+        comparison_metrics = {}
+        n_adv = len(adv_res)
+        n_clean = len(clean_res)
+
+        def _method_metrics(n_detected, n_fp, n_adv_total, n_clean_total):
+            from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
+            labels = [0]*n_clean_total + [1]*n_adv_total
+            preds = ([0]*(n_clean_total - n_fp) + [1]*n_fp +
+                     [1]*n_detected + [0]*(n_adv_total - n_detected))
+            tp, fn = n_detected, n_adv_total - n_detected
+            tn = n_clean_total - n_fp
+            asr = 1.0 - tp / max(n_adv_total, 1)
+            return {"asr": asr, "fp": n_fp, "tp": tp, "fn": fn, "tn": tn,
+                    "precision": precision_score(labels, preds, zero_division=0),
+                    "recall": recall_score(labels, preds, zero_division=0),
+                    "f1": f1_score(labels, preds, zero_division=0),
+                    "accuracy": accuracy_score(labels, preds) if labels else 0}
+
+        n_det = sum(1 for r in adv_res if r["is_adversarial"])
+        n_fp = sum(1 for r in clean_res if r["is_adversarial"])
+        comparison_metrics["Ours"] = _method_metrics(n_det, n_fp, n_adv, n_clean)
+        comparison_metrics["Unguarded"] = _method_metrics(0, 0, n_adv, n_clean)
+
+        pg_path = getattr(args, "prompt_guard_path", "")
+        if pg_path:
+            log.info("Running PromptGuard-2...")
+            pg = PromptGuardDefense(pg_path)
+            if pg.model is not None:
+                pg_fp, pg_det = 0, 0
+                for r in clean_res:
+                    d = pg.detect(r.get("query", ""))
+                    if d["is_adversarial"]: pg_fp += 1
+                for r in adv_res:
+                    suf = r.get("suffix_used", args.adv_suffix or "")
+                    d = pg.detect(r.get("query", "") + " " + suf)
+                    if d["is_adversarial"]: pg_det += 1
+                comparison_metrics["PromptGuard-2"] = _method_metrics(
+                    pg_det, pg_fp, n_adv, n_clean)
+
+        log.info("Running GammaGuard (trained on train set)...")
+        gg = GammaGuardDefense()
+        if train_h_clean_pairs and train_h_adv_pairs:
+            gg.train_on_pairs(train_h_clean_pairs, train_h_adv_pairs, epochs=100)
+            gg_fp, gg_det = 0, 0
+            for r in test_results:
+                h = r.get("h_adv") if r["flipped"] else r.get("h_clean")
+                if h is not None:
+                    d = gg.detect(hidden_state=h)
+                    if r["flipped"]:
+                        if d["is_adversarial"]: gg_det += 1
+                    else:
+                        if d["is_adversarial"]: gg_fp += 1
+            n_gg_adv = sum(1 for r in test_results if r["flipped"])
+            n_gg_clean = sum(1 for r in test_results if not r["flipped"])
+            comparison_metrics["GammaGuard"] = _method_metrics(
+                gg_det, gg_fp, n_gg_adv, n_gg_clean)
+
+        log.info("\nComparison:")
+        hdr = f'  {"Method":16s} {"ASR":>6s} {"FP":>4s} {"Prec":>6s} {"Rec":>6s} {"F1":>6s} {"Acc":>6s}'
+        log.info(hdr)
+        for method, m in comparison_metrics.items():
+            log.info(f'  {method:16s} {m["asr"]*100:5.1f}% {m["fp"]:4d} '
+                     f'{m["precision"]*100:5.1f}% {m["recall"]*100:5.1f}% '
+                     f'{m["f1"]*100:5.1f}% {m["accuracy"]*100:5.1f}%')
+
+    # ── Visualization ────────────────────────────────────────────────
+    if clean_res and adv_res:
+        plot_sep = TriangulatedSeparator(args.model_type)
+        plot_sep.feature_keys = shift_keys
+        plot_sep.scaler = scaler
+        plot_sep.model = detector
+        plot_triangulated_defense(clean_res, adv_res, plot_sep,
+                                  output_dir=args.output_dir,
+                                  model_name=Path(args.model_path).name,
+                                  comparison_metrics=comparison_metrics)
+    else:
+        metrics = {"note": f"clean={len(clean_res)}, adv={len(adv_res)}"}
+
+    # ── Demo display ─────────────────────────────────────────────────
+    if getattr(args, "show_demo", False):
+        n_demo = min(getattr(args, "demo_n", 10), len(test_results))
+        print(f"\n{'━'*78}")
+        print(f"  DEFENSE DEMO — {args.benchmark}")
+        print(f"{'━'*78}")
+        for r in test_results[:n_demo]:
+            label_name = names[r["label"]] if r["label"] < len(names) else "?"
+            pred_name = names[r["pred_clean"]] if r["pred_clean"] < len(names) else "?"
+            adv_pred = names[r["pred_adv"]] if r["pred_adv"] < len(names) else "?"
+            det = f"{C_RED}BLOCKED{C_RESET}" if r["is_adversarial"] else f"{C_GREEN}PASSED{C_RESET}"
+            flip = f"{C_RED}FLIPPED{C_RESET}" if r["flipped"] else f"{C_GREEN}stable{C_RESET}"
+            print(f"\n  {C_CYAN}Query:{C_RESET} {r['query'][:80]}")
+            print(f"  Gold: {label_name}  "
+                  f"Clean pred: {C_YELLOW}{pred_name}{C_RESET}  "
+                  f"Suffix pred: {adv_pred}  {flip}")
+            print(f"  KL={r['shift']['logit_kl']:.4f}  "
+                  f"cos_Δ={r['shift']['cos_delta']:.4f}  "
+                  f"score={r['adversarial_prob']:.3f}  "
+                  f"→ {det}")
+            if r["is_adversarial"]:
+                print(f"  {C_MAGENTA}↳ Defense action: reject suffix, "
+                      f"use clean prediction '{pred_name}'{C_RESET}")
+
+    # Save
+    out_dir = Path(args.output_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / f"defend_{args.benchmark}_{Path(args.model_path).name}.json"
+    with open(out_path, "w") as f:
+        json.dump({
+            "benchmark": args.benchmark, "model_path": args.model_path,
+            "defense": "anomaly_shift", "model_type": args.model_type,
+            "train_suffix": train_suffix[:100],
+            "n_suffix_choices": len(suffix_choices),
+            "n_train": len(train_shifts), "n_train_flipped": sum(train_flipped),
+            "n_test": len(test_results),
+            "n_test_normal": len(clean_res), "n_test_flipped": len(adv_res),
+            "metrics": metrics,
+        }, f, indent=2, default=str)
+    log.info(f"Saved: {out_path}")
+
 # Main
 # ══════════════════════════════════════════════════════════════════════════════
 def main():
@@ -371,7 +769,7 @@ def main():
     sub = ap.add_subparsers(dest="mode", help="Operation mode")
 
     # Common args
-    for name in ["evaluate", "demo", "gcg", "direction"]:
+    for name in ["evaluate", "demo", "gcg", "direction", "defend"]:
         p = sub.add_parser(name)
         p.add_argument("--model_path", type=str, required=True,
                        help="HF model name or local path")
@@ -413,6 +811,36 @@ def main():
     dir_p.add_argument("--pool", type=str, default="last",
                        choices=["last", "mean", "first"])
 
+    # Defend-specific
+    def_p = sub.choices["defend"]
+    def_p.add_argument("--direction_path", type=str, default=None,
+                       help="Path to .npy direction vector (from direction mode)")
+    def_p.add_argument("--direction_layer", type=int, default=-1,
+                       help="Layer for direction (-1 = auto-detect from filename)")
+    def_p.add_argument("--adv_suffix", type=str, default="",
+                       help="GCG adversarial suffix (used for training)")
+    def_p.add_argument("--suffix_file", type=str, default="",
+                       help="JSON/text file with multiple suffix choices "
+                            "(one per line or JSON list). Random suffix "
+                            "chosen per test input for generalizability.")
+    def_p.add_argument("--show_demo", action="store_true",
+                       help="Show interactive demo of defense decisions")
+    def_p.add_argument("--demo_n", type=int, default=10,
+                       help="Number of demo examples to display")
+    def_p.add_argument("--prompt_guard_path", type=str, default="",
+                       help="Path to PromptGuard-2 DeBERTa model directory")
+    def_p.add_argument("--compare", action="store_true",
+                       help="Run all baselines (unguarded, PG-2, GammaGuard, ours)")
+    def_p.add_argument("--max_samples", type=int, default=50)
+    def_p.add_argument("--alpha", type=float, default=0.05,
+                       help="Target FPR for threshold calibration")
+    def_p.add_argument("--model_type", type=str, default="isolation_forest",
+                       choices=["isolation_forest", "elliptic", "rbf_svm"],
+                       help="Anomaly detector: isolation_forest (unsupervised), "
+                            "elliptic (Mahalanobis), rbf_svm (supervised)")
+    def_p.add_argument("--pool", type=str, default="last",
+                       choices=["last", "mean", "first"])
+
     args = ap.parse_args()
     if args.mode is None:
         ap.print_help()
@@ -437,6 +865,8 @@ def main():
         run_gcg(args, model, tokenizer)
     elif args.mode == "direction":
         run_direction(args, model, tokenizer)
+    elif args.mode == "defend":
+        run_defend(args, model, tokenizer)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
