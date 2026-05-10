@@ -549,6 +549,8 @@ def run_defend(args, model, tokenizer):
             "query": rec["query"], "label": rec["label"],
             "logits_clean": logits_clean, "logits_adv": logits_adv,
             "h_clean": h_clean, "h_adv": h_adv,
+            "turn_idx": rec["turn_idx"],
+            "observations": rec.get("observations", []),
         }
 
     # ── Phase 1: Train on TRAIN set (single suffix) ─────────────────
@@ -593,7 +595,8 @@ def run_defend(args, model, tokenizer):
     log.info(f"\nPhase 2: Test ({len(raw_test)} convs, "
              f"{len(suffix_choices)} suffix choices)...")
     test_results = []
-    for conv in tqdm(raw_test, desc="Test"):
+    for ci, conv in enumerate(tqdm(raw_test, desc="Test")):
+        conv_id = conv.get("id", f"{args.benchmark}_{ci:04d}")
         records = parse_sip_for_qpp(conv, args.num_classes)
         if not records: continue
         targets = [records[-1]] if not args.per_turn else records
@@ -613,6 +616,8 @@ def run_defend(args, model, tokenizer):
             out["is_adversarial"] = bool(is_adv)
             out["anomaly_score"] = float(raw_sc)
             out["suffix_used"] = test_suf[:50]
+            out["conv_id"] = conv_id
+            out["conv_idx"] = ci
             test_results.append(out)
 
     # Normalize scores
@@ -699,13 +704,63 @@ def run_defend(args, model, tokenizer):
             comparison_metrics["GammaGuard"] = _method_metrics(
                 gg_det, gg_fp, n_gg_adv, n_gg_clean)
 
+        # Cascaded: PromptGuard-2 first pass → our method second pass
+        if pg_path:
+            log.info("Running PG2+Ours (union — either flags)...")
+            cascade_fp, cascade_det = 0, 0
+            cascade_times = []
+
+            for r in test_results:
+                t0_c = time.time()
+                query = r.get("query", "")
+                suf = r.get("suffix_used", args.adv_suffix or "")
+                is_flipped = r["flipped"]
+
+                # Pass 1: PromptGuard-2
+                text_to_check = (query + " " + suf) if is_flipped else query
+                pg_flag = pg.detect(text_to_check)["is_adversarial"]
+
+                # Pass 2: our suffix-sensitivity anomaly score
+                x = np.array([[r["shift"][k] for k in shift_keys]])
+                x_s = scaler.transform(x)
+                if args.model_type in ("isolation_forest", "elliptic"):
+                    our_flag = detector.predict(x_s)[0] == -1
+                else:
+                    our_flag = detector.predict_proba(x_s)[0][1] > 0.5
+
+                # Union: flag if EITHER detects
+                flagged = pg_flag or our_flag
+
+                elapsed_c = (time.time() - t0_c) * 1000
+                cascade_times.append(elapsed_c)
+
+                if is_flipped:
+                    if flagged: cascade_det += 1
+                else:
+                    if flagged: cascade_fp += 1
+
+            n_casc_adv = sum(1 for r in test_results if r["flipped"])
+            n_casc_clean = sum(1 for r in test_results if not r["flipped"])
+            casc_metrics = _method_metrics(
+                cascade_det, cascade_fp, n_casc_adv, n_casc_clean)
+            casc_metrics["avg_latency_ms"] = float(np.mean(cascade_times))
+            casc_metrics["p50_latency_ms"] = float(np.percentile(cascade_times, 50))
+            casc_metrics["p95_latency_ms"] = float(np.percentile(cascade_times, 95))
+            comparison_metrics["PG2+Ours"] = casc_metrics
+
+            log.info(f"  Cascade latency: avg={casc_metrics['avg_latency_ms']:.1f}ms  "
+                     f"p50={casc_metrics['p50_latency_ms']:.1f}ms  "
+                     f"p95={casc_metrics['p95_latency_ms']:.1f}ms")
+
         log.info("\nComparison:")
-        hdr = f'  {"Method":16s} {"ASR":>6s} {"FP":>4s} {"Prec":>6s} {"Rec":>6s} {"F1":>6s} {"Acc":>6s}'
+        hdr = f'  {"Method":16s} {"ASR":>6s} {"FP":>4s} {"Prec":>6s} {"Rec":>6s} {"F1":>6s} {"Acc":>6s} {"Lat(ms)":>8s}'
         log.info(hdr)
         for method, m in comparison_metrics.items():
+            lat = f'{m["avg_latency_ms"]:.1f}' if "avg_latency_ms" in m else "-"
             log.info(f'  {method:16s} {m["asr"]*100:5.1f}% {m["fp"]:4d} '
                      f'{m["precision"]*100:5.1f}% {m["recall"]*100:5.1f}% '
-                     f'{m["f1"]*100:5.1f}% {m["accuracy"]*100:5.1f}%')
+                     f'{m["f1"]*100:5.1f}% {m["accuracy"]*100:5.1f}% '
+                     f'{lat:>8s}')
 
     # ── Visualization ────────────────────────────────────────────────
     if clean_res and adv_res:
@@ -744,22 +799,90 @@ def run_defend(args, model, tokenizer):
                 print(f"  {C_MAGENTA}↳ Defense action: reject suffix, "
                       f"use clean prediction '{pred_name}'{C_RESET}")
 
-    # Save
+    # ── Save in leaderboard submission format ─────────────────────────
     out_dir = Path(args.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / f"defend_{args.benchmark}_{Path(args.model_path).name}.json"
-    with open(out_path, "w") as f:
-        json.dump({
-            "benchmark": args.benchmark, "model_path": args.model_path,
-            "defense": "anomaly_shift", "model_type": args.model_type,
-            "train_suffix": train_suffix[:100],
-            "n_suffix_choices": len(suffix_choices),
-            "n_train": len(train_shifts), "n_train_flipped": sum(train_flipped),
-            "n_test": len(test_results),
-            "n_test_normal": len(clean_res), "n_test_flipped": len(adv_res),
-            "metrics": metrics,
-        }, f, indent=2, default=str)
-    log.info(f"Saved: {out_path}")
+    model_name = Path(args.model_path).name
+
+    # Group test_results by conversation
+    from collections import defaultdict
+    conv_groups = defaultdict(list)
+    conv_contexts = {}
+    for r in test_results:
+        cid = r.get("conv_id", f"{args.benchmark}_{r.get('conv_idx', 0):04d}")
+        turn_entry = {
+            "turn_idx": r.get("turn_idx", len(conv_groups[cid])),
+            "query": r["query"],
+            "pred": int(r["pred_clean"]),
+            "confidence": 1.0 - r.get("adversarial_prob", 0.0),
+            # Defense fields
+            "pred_clean": int(r["pred_clean"]),
+            "pred_adv": int(r["pred_adv"]),
+            "defense_flag": r["is_adversarial"],
+            "defended_pred": int(r["pred_clean"]) if r["is_adversarial"] else int(r["pred_adv"]),
+            "anomaly_score": round(r.get("adversarial_prob", 0.0), 4),
+        }
+        conv_groups[cid].append(turn_entry)
+        # Store context (observations) separately
+        if cid not in conv_contexts and r.get("observations"):
+            conv_contexts[cid] = {
+                "observations": {str(turn_entry["turn_idx"]): obs[:500]
+                                 for obs in r.get("observations", [])}
+            }
+
+    # 1. Predictions file (compact, SIP-aligned)
+    submission = {
+        "metadata": {
+            "team": "",
+            "model": args.model_path,
+            "method": "triangulated_defense",
+            "defense": "anomaly_shift",
+            "model_type": args.model_type,
+            "features": shift_keys,
+            "config": {
+                "benchmark": args.benchmark,
+                "per_turn": args.per_turn,
+                "num_classes": args.num_classes,
+                "train_suffix": train_suffix[:80],
+                "n_suffix_choices": len(suffix_choices),
+            },
+            "per_turn": args.per_turn,
+            "num_classes": args.num_classes,
+        },
+        "predictions": [
+            {"conv_id": cid, "turns": turns}
+            for cid, turns in conv_groups.items()
+        ],
+    }
+
+    pred_path = out_dir / f"predictions_{args.benchmark}_{model_name}.json"
+    with open(pred_path, "w") as f:
+        json.dump(submission, f, indent=2)
+    log.info(f"Predictions: {pred_path} "
+             f"({len(conv_groups)} convs, {len(test_results)} turns)")
+
+    # 2. Context file (optional, for reproducibility)
+    if conv_contexts:
+        ctx_path = out_dir / f"context_{args.benchmark}_{model_name}.json"
+        with open(ctx_path, "w") as f:
+            json.dump(conv_contexts, f, indent=2)
+        log.info(f"Context: {ctx_path}")
+
+    # 3. Summary
+    summary = {
+        "benchmark": args.benchmark, "model_path": args.model_path,
+        "defense": "anomaly_shift", "model_type": args.model_type,
+        "n_train": len(train_shifts), "n_train_flipped": sum(train_flipped),
+        "n_test": len(test_results),
+        "n_test_normal": len(clean_res), "n_test_flipped": len(adv_res),
+        "metrics": metrics,
+    }
+    if comparison_metrics:
+        summary["comparison"] = comparison_metrics
+    summary_path = out_dir / f"defend_{args.benchmark}_{model_name}.json"
+    with open(summary_path, "w") as f:
+        json.dump(summary, f, indent=2, default=str)
+    log.info(f"Summary: {summary_path}")
 
 # Main
 # ══════════════════════════════════════════════════════════════════════════════
