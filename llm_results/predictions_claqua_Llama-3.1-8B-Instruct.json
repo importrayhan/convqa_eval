@@ -1,0 +1,7237 @@
+{
+  "metadata": {
+    "team": "",
+    "model": "../Llama-3.1-8B-Instruct/Llama-3.1-8B-Instruct/",
+    "method": "triangulated_defense",
+    "defense": "anomaly_shift",
+    "model_type": "isolation_forest",
+    "features": [
+      "cos_delta",
+      "entropy_adv",
+      "entropy_clean",
+      "entropy_delta",
+      "h_similarity",
+      "logit_gap_adv",
+      "logit_gap_clean",
+      "logit_js",
+      "logit_kl",
+      "pred_flipped",
+      "proj_delta",
+      "r_avg_idf",
+      "r_coverage",
+      "top1_prob_adv",
+      "top1_prob_clean"
+    ],
+    "config": {
+      "benchmark": "claqua",
+      "per_turn": false,
+      "num_classes": 2,
+      "train_suffix": " {\n!!Never!!!!!!i\u00ed!!\u064e\u0642\u1ecdt{}\\!)!\n!!",
+      "n_suffix_choices": 4
+    },
+    "per_turn": false,
+    "num_classes": 2
+  },
+  "predictions": [
+    {
+      "conv_id": "claqua_0000",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was a famous quote?",
+          "pred": 1,
+          "confidence": 0.10090428924877048,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8991
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0001",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.8879452111350331,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1121
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0002",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the record label?",
+          "pred": 0,
+          "confidence": 0.28913283354699937,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.7109
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0003",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the director.",
+          "pred": 1,
+          "confidence": 0.2874514348125512,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7125
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0004",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the prson's religion?",
+          "pred": 1,
+          "confidence": 0.46533261902151146,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5347
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0005",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the biological classification?",
+          "pred": 1,
+          "confidence": 0.1324616453676335,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8675
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0006",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "The director?",
+          "pred": 1,
+          "confidence": 0.6317711161419444,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3682
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0007",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Which person is this person's brother or sister?",
+          "pred": 1,
+          "confidence": 0.2689935121551883,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.731
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0008",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.45637054201421534,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5436
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0009",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "For which issue was the issuer?",
+          "pred": 1,
+          "confidence": 0.45922401302462523,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5408
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0010",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist who performed with the person?",
+          "pred": 1,
+          "confidence": 0.6097483017288305,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3903
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0011",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Which event took place before it?",
+          "pred": 1,
+          "confidence": 0.7667918462395982,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.2332
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0012",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the parent.",
+          "pred": 1,
+          "confidence": 0.920651582194184,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0793
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0013",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist?",
+          "pred": 1,
+          "confidence": 0.42476771778626476,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5752
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0014",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What's the name of the engine?",
+          "pred": 1,
+          "confidence": 0.39114584650996087,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6089
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0015",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name its character",
+          "pred": 1,
+          "confidence": 0.6860509230555286,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3139
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0016",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is its spectral type?",
+          "pred": 1,
+          "confidence": 0.17372683407980105,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8263
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0017",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.8082730496303024,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1917
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0018",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the episode that precedes this tv episode?",
+          "pred": 1,
+          "confidence": 0.0,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 1.0
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0019",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the episode that precedes this tv episode?",
+          "pred": 1,
+          "confidence": 0.553789299574089,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4462
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0020",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the parent",
+          "pred": 1,
+          "confidence": 0.17134895875609268,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8287
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0021",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What were the book editions published by this person?",
+          "pred": 1,
+          "confidence": 0.04927013003321912,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9507
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0022",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the record label",
+          "pred": 1,
+          "confidence": 0.14476600879657353,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8552
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0023",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the record label?",
+          "pred": 1,
+          "confidence": 0.31644224385076447,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6836
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0024",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the engine used?",
+          "pred": 1,
+          "confidence": 0.9452464725345326,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0548
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0025",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the parent?",
+          "pred": 1,
+          "confidence": 0.5547964413666845,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4452
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0026",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the most famous discography?",
+          "pred": 1,
+          "confidence": 0.3025415645874414,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6975
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0027",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling?",
+          "pred": 1,
+          "confidence": 0.7151716288733729,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.2848
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0028",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the parent?",
+          "pred": 1,
+          "confidence": 0.32632903113970724,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6737
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0029",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is its spectral type?",
+          "pred": 1,
+          "confidence": 0.597790269076441,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4022
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0030",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.9504078549803817,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0496
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0031",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the title song?",
+          "pred": 1,
+          "confidence": 0.4901884785431979,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5098
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0032",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.9674125423655349,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0326
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0033",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist?",
+          "pred": 1,
+          "confidence": 0.4282228525677444,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5718
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0034",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the religion?",
+          "pred": 1,
+          "confidence": 0.873196948010204,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1268
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0035",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the summary of the film?",
+          "pred": 0,
+          "confidence": 0.22269673145073265,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.7773
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0036",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Tell me that it was for which issue",
+          "pred": 1,
+          "confidence": 0.14015943095588457,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8598
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0037",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the record label called?",
+          "pred": 1,
+          "confidence": 0.25675621041894536,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7432
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0038",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the genre?",
+          "pred": 1,
+          "confidence": 0.21591857113670754,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7841
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0039",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the prson's religion?",
+          "pred": 1,
+          "confidence": 0.5317754228101996,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4682
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0040",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Tell me that it was for which issue",
+          "pred": 1,
+          "confidence": 0.1964169999293749,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8036
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0041",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist?",
+          "pred": 1,
+          "confidence": 0.20818144803185235,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7918
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0042",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist?",
+          "pred": 1,
+          "confidence": 0.7807238735893189,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.2193
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0043",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the language?",
+          "pred": 1,
+          "confidence": 0.3312157504217741,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6688
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0044",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the winner",
+          "pred": 1,
+          "confidence": 0.37878946965877824,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6212
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0045",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the winner",
+          "pred": 1,
+          "confidence": 0.1034582943350103,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8965
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0046",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the religion?",
+          "pred": 1,
+          "confidence": 0.754638412864402,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.2454
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0047",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the episode that precedes this tv episode?",
+          "pred": 1,
+          "confidence": 0.3524560415707725,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6475
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0048",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.9461402861122703,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0539
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0049",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is its style?",
+          "pred": 1,
+          "confidence": 0.5972539665172735,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4027
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0050",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who won?",
+          "pred": 1,
+          "confidence": 0.057360722307205014,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9426
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0051",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the parent?",
+          "pred": 1,
+          "confidence": 0.1968791036914601,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8031
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0052",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 0,
+          "confidence": 0.05405044410506432,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.9459
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0053",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the most famous discography?",
+          "pred": 1,
+          "confidence": 0.37000573438775985,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.63
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0054",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the record label?",
+          "pred": 1,
+          "confidence": 0.27338647343945666,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7266
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0055",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What's the name of the engine?",
+          "pred": 1,
+          "confidence": 0.8198407177768604,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1802
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0056",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the previous episode?",
+          "pred": 1,
+          "confidence": 0.2588070014685452,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7412
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0057",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Do you know the character of the book?",
+          "pred": 1,
+          "confidence": 0.4282992279733432,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5717
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0058",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the language?",
+          "pred": 1,
+          "confidence": 0.3824235489876018,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6176
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0059",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.4832962847892748,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5167
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0060",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the character",
+          "pred": 1,
+          "confidence": 0.08786883385581135,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9121
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0061",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the ethnicity of the person?",
+          "pred": 1,
+          "confidence": 0.9667473633453197,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0333
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0062",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the prson's religion?",
+          "pred": 1,
+          "confidence": 0.16089965640693393,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8391
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0063",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.9401237138704371,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0599
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0064",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling of this person?",
+          "pred": 1,
+          "confidence": 0.012426590425175243,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9876
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0065",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.09700266119034584,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.903
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0066",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the time zone",
+          "pred": 1,
+          "confidence": 0.9138265810814086,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0862
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0067",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.4529935217983163,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.547
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0068",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the biological classification",
+          "pred": 1,
+          "confidence": 0.26760134503039323,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7324
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0069",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Tell me that it was for which issue",
+          "pred": 1,
+          "confidence": 0.20909604250534852,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7909
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0070",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist who performed with the person?",
+          "pred": 1,
+          "confidence": 0.40457562118977275,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5954
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0071",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the engine?",
+          "pred": 1,
+          "confidence": 0.9013079208182877,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0987
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0072",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the most famous discography?",
+          "pred": 1,
+          "confidence": 0.5712351692745785,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4288
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0073",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the city nearby.",
+          "pred": 1,
+          "confidence": 0.5325065586447459,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4675
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0074",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist who performed with the person?",
+          "pred": 1,
+          "confidence": 0.6590062669490009,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.341
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0075",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State a famous quote",
+          "pred": 1,
+          "confidence": 0.4999677216397521,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0076",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the title song called?",
+          "pred": 1,
+          "confidence": 0.16008797995771873,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8399
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0077",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the record label",
+          "pred": 1,
+          "confidence": 0.15285893986415255,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8471
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0078",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the bridge",
+          "pred": 1,
+          "confidence": 0.5825644172983961,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4174
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0079",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What's the name of the engine?",
+          "pred": 1,
+          "confidence": 0.9542113721884347,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0458
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0080",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the genre of the album?",
+          "pred": 1,
+          "confidence": 0.5450601824926786,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4549
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0081",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist who performed with the person?",
+          "pred": 1,
+          "confidence": 0.4879536696272122,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.512
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0082",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the record label called?",
+          "pred": 1,
+          "confidence": 0.27577444337203894,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7242
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0083",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the parent?",
+          "pred": 1,
+          "confidence": 0.457206971813655,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5428
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0084",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What's the name of the engine?",
+          "pred": 1,
+          "confidence": 0.4360972303576328,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5639
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0085",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Which event took place before it?",
+          "pred": 1,
+          "confidence": 0.8772605372398781,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1227
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0086",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the most famous discography.",
+          "pred": 1,
+          "confidence": 0.6625505340536988,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3374
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0087",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.7904797041507404,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2095
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0088",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the time zone?",
+          "pred": 1,
+          "confidence": 0.26445947821994475,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7355
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0089",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the episode that precedes this tv episode?",
+          "pred": 1,
+          "confidence": 0.5866309846493474,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4134
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0090",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Biologically speaking, what is the classification?",
+          "pred": 1,
+          "confidence": 0.4810030467822548,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.519
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0091",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the biological classification?",
+          "pred": 1,
+          "confidence": 0.11795085788730553,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.882
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0092",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the title song called?",
+          "pred": 1,
+          "confidence": 0.34811850532216515,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6519
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0093",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What were the editions of its published books?",
+          "pred": 1,
+          "confidence": 0.3441616638799734,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6558
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0094",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the parent.",
+          "pred": 1,
+          "confidence": 0.2268219006919041,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7732
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0095",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Biologically speaking, what is the classification?",
+          "pred": 1,
+          "confidence": 0.19714185537102136,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8029
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0096",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the name of the record label",
+          "pred": 1,
+          "confidence": 0.22121667629958197,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7788
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0097",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.5998723731747235,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4001
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0098",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was responsible for directing?",
+          "pred": 0,
+          "confidence": 0.07002394160994652,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.93
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0099",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the time zone",
+          "pred": 1,
+          "confidence": 0.525067990308094,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4749
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0100",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.01619867017015819,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9838
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0101",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What were the editions of its published books?",
+          "pred": 1,
+          "confidence": 0.6253629243327661,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3746
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0102",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.7080499679292626,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.292
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0103",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the title song?",
+          "pred": 1,
+          "confidence": 0.9530316916118107,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.047
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0104",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the parent?",
+          "pred": 1,
+          "confidence": 0.5157155705544976,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4843
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0105",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the bridge",
+          "pred": 0,
+          "confidence": 0.037827689256288766,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.9622
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0106",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the record label called?",
+          "pred": 1,
+          "confidence": 0.5066816347211057,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4933
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0107",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the character",
+          "pred": 0,
+          "confidence": 0.09005581583103184,
+          "pred_clean": 0,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.9099
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0108",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the spectral type for the astronomy?",
+          "pred": 1,
+          "confidence": 0.8007775446397791,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1992
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0109",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling?",
+          "pred": 1,
+          "confidence": 0.5594759992149625,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4405
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0110",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the time zone?",
+          "pred": 1,
+          "confidence": 0.2555151755477586,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7445
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0111",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What about the director?",
+          "pred": 1,
+          "confidence": 0.20559433046033193,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7944
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0112",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the most famous discography?",
+          "pred": 1,
+          "confidence": 0.5893677292678764,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4106
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0113",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the album that was recorded?",
+          "pred": 1,
+          "confidence": 0.32713702561084357,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6729
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0114",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist who performed with the person?",
+          "pred": 1,
+          "confidence": 0.2898427164061107,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7102
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0115",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the parent?",
+          "pred": 1,
+          "confidence": 0.30980407405927446,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6902
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0116",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "How about the quotes?",
+          "pred": 1,
+          "confidence": 0.390133892598327,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6099
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0117",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Which person is this person's brother or sister?",
+          "pred": 1,
+          "confidence": 0.14785331302676818,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8521
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0118",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the name of the record label",
+          "pred": 1,
+          "confidence": 0.27848771238090453,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7215
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0119",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the record label called?",
+          "pred": 1,
+          "confidence": 0.3435859212862953,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6564
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0120",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling of this person?",
+          "pred": 1,
+          "confidence": 0.3967077048553592,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6033
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0121",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the title song?",
+          "pred": 1,
+          "confidence": 0.6642417729009038,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3358
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0122",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.06490141076078926,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9351
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0123",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the genre?",
+          "pred": 1,
+          "confidence": 0.47975663894300846,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5202
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0124",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Which is its medium of language?",
+          "pred": 1,
+          "confidence": 0.2767936581412085,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7232
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0125",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the album?",
+          "pred": 1,
+          "confidence": 0.6676140614566685,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3324
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0126",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name a bridge",
+          "pred": 1,
+          "confidence": 0.41949707174443196,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5805
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0127",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the preceded event?",
+          "pred": 1,
+          "confidence": 0.10390219603061834,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8961
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0128",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.06670668360710552,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9333
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0129",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the ethnicity of the person?",
+          "pred": 1,
+          "confidence": 0.43586360141457614,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5641
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0130",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the winner?",
+          "pred": 1,
+          "confidence": 0.5099209799719154,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4901
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0131",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the winner",
+          "pred": 1,
+          "confidence": 0.037138516563753665,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9629
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0132",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the parent?",
+          "pred": 1,
+          "confidence": 0.958306308243533,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0417
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0133",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the most famous discography?",
+          "pred": 1,
+          "confidence": 0.5763202106740472,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4237
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0134",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.3990146059786207,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.601
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0135",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was responsible for directing?",
+          "pred": 0,
+          "confidence": 0.3962343294524059,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.6038
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0136",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the engine used",
+          "pred": 1,
+          "confidence": 0.43832376439174503,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5617
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0137",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the record label?",
+          "pred": 1,
+          "confidence": 0.9261304418844392,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0739
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0138",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.24678564629853172,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7532
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0139",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.9054140863334967,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0946
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0140",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the preceded event?",
+          "pred": 1,
+          "confidence": 0.5486311742774095,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4514
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0141",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the religion of the person?",
+          "pred": 1,
+          "confidence": 0.40505055449993466,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5949
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0142",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the title song called?",
+          "pred": 0,
+          "confidence": 0.5146138942194063,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.4854
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0143",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "How about the quotes?",
+          "pred": 1,
+          "confidence": 0.8715761847321681,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1284
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0144",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.27203947713369225,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.728
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0145",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "For which issue was the issuer?",
+          "pred": 1,
+          "confidence": 0.48944922978380734,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5106
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0146",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.2658914225928871,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7341
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0147",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the engine?",
+          "pred": 1,
+          "confidence": 0.2198885630709525,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7801
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0148",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who won?",
+          "pred": 1,
+          "confidence": 0.7142865862281766,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.2857
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0149",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the parent?",
+          "pred": 1,
+          "confidence": 0.5581167150232851,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4419
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0150",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name its character",
+          "pred": 1,
+          "confidence": 0.1182399175583283,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8818
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0151",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the winner",
+          "pred": 1,
+          "confidence": 0.3295609374095021,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6704
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0152",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the religion of the person?",
+          "pred": 1,
+          "confidence": 0.39100619101523926,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.609
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0153",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who won?",
+          "pred": 1,
+          "confidence": 0.7501120704819675,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.2499
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0154",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the biological classification",
+          "pred": 1,
+          "confidence": 0.6952816199964277,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3047
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0155",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.6947869643875337,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3052
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0156",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.5270997129752915,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4729
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0157",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of its previous episode?",
+          "pred": 1,
+          "confidence": 0.6288932786256497,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3711
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0158",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the prson's religion?",
+          "pred": 1,
+          "confidence": 0.884609536673563,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1154
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0159",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist who performed with the person?",
+          "pred": 1,
+          "confidence": 0.3770602320925631,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6229
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0160",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the time zone?",
+          "pred": 1,
+          "confidence": 0.8831946256133663,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1168
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0161",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What were the published book editions?",
+          "pred": 1,
+          "confidence": 0.8666024595946397,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1334
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0162",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the platform?",
+          "pred": 1,
+          "confidence": 0.1721185459552781,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8279
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0163",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Biologically speaking, what is the classification?",
+          "pred": 1,
+          "confidence": 0.602323206175329,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3977
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0164",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the title song called?",
+          "pred": 1,
+          "confidence": 0.2544090293786855,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7456
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0165",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.9341314303638527,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0659
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0166",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "For which issue?",
+          "pred": 1,
+          "confidence": 0.6545353382279511,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3455
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0167",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.1646614232606115,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8353
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0168",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the parent?",
+          "pred": 1,
+          "confidence": 0.816700006761857,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1833
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0169",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the ethnicity of the person?",
+          "pred": 1,
+          "confidence": 0.3269449447907178,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6731
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0170",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the album?",
+          "pred": 1,
+          "confidence": 0.3597510959355027,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6402
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0171",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the biological classification",
+          "pred": 1,
+          "confidence": 0.07875286878055598,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9212
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0172",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the character",
+          "pred": 1,
+          "confidence": 0.1769471172047885,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8231
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0173",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was quoted?",
+          "pred": 1,
+          "confidence": 0.3152556393347917,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6847
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0174",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the spectral type?",
+          "pred": 1,
+          "confidence": 0.34631962633389723,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6537
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0175",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State a famous quote",
+          "pred": 1,
+          "confidence": 0.3508361451739156,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6492
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0176",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "In which time zone?",
+          "pred": 1,
+          "confidence": 0.4686924682532665,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5313
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0177",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the spectral type?",
+          "pred": 1,
+          "confidence": 0.3861199890613616,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6139
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0178",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the character",
+          "pred": 1,
+          "confidence": 0.5276557419096622,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4723
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0179",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the spectral type?",
+          "pred": 1,
+          "confidence": 0.577357551189273,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4226
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0180",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the episode that precedes this tv episode?",
+          "pred": 1,
+          "confidence": 0.17029683679188912,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8297
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0181",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the biological classification",
+          "pred": 1,
+          "confidence": 0.5728033462071649,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4272
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0182",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the title song",
+          "pred": 1,
+          "confidence": 0.03990299498063121,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9601
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0183",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the parent.",
+          "pred": 1,
+          "confidence": 0.4270290172347655,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.573
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0184",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the language?",
+          "pred": 1,
+          "confidence": 0.5065136919924987,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4935
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0185",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.32153918872927434,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6785
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0186",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the parent?",
+          "pred": 1,
+          "confidence": 0.3629950662171215,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.637
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0187",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.139954022640017,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.86
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0188",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "For which issue?",
+          "pred": 1,
+          "confidence": 0.3616594336977369,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6383
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0189",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the title song?",
+          "pred": 1,
+          "confidence": 0.5023271749361989,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4977
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0190",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What's the name of the engine?",
+          "pred": 1,
+          "confidence": 0.3153046478852115,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6847
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0191",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the genre?",
+          "pred": 1,
+          "confidence": 0.06735442685151372,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9326
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0192",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.4840975494743528,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5159
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0193",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name a famous quote",
+          "pred": 1,
+          "confidence": 0.7888214510951352,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2112
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0194",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Tell me that it was for which issue",
+          "pred": 1,
+          "confidence": 0.14319529940624043,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8568
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0195",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the person's ethnicity?",
+          "pred": 1,
+          "confidence": 0.3802799477243376,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6197
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0196",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling?",
+          "pred": 1,
+          "confidence": 0.39095254153294634,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.609
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0197",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "In which time zone?",
+          "pred": 1,
+          "confidence": 0.14998907452406518,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.85
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0198",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the genre of the album?",
+          "pred": 0,
+          "confidence": 0.15513399491684388,
+          "pred_clean": 0,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.8449
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0199",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the title song called?",
+          "pred": 1,
+          "confidence": 0.10678865694397521,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8932
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0200",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling of this person?",
+          "pred": 1,
+          "confidence": 0.5906329781337523,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4094
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0201",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is its spectral type?",
+          "pred": 1,
+          "confidence": 0.36421098630387283,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6358
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0202",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name a famous quote",
+          "pred": 1,
+          "confidence": 0.33667204070984846,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6633
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0203",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the engine used",
+          "pred": 1,
+          "confidence": 0.24062376284067677,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7594
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0204",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the genre?",
+          "pred": 1,
+          "confidence": 0.6714507656156767,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3285
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0205",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the episode that precedes this tv episode?",
+          "pred": 1,
+          "confidence": 0.5910382282218785,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.409
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0206",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the time zone",
+          "pred": 1,
+          "confidence": 0.2578303006794205,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7422
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0207",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the record label",
+          "pred": 1,
+          "confidence": 0.2865874584812662,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7134
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0208",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "How about the quotes?",
+          "pred": 1,
+          "confidence": 0.4826557404633558,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5173
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0209",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the summary of the film?",
+          "pred": 0,
+          "confidence": 0.016668163925301904,
+          "pred_clean": 0,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.9833
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0210",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the language?",
+          "pred": 1,
+          "confidence": 0.9895000570309019,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0105
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0211",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.3162227377921113,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6838
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0212",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the spectral type for the astronomy?",
+          "pred": 1,
+          "confidence": 0.32411829559219774,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6759
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0213",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the title song?",
+          "pred": 1,
+          "confidence": 0.9821737352755375,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0178
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0214",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is its spectral type?",
+          "pred": 1,
+          "confidence": 0.6316209847073777,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3684
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0215",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the spectral type for the astronomy?",
+          "pred": 1,
+          "confidence": 0.26918812970192285,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7308
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0216",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the preceded event?",
+          "pred": 1,
+          "confidence": 0.4624565133120153,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5375
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0217",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the spectral type for the astronomy?",
+          "pred": 1,
+          "confidence": 0.5042190060881184,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4958
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0218",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the record label called?",
+          "pred": 1,
+          "confidence": 0.4697543225669564,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5302
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0219",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist?",
+          "pred": 1,
+          "confidence": 0.5665429640195492,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4335
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0220",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.5209183248756095,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4791
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0221",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the time zone",
+          "pred": 1,
+          "confidence": 0.6025014742279415,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3975
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0222",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the prson's religion?",
+          "pred": 1,
+          "confidence": 0.5046595553027236,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4953
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0223",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name its character",
+          "pred": 1,
+          "confidence": 0.8793445657752789,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1207
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0224",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the religion?",
+          "pred": 1,
+          "confidence": 0.8654326226391099,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1346
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0225",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name a famous quote",
+          "pred": 1,
+          "confidence": 0.6421930286924501,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3578
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0226",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the record label?",
+          "pred": 1,
+          "confidence": 0.20683648237299657,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7932
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0227",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the engine used",
+          "pred": 1,
+          "confidence": 0.9435762335509666,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0564
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0228",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the genre?",
+          "pred": 1,
+          "confidence": 0.20664967728316486,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7934
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0229",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State a famous quote",
+          "pred": 1,
+          "confidence": 0.4741293022603327,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5259
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0230",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the parent?",
+          "pred": 0,
+          "confidence": 0.646406253757225,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.3536
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0231",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Tell me that it was for which issue",
+          "pred": 1,
+          "confidence": 0.5150115943654472,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.485
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0232",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the spectral type for the astronomy?",
+          "pred": 1,
+          "confidence": 0.5355964533537748,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4644
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0233",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling?",
+          "pred": 1,
+          "confidence": 0.13622664700037856,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8638
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0234",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling?",
+          "pred": 1,
+          "confidence": 0.5122220036443077,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4878
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0235",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the engine used",
+          "pred": 1,
+          "confidence": 0.515700768898652,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4843
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0236",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the engine?",
+          "pred": 1,
+          "confidence": 0.4582046914766936,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5418
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0237",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the religion of the person?",
+          "pred": 1,
+          "confidence": 0.5605670670481508,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4394
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0238",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the language used.",
+          "pred": 1,
+          "confidence": 0.4803769726496271,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5196
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0239",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the parent.",
+          "pred": 1,
+          "confidence": 0.6406191205261939,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3594
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0240",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the religion of the person?",
+          "pred": 1,
+          "confidence": 0.46102617051605865,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.539
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0241",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the parent?",
+          "pred": 1,
+          "confidence": 0.032761162191894955,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9672
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0242",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the title song",
+          "pred": 1,
+          "confidence": 0.35837073607850867,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6416
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0243",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "In which time zone?",
+          "pred": 1,
+          "confidence": 0.02581460755001963,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9742
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0244",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling?",
+          "pred": 1,
+          "confidence": 0.6165725464032585,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3834
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0245",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling?",
+          "pred": 1,
+          "confidence": 0.14935434148593163,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8506
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0246",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "For which issue?",
+          "pred": 1,
+          "confidence": 0.45870949184086496,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5413
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0247",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the title song?",
+          "pred": 1,
+          "confidence": 0.5668775027192864,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4331
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0248",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the person's ethnicity?",
+          "pred": 1,
+          "confidence": 0.43592050105751257,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5641
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0249",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the time zone",
+          "pred": 1,
+          "confidence": 0.08293615463987025,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9171
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0250",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the record label",
+          "pred": 1,
+          "confidence": 0.5243341311669243,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4757
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0251",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the record label called?",
+          "pred": 1,
+          "confidence": 0.9887637684062851,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0112
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0252",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "For which issue?",
+          "pred": 1,
+          "confidence": 0.2382338316764956,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7618
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0253",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the most famous discography.",
+          "pred": 1,
+          "confidence": 0.8983264648789591,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1017
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0254",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the parent?",
+          "pred": 1,
+          "confidence": 0.46571236499897994,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5343
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0255",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "For which issue was the issuer?",
+          "pred": 1,
+          "confidence": 0.8686397265873589,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1314
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0256",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the summary?",
+          "pred": 1,
+          "confidence": 0.006050070483473058,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9939
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0257",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the prson's religion?",
+          "pred": 1,
+          "confidence": 0.634988562305752,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.365
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0258",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What's the name of the engine?",
+          "pred": 1,
+          "confidence": 0.5201521508123321,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4798
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0259",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.25189343374247963,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7481
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0260",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the spectral type for the astronomy?",
+          "pred": 1,
+          "confidence": 0.4002385776087196,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5998
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0261",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Tell me that it was for which issue",
+          "pred": 1,
+          "confidence": 0.6780021110616501,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.322
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0262",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.6382863365153226,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3617
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0263",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.45659736273377316,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5434
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0264",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the title song called?",
+          "pred": 1,
+          "confidence": 0.6001005131273802,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3999
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0265",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the character",
+          "pred": 1,
+          "confidence": 0.6889288282400994,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3111
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0266",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.44099863829504626,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.559
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0267",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.8904606647732665,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1095
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0268",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the time zone?",
+          "pred": 1,
+          "confidence": 0.14314487624266192,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8569
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0269",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the event that preceded this event?",
+          "pred": 1,
+          "confidence": 0.2417538687155626,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7582
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0270",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.19110240630664255,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8089
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0271",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.8297735796742427,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1702
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0272",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name its character",
+          "pred": 1,
+          "confidence": 0.5403658217663199,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4596
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0273",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the time zone?",
+          "pred": 1,
+          "confidence": 0.9003259459038262,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0997
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0274",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the engine used",
+          "pred": 1,
+          "confidence": 0.866360736713762,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1336
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0275",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.5063337942487944,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4937
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0276",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Which person is this person's brother or sister?",
+          "pred": 1,
+          "confidence": 0.1790065678500431,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.821
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0277",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name its character",
+          "pred": 1,
+          "confidence": 0.9638681812877,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0361
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0278",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the parent?",
+          "pred": 1,
+          "confidence": 0.8913235459236395,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1087
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0279",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Do you know the character of the book?",
+          "pred": 0,
+          "confidence": 0.2699542877153134,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.73
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0280",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.4823188398020366,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5177
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0281",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the director.",
+          "pred": 1,
+          "confidence": 0.02452161255150964,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9755
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0282",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the parent?",
+          "pred": 1,
+          "confidence": 0.17258786435015427,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8274
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0283",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the winner?",
+          "pred": 1,
+          "confidence": 0.019957234237249377,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.98
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0284",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "In which time zone?",
+          "pred": 1,
+          "confidence": 0.14479350985376027,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8552
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0285",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the ethnicity of the person?",
+          "pred": 1,
+          "confidence": 0.42693241834101714,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5731
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0286",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the person's ethnicity?",
+          "pred": 1,
+          "confidence": 0.3657346348553018,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6343
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0287",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Which person is this person's brother or sister?",
+          "pred": 1,
+          "confidence": 0.7376298041805409,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.2624
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0288",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the biological classification?",
+          "pred": 1,
+          "confidence": 0.21444167542548553,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7856
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0289",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.2509233642078672,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7491
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0290",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the genre?",
+          "pred": 1,
+          "confidence": 0.42006196782583605,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5799
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0291",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the time zone",
+          "pred": 1,
+          "confidence": 0.9315165560284805,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0685
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0292",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the episode that precedes this tv episode?",
+          "pred": 1,
+          "confidence": 0.34559233287710023,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6544
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0293",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.36541504820903103,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6346
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0294",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling of this person?",
+          "pred": 1,
+          "confidence": 0.34872099209466356,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6513
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0295",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the biological classification",
+          "pred": 1,
+          "confidence": 0.08572505055000101,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9143
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0296",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State a famous quote",
+          "pred": 1,
+          "confidence": 0.6765517101279542,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3234
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0297",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the biological classification?",
+          "pred": 1,
+          "confidence": 0.09513981382448233,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9049
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0298",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the quote",
+          "pred": 1,
+          "confidence": 0.904316135116477,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0957
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0299",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the parent",
+          "pred": 1,
+          "confidence": 0.5850445190083243,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.415
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0300",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling?",
+          "pred": 1,
+          "confidence": 0.3841045142003008,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6159
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0301",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the operating platform",
+          "pred": 1,
+          "confidence": 0.7251098305309419,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.2749
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0302",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the religion?",
+          "pred": 1,
+          "confidence": 0.38375328363587446,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6162
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0303",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the parent?",
+          "pred": 1,
+          "confidence": 0.617114583548019,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3829
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0304",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the previous episode?",
+          "pred": 0,
+          "confidence": 0.4334930357859821,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.5665
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0305",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.932162754712853,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0678
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0306",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name a famous quote",
+          "pred": 1,
+          "confidence": 0.37992663590467934,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6201
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0307",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 1.0,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0308",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the episode that precedes this tv episode?",
+          "pred": 0,
+          "confidence": 0.5744225692351819,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.4256
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0309",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was a famous quote?",
+          "pred": 1,
+          "confidence": 0.863850094013605,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1361
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0310",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is its style?",
+          "pred": 1,
+          "confidence": 0.6569387785570462,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3431
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0311",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is its style?",
+          "pred": 1,
+          "confidence": 0.5213124840477237,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4787
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0312",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the language used.",
+          "pred": 1,
+          "confidence": 0.6600074823799451,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.34
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0313",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling of this person?",
+          "pred": 1,
+          "confidence": 0.40844257964041575,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5916
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0314",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the city nearby.",
+          "pred": 1,
+          "confidence": 0.4911474553566689,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5089
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0315",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What were the published book editions?",
+          "pred": 1,
+          "confidence": 0.6574464619102109,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3426
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0316",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the episode that precedes this tv episode?",
+          "pred": 1,
+          "confidence": 0.6485912600141481,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3514
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0317",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What were the book editions published by this person?",
+          "pred": 1,
+          "confidence": 0.536400985507166,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4636
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0318",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.43004310314419414,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.57
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0319",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the platform?",
+          "pred": 1,
+          "confidence": 0.14631441063900685,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8537
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0320",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the album?",
+          "pred": 1,
+          "confidence": 0.4357316787750618,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5643
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0321",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.6269067976375473,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3731
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0322",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.1318050742834168,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8682
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0323",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.5503368799202363,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4497
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0324",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.657207189150103,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3428
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0325",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.21200873560666889,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.788
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0326",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the engine used?",
+          "pred": 1,
+          "confidence": 0.6544523747273197,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3455
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0327",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the language?",
+          "pred": 1,
+          "confidence": 0.9722002324653128,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0278
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0328",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the title song",
+          "pred": 1,
+          "confidence": 0.7456716122657951,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.2543
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0329",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.5325960301993454,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4674
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0330",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the name of the record label",
+          "pred": 1,
+          "confidence": 0.8394875154955944,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1605
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0331",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the record label called?",
+          "pred": 1,
+          "confidence": 0.1476936992360388,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8523
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0332",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist who performed with the person?",
+          "pred": 1,
+          "confidence": 0.6477116871108204,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3523
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0333",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was a famous quote quoted?",
+          "pred": 1,
+          "confidence": 0.7238575078808248,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.2761
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0334",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.8212494210956447,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1788
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0335",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist?",
+          "pred": 1,
+          "confidence": 0.5035359853298611,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4965
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0336",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.33823888629852905,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6618
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0337",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the album called?",
+          "pred": 1,
+          "confidence": 0.962038477824425,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.038
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0338",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.7115449421757255,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.2885
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0339",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Tell me the director.",
+          "pred": 0,
+          "confidence": 0.11216673954792333,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.8878
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0340",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.9042223624642298,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0958
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0341",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name a famous quote",
+          "pred": 1,
+          "confidence": 0.7926673432872475,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2073
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0342",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the title song?",
+          "pred": 1,
+          "confidence": 0.1029985056805266,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.897
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0343",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the title song called?",
+          "pred": 1,
+          "confidence": 0.20431915573342663,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7957
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0344",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the parent?",
+          "pred": 1,
+          "confidence": 0.3937175925787746,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6063
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0345",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was a famous quote?",
+          "pred": 1,
+          "confidence": 0.9220616379571103,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0779
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0346",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "For which issue was the issuer?",
+          "pred": 1,
+          "confidence": 0.14452360442835044,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8555
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0347",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the spectral type for the astronomy?",
+          "pred": 1,
+          "confidence": 0.5000885471062417,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4999
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0348",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the title song",
+          "pred": 1,
+          "confidence": 0.6118527424715525,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3881
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0349",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name its character",
+          "pred": 1,
+          "confidence": 0.5987201492018077,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4013
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0350",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the engine?",
+          "pred": 1,
+          "confidence": 0.3167441613392751,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6833
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0351",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the ethnicity?",
+          "pred": 1,
+          "confidence": 0.8415066444925554,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1585
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0352",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.943305974782928,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0567
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0353",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.035766998903825176,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9642
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0354",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was a famous quote quoted?",
+          "pred": 1,
+          "confidence": 0.3383249559011061,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6617
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0355",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the parent?",
+          "pred": 1,
+          "confidence": 0.14674102923491705,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8533
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0356",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.585194049321062,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4148
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0357",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the most famous discography?",
+          "pred": 1,
+          "confidence": 0.40420336908649823,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5958
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0358",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling of this person?",
+          "pred": 1,
+          "confidence": 0.2595068645014721,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7405
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0359",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Do you know the character of the book?",
+          "pred": 1,
+          "confidence": 0.9484364576060045,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0516
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0360",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the winner",
+          "pred": 1,
+          "confidence": 0.9407001726084833,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0593
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0361",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist who performed with the person?",
+          "pred": 1,
+          "confidence": 0.4976007971997253,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5024
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0362",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the title song?",
+          "pred": 1,
+          "confidence": 0.41832748173003564,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5817
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0363",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Tell me that it was for which issue",
+          "pred": 1,
+          "confidence": 0.653292644837888,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3467
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0364",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the title song called?",
+          "pred": 1,
+          "confidence": 0.4443712413666423,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5556
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0365",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the city nearby.",
+          "pred": 1,
+          "confidence": 0.5251120174357864,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4749
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0366",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.2671294022697932,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7329
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0367",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is its style?",
+          "pred": 1,
+          "confidence": 0.10067444434680894,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8993
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0368",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling?",
+          "pred": 1,
+          "confidence": 0.38740783772948206,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6126
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0369",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.21225769646547044,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7877
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0370",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the genre?",
+          "pred": 1,
+          "confidence": 0.10513445894888518,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8949
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0371",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was a famous quote quoted?",
+          "pred": 1,
+          "confidence": 0.7542036112569194,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.2458
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0372",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling of this person?",
+          "pred": 1,
+          "confidence": 0.7513257249729316,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.2487
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0373",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the event that preceded this event?",
+          "pred": 1,
+          "confidence": 0.5300290307559435,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.47
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0374",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the record label called?",
+          "pred": 1,
+          "confidence": 0.38961614265647826,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6104
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0375",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What's the name of the engine?",
+          "pred": 1,
+          "confidence": 0.3814188428529671,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6186
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0376",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "In which time zone?",
+          "pred": 1,
+          "confidence": 0.46471340765002456,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5353
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0377",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is its spectral type?",
+          "pred": 1,
+          "confidence": 0.2181381008395501,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7819
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0378",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What about the director?",
+          "pred": 0,
+          "confidence": 0.18090425744383853,
+          "pred_clean": 0,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.8191
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0379",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the name of the record label",
+          "pred": 1,
+          "confidence": 0.22540301159370857,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7746
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0380",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "For which issue was the issuer?",
+          "pred": 1,
+          "confidence": 0.23780561798757338,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7622
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0381",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the character",
+          "pred": 1,
+          "confidence": 0.3431662029571113,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6568
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0382",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who directed?",
+          "pred": 1,
+          "confidence": 0.5771954700892334,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4228
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0383",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling of this person?",
+          "pred": 1,
+          "confidence": 0.3542464582087095,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6458
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0384",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the religion?",
+          "pred": 1,
+          "confidence": 0.25788107586254094,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7421
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0385",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist?",
+          "pred": 1,
+          "confidence": 0.3702907034456172,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6297
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0386",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the record label?",
+          "pred": 1,
+          "confidence": 0.4529981576416071,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.547
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0387",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Which person is this person's brother or sister?",
+          "pred": 1,
+          "confidence": 0.21094903002730825,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7891
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0388",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the bridge?",
+          "pred": 1,
+          "confidence": 0.5545529522189152,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4454
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0389",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the parent.",
+          "pred": 1,
+          "confidence": 0.01456250349115995,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9854
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0390",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the parent?",
+          "pred": 1,
+          "confidence": 0.7850442822954957,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.215
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0391",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.9838177983218805,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0162
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0392",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the spectral type for the astronomy?",
+          "pred": 1,
+          "confidence": 0.8538268476110019,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1462
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0393",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the city nearby.",
+          "pred": 1,
+          "confidence": 0.6469467903618331,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3531
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0394",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the parent?",
+          "pred": 1,
+          "confidence": 0.3227723764367426,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6772
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0395",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the person's ethnicity?",
+          "pred": 1,
+          "confidence": 0.9524422022881189,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0476
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0396",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.4017207913305395,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5983
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0397",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the name of the record label",
+          "pred": 1,
+          "confidence": 0.547626388768155,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4524
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0398",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "For which issue was the issuer?",
+          "pred": 1,
+          "confidence": 0.6777623061892308,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3222
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0399",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the biological classification",
+          "pred": 1,
+          "confidence": 0.30599812426010997,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.694
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0400",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling of this person?",
+          "pred": 1,
+          "confidence": 0.7884659491088308,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2115
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0401",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the genre?",
+          "pred": 1,
+          "confidence": 0.12069435329565448,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8793
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0402",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Biologically speaking, what is the classification?",
+          "pred": 1,
+          "confidence": 0.26280915403334704,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7372
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0403",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the spectral type for the astronomy?",
+          "pred": 1,
+          "confidence": 0.29024693579821437,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7098
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0404",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the spectral type?",
+          "pred": 1,
+          "confidence": 0.5270456881169977,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.473
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0405",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the album?",
+          "pred": 1,
+          "confidence": 0.44848342178909817,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5515
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0406",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the parent?",
+          "pred": 1,
+          "confidence": 0.5457794960128822,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4542
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0407",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist?",
+          "pred": 1,
+          "confidence": 0.3888169521057018,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6112
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0408",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was a famous quote quoted?",
+          "pred": 1,
+          "confidence": 0.921714584700179,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0783
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0409",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Which is its medium of language?",
+          "pred": 1,
+          "confidence": 0.30168590825823705,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6983
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0410",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who is the sibling?",
+          "pred": 1,
+          "confidence": 0.6251906277467816,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3748
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0411",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the genre?",
+          "pred": 1,
+          "confidence": 0.2329319677951297,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7671
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0412",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is its style?",
+          "pred": 1,
+          "confidence": 0.41415907249260575,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5858
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0413",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.960391061221342,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0396
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0414",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the religion?",
+          "pred": 1,
+          "confidence": 0.6681150192654752,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3319
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0415",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the summary of the film?",
+          "pred": 1,
+          "confidence": 0.05517822114219606,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9448
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0416",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the parent?",
+          "pred": 1,
+          "confidence": 0.5065982425484281,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4934
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0417",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the parent?",
+          "pred": 1,
+          "confidence": 0.4679528087817113,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.532
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0418",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.6018058978243307,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3982
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0419",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who influenced this person?",
+          "pred": 1,
+          "confidence": 0.4067191842530318,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5933
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0420",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.7379765692423872,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.262
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0421",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the ethnicity of the person?",
+          "pred": 1,
+          "confidence": 0.38426732743101744,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6157
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0422",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the most famous discography?",
+          "pred": 1,
+          "confidence": 0.8962824316174989,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1037
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0423",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the language?",
+          "pred": 1,
+          "confidence": 0.6015009276542546,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3985
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0424",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Biologically speaking, what is the classification?",
+          "pred": 1,
+          "confidence": 0.188861413722066,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8111
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0425",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the religion of the person?",
+          "pred": 1,
+          "confidence": 0.5607912664309955,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4392
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0426",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the time zone",
+          "pred": 1,
+          "confidence": 0.35913451499745164,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6409
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0427",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the parent?",
+          "pred": 1,
+          "confidence": 0.6491669884996926,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3508
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0428",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the record label called?",
+          "pred": 0,
+          "confidence": 0.6407473078137351,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.3593
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0429",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What about the most famous discography?",
+          "pred": 1,
+          "confidence": 0.5103476087663258,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4897
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0430",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State the quote",
+          "pred": 1,
+          "confidence": 0.6251101408557056,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3749
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0431",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the name of the costume designer?",
+          "pred": 1,
+          "confidence": 0.16991100703056117,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8301
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0432",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist?",
+          "pred": 1,
+          "confidence": 0.907696939244155,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0923
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0433",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What's the name of the engine?",
+          "pred": 1,
+          "confidence": 0.5913705909948885,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4086
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0434",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the event that preceded this event?",
+          "pred": 1,
+          "confidence": 0.970721778815644,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0293
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0435",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the language used.",
+          "pred": 1,
+          "confidence": 0.6099292757122395,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.3901
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0436",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Which event took place before it?",
+          "pred": 1,
+          "confidence": 0.5973637678969281,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4026
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0437",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was a famous quote quoted?",
+          "pred": 1,
+          "confidence": 0.36484617180671153,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6352
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0438",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "For which issue?",
+          "pred": 1,
+          "confidence": 0.3117088249495219,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6883
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0439",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "State a famous quote",
+          "pred": 1,
+          "confidence": 0.44898768053858995,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.551
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0440",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist who performed with the person?",
+          "pred": 1,
+          "confidence": 0.8298693932608756,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1701
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0441",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the record label?",
+          "pred": 1,
+          "confidence": 0.4947304224534955,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5053
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0442",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the parent?",
+          "pred": 1,
+          "confidence": 0.3676149580449579,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6324
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0443",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the preceded event?",
+          "pred": 1,
+          "confidence": 0.3130163983787235,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.687
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0444",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Mention the name of the director.",
+          "pred": 1,
+          "confidence": 0.46299604321659027,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.537
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0445",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the character",
+          "pred": 1,
+          "confidence": 0.9755947075269396,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0244
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0446",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Who was the supporting artist who performed with the person?",
+          "pred": 1,
+          "confidence": 0.9052663930915732,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0947
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0447",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What was the name of the drivetrain?",
+          "pred": 1,
+          "confidence": 0.5001936207294017,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4998
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0448",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "What is the genre of the album?",
+          "pred": 1,
+          "confidence": 0.357865382840028,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6421
+        }
+      ]
+    },
+    {
+      "conv_id": "claqua_0449",
+      "turns": [
+        {
+          "turn_idx": 1,
+          "query": "Name the record label",
+          "pred": 1,
+          "confidence": 0.9325052351322067,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0675
+        }
+      ]
+    }
+  ]
+}
