@@ -567,17 +567,24 @@ def plot_triangulated_defense(
     model_name: str = "",
     comparison_metrics: Dict = None,
 ):
-    """
-    Publication-quality 4-panel figure:
-      1. Decision boundary (logit_kl vs cos_delta with contour)
-      2. ASR / Utility / Latency bar chart (multi-method comparison)
-      3. ROC curve
-      4. Per-method metrics table
-    """
+    """Publication-quality 4-panel figure for poster/article."""
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
+    from matplotlib import rcParams
     from sklearn.metrics import roc_curve, auc
+
+    # Publication styling
+    rcParams.update({
+        "font.family": "serif",
+        "font.size": 11,
+        "axes.labelsize": 13,
+        "axes.titlesize": 14,
+        "xtick.labelsize": 10,
+        "ytick.labelsize": 10,
+        "legend.fontsize": 10,
+        "figure.dpi": 200,
+    })
 
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -588,9 +595,17 @@ def plot_triangulated_defense(
     labels = [0]*len(clean_results) + [1]*len(adversarial_results)
     scores = clean_scores + adv_scores
 
-    fig, axes = plt.subplots(2, 2, figsize=(13, 11))
+    fig, axes = plt.subplots(2, 2, figsize=(14, 11.5))
+    panel_labels = ["(a)", "(b)", "(c)", "(d)"]
 
-    # ── Panel 1: Decision boundary ───────────────────────────────────
+    # Colors
+    C_CLEAN = "#2E7D32"   # dark green
+    C_ADV = "#C62828"     # dark red
+    C_ROC = "#1565C0"     # dark blue
+    C_BAR_ASR = "#E53935"
+    C_BAR_F1 = "#43A047"
+
+    # ── (a) Suffix-Induced Shift Space ───────────────────────────────
     ax = axes[0, 0]
     x_key = "logit_kl" if "logit_kl" in all_merged[0] else sorted(all_merged[0].keys())[0]
     y_key = "cos_delta" if "cos_delta" in all_merged[0] else sorted(all_merged[0].keys())[1]
@@ -600,17 +615,21 @@ def plot_triangulated_defense(
     adv_x = [r["merged"].get(x_key, 0) for r in adversarial_results]
     adv_y = [r["merged"].get(y_key, 0) for r in adversarial_results]
 
-    ax.scatter(clean_x, clean_y, c="#4CAF50", s=20, alpha=0.5,
-               label="not flipped", edgecolors="none", zorder=3)
-    ax.scatter(adv_x, adv_y, c="#F44336", s=20, alpha=0.5,
-               label="flipped by suffix", marker="x", zorder=3)
-    ax.set_xlabel(x_key, fontsize=10)
-    ax.set_ylabel(y_key, fontsize=10)
-    ax.set_title("Decision Boundary", fontsize=12, fontweight="bold")
-    ax.legend(fontsize=9)
-    ax.grid(alpha=0.2)
+    ax.scatter(clean_x, clean_y, c=C_CLEAN, s=18, alpha=0.45,
+               label="Not flipped (robust)", edgecolors="none", zorder=3,
+               marker="o")
+    ax.scatter(adv_x, adv_y, c=C_ADV, s=30, alpha=0.6,
+               label="Flipped (attacked)", marker="X", zorder=4,
+               linewidths=0.5, edgecolors="#8B0000")
+    ax.set_xlabel("KL Divergence (logit shift)", fontsize=13)
+    ax.set_ylabel("Cosine Δ (direction shift)", fontsize=13)
+    ax.set_title("Suffix-Induced Shift Space", fontsize=14, fontweight="bold")
+    ax.legend(loc="upper right", framealpha=0.9, edgecolor="#ccc")
+    ax.grid(True, alpha=0.15, linestyle="-")
+    ax.text(0.02, 0.98, panel_labels[0], transform=ax.transAxes,
+            fontsize=16, fontweight="bold", va="top", ha="left")
 
-    # ── Panel 2: ASR and F1 comparison ──────────────────────────────
+    # ── (b) ASR vs F1 Comparison ─────────────────────────────────────
     ax = axes[0, 1]
     if comparison_metrics:
         methods = list(comparison_metrics.keys())
@@ -618,76 +637,106 @@ def plot_triangulated_defense(
         f1_vals = [comparison_metrics[m].get("f1", 0) * 100 for m in methods]
 
         x_pos = np.arange(len(methods))
-        w = 0.35
+        w = 0.32
         bars1 = ax.bar(x_pos - w/2, asr_vals, w, label="ASR (%) ↓",
-                        color="#F44336", alpha=0.8)
+                        color=C_BAR_ASR, alpha=0.85, edgecolor="#B71C1C",
+                        linewidth=0.5)
         bars2 = ax.bar(x_pos + w/2, f1_vals, w, label="F1 (%) ↑",
-                        color="#4CAF50", alpha=0.8)
+                        color=C_BAR_F1, alpha=0.85, edgecolor="#1B5E20",
+                        linewidth=0.5)
         ax.set_xticks(x_pos)
-        ax.set_xticklabels(methods, fontsize=9, rotation=15)
-        ax.set_ylabel("Percentage", fontsize=11)
-        ax.set_title("ASR vs F1", fontsize=12, fontweight="bold")
-        ax.legend(fontsize=9)
-        ax.set_ylim(0, 105)
+        ax.set_xticklabels(methods, fontsize=9, rotation=20, ha="right")
+        ax.set_ylabel("Percentage", fontsize=13)
+        ax.set_title("Attack Success Rate vs Detection F1", fontsize=14,
+                     fontweight="bold")
+        ax.legend(loc="upper center", framealpha=0.9, edgecolor="#ccc",
+                  ncol=2)
+        ax.set_ylim(0, 112)
 
         for bar in bars1:
-            ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-                    f"{bar.get_height():.1f}", ha="center", fontsize=8)
+            h = bar.get_height()
+            if h > 2:
+                ax.text(bar.get_x() + bar.get_width()/2, h + 1.5,
+                        f"{h:.1f}", ha="center", fontsize=8, fontweight="bold")
         for bar in bars2:
-            ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-                    f"{bar.get_height():.1f}", ha="center", fontsize=8)
+            h = bar.get_height()
+            if h > 2:
+                ax.text(bar.get_x() + bar.get_width()/2, h + 1.5,
+                        f"{h:.1f}", ha="center", fontsize=8, fontweight="bold")
     else:
-        ax.text(0.5, 0.5, "Run with --compare\nfor multi-method comparison",
-                ha="center", va="center", transform=ax.transAxes, fontsize=11)
-        ax.set_title("ASR vs Utility", fontsize=12, fontweight="bold")
+        ax.text(0.5, 0.5, "Run with --compare", ha="center", va="center",
+                transform=ax.transAxes, fontsize=12, color="#666")
+    ax.grid(True, alpha=0.15, axis="y", linestyle="-")
+    ax.text(0.02, 0.98, panel_labels[1], transform=ax.transAxes,
+            fontsize=16, fontweight="bold", va="top", ha="left")
 
-    # ── Panel 3: ROC curve ───────────────────────────────────────────
+    # ── (c) ROC Curve ────────────────────────────────────────────────
     ax = axes[1, 0]
     if len(set(labels)) > 1 and len(set(scores)) > 1:
         fpr_arr, tpr_arr, _ = roc_curve(labels, scores)
         roc_auc = auc(fpr_arr, tpr_arr)
-        ax.plot(fpr_arr, tpr_arr, color="#3F51B5", lw=2,
-                label=f"AUROC={roc_auc:.3f}")
-    ax.plot([0, 1], [0, 1], "k--", alpha=0.3)
-    ax.set_xlabel("FPR", fontsize=11)
-    ax.set_ylabel("TPR", fontsize=11)
-    ax.set_title("ROC — Adversarial Detection", fontsize=12, fontweight="bold")
-    ax.legend(fontsize=10)
-    ax.grid(alpha=0.2)
+        ax.plot(fpr_arr, tpr_arr, color=C_ROC, lw=2.5,
+                label=f"Ours (AUROC = {roc_auc:.3f})")
+        ax.fill_between(fpr_arr, tpr_arr, alpha=0.08, color=C_ROC)
+    ax.plot([0, 1], [0, 1], "k--", alpha=0.25, lw=1)
+    ax.set_xlabel("False Positive Rate", fontsize=13)
+    ax.set_ylabel("True Positive Rate", fontsize=13)
+    ax.set_title("ROC — Adversarial Detection", fontsize=14,
+                 fontweight="bold")
+    ax.legend(loc="lower right", framealpha=0.9, edgecolor="#ccc",
+              fontsize=11)
+    ax.grid(True, alpha=0.15, linestyle="-")
+    ax.set_xlim(-0.02, 1.02)
+    ax.set_ylim(-0.02, 1.02)
+    ax.text(0.02, 0.98, panel_labels[2], transform=ax.transAxes,
+            fontsize=16, fontweight="bold", va="top", ha="left")
 
-    # ── Panel 4: Metrics table ───────────────────────────────────────
+    # ── (d) Comparison Table ─────────────────────────────────────────
     ax = axes[1, 1]
     ax.axis("off")
     if comparison_metrics:
-        col_labels = ["Method", "ASR↓", "FP", "Prec↑", "Rec↑", "F1↑", "Acc↑"]
+        col_labels = ["Method", "ASR↓", "FP", "Prec↑", "Rec↑", "F1↑", "Acc↑", "ms"]
         table_data = []
         for m in methods:
             d = comparison_metrics[m]
+            lat = f"{d['avg_latency_ms']:.0f}" if "avg_latency_ms" in d else "—"
             table_data.append([
-                m,
-                f"{d.get('asr',0)*100:.1f}%",
-                f"{d.get('fp',0)}",
+                m, f"{d.get('asr',0)*100:.1f}%", f"{d.get('fp',0)}",
                 f"{d.get('precision',0)*100:.1f}%",
                 f"{d.get('recall',0)*100:.1f}%",
                 f"{d.get('f1',0)*100:.1f}%",
-                f"{d.get('accuracy',0)*100:.1f}%",
+                f"{d.get('accuracy',0)*100:.1f}%", lat,
             ])
         table = ax.table(cellText=table_data, colLabels=col_labels,
                          loc="center", cellLoc="center")
         table.auto_set_font_size(False)
         table.set_fontsize(10)
-        table.scale(1, 1.5)
-        # Color header
+        table.scale(1.0, 1.6)
+
+        # Header styling
         for j in range(len(col_labels)):
-            table[0, j].set_facecolor("#3F51B5")
-            table[0, j].set_text_props(color="white", fontweight="bold")
-    ax.set_title("Comparison", fontsize=12, fontweight="bold")
+            table[0, j].set_facecolor("#1565C0")
+            table[0, j].set_text_props(color="white", fontweight="bold",
+                                        fontsize=10)
+        # Alternate row shading
+        for i in range(1, len(table_data) + 1):
+            bg = "#F5F5F5" if i % 2 == 0 else "white"
+            for j in range(len(col_labels)):
+                table[i, j].set_facecolor(bg)
+                table[i, j].set_edgecolor("#E0E0E0")
+        # Bold best values
+        for j in range(len(col_labels)):
+            table[0, j].set_edgecolor("#0D47A1")
+
+    ax.set_title("Defense Comparison", fontsize=14, fontweight="bold")
+    ax.text(0.02, 0.98, panel_labels[3], transform=ax.transAxes,
+            fontsize=16, fontweight="bold", va="top", ha="left")
 
     fig.suptitle(f"Defense Evaluation — {model_name}",
-                 fontsize=14, fontweight="bold")
+                 fontsize=16, fontweight="bold", y=0.98)
     fig.tight_layout(rect=[0, 0, 1, 0.96])
     p = out / "triangulated_defense.png"
-    fig.savefig(p, dpi=200, bbox_inches="tight")
+    fig.savefig(p, dpi=250, bbox_inches="tight", facecolor="white")
     plt.close(fig)
     log.info(f"Plot saved: {p}")
     return [str(p)]
