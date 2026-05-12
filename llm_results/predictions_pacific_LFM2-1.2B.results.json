@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "team": "",
+    "model": "../LFM2-1.2B/",
+    "method": "triangulated_defense",
+    "defense": "anomaly_shift",
+    "model_type": "isolation_forest",
+    "features": [
+      "cos_delta",
+      "entropy_adv",
+      "entropy_clean",
+      "entropy_delta",
+      "h_similarity",
+      "logit_gap_adv",
+      "logit_gap_clean",
+      "logit_js",
+      "logit_kl",
+      "pred_flipped",
+      "proj_delta",
+      "r_avg_idf",
+      "r_coverage",
+      "top1_prob_adv",
+      "top1_prob_clean"
+    ],
+    "config": {
+      "benchmark": "pacific",
+      "per_turn": true,
+      "num_classes": 2,
+      "train_suffix": "isie!filter!!!rus!!zero!!!!!!!!!!",
+      "n_suffix_choices": 5
+    },
+    "per_turn": true,
+    "num_classes": 2
+  },
+  "n_predictions": 1982,
+  "n_unmatched": 0,
+  "clarification": {
+    "f1_weighted": 0.058781152414785154,
+    "f1_macro": 0.14706914999680698,
+    "accuracy": 0.16700302724520685,
+    "precision_w": 0.7166141735732353,
+    "recall_w": 0.16700302724520685
+  },
+  "defense": {
+    "asr": 0.18181818181818177,
+    "tp": 108,
+    "fp": 763,
+    "fn": 24,
+    "tn": 1087,
+    "precision": 0.12399540757749714,
+    "recall": 0.8181818181818182,
+    "f1": 0.21535393818544366,
+    "accuracy": 0.6029263370332997
+  },
+  "defended_clarification": {
+    "f1_weighted": 0.06800552468481895,
+    "f1_macro": 0.15122407828484732,
+    "accuracy": 0.16902119071644803
+  }
+}
