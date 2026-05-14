@@ -1,0 +1,76 @@
+{
+  "benchmark": "pacific",
+  "track": "defense",
+  "n_queries": 272,
+  "n_systems": 3,
+  "systems": {
+    "LFM- triangulated_defense": {
+      "mean": 0.6213235294117647,
+      "std": 0.4850573174492605
+    },
+    "Llama- triangulated_defense": {
+      "mean": 0.7095588235294118,
+      "std": 0.45396596731579875
+    },
+    "Qwen- triangulated_defense": {
+      "mean": 0.7463235294117647,
+      "std": 0.4351146042804487
+    }
+  },
+  "pairwise": {
+    "LFM- triangulated_defense_vs_Llama- triangulated_defense": {
+      "mean_diff": -0.08823529411764708,
+      "p_ttest": 0.028193886358724444,
+      "p_wilcoxon": 0.028459736916310565,
+      "p_randomization": 0.0352,
+      "p_bootstrap": 0.0254
+    },
+    "LFM- triangulated_defense_vs_Qwen- triangulated_defense": {
+      "mean_diff": -0.125,
+      "p_ttest": 0.0021301739284783367,
+      "p_wilcoxon": 0.002263469812035179,
+      "p_randomization": 0.0028,
+      "p_bootstrap": 0.0036
+    },
+    "Llama- triangulated_defense_vs_Qwen- triangulated_defense": {
+      "mean_diff": -0.03676470588235292,
+      "p_ttest": 0.3323224513339587,
+      "p_wilcoxon": 0.33140594694491454,
+      "p_randomization": 0.3818,
+      "p_bootstrap": 0.3492
+    }
+  },
+  "friedman": {
+    "chi2": 10.468571428571096,
+    "p_value": 0.005330630717659972
+  },
+  "agreement": {
+    "fleiss_kappa": -0.4327651515151519,
+    "kendalls_w": 0.2100257266308927,
+    "pairwise_kappa": {
+      "LFM- triangulated_defense_vs_Llama- triangulated_defense": -0.007052186177715081,
+      "LFM- triangulated_defense_vs_Qwen- triangulated_defense": 0.0001381940797654524,
+      "Llama- triangulated_defense_vs_Qwen- triangulated_defense": 0.002968063635284346
+    }
+  },
+  "nll_efficiency": {
+    "LFM- triangulated_defense": {
+      "nll": 0.8097,
+      "h_label": 0.5084,
+      "efficiency": -0.5925,
+      "nll_normalized": 1.5925
+    },
+    "Llama- triangulated_defense": {
+      "nll": 1.1076,
+      "h_label": 0.5084,
+      "efficiency": -1.1784,
+      "nll_normalized": 2.1784
+    },
+    "Qwen- triangulated_defense": {
+      "nll": 0.6084,
+      "h_label": 0.5084,
+      "efficiency": -0.1965,
+      "nll_normalized": 1.1965
+    }
+  }
+}
