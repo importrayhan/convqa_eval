@@ -1,0 +1,41 @@
+{
+  "benchmark": "pacific",
+  "track": "cnp",
+  "test": "randomization",
+  "n_iter": 10000,
+  "n_queries": 272,
+  "systems": {
+    "triangulated_defense": {
+      "mean": 0.7830882352941176,
+      "std": 0.412142027750219
+    },
+    "triangulated_defense_1.2B": {
+      "mean": 0.20955882352941177,
+      "std": 0.4069937628642245
+    },
+    "triangulated_defense_ruct": {
+      "mean": 0.22058823529411764,
+      "std": 0.4146432994079907
+    }
+  },
+  "pairwise": {
+    "triangulated_defense_vs_triangulated_defense_1.2B": {
+      "p_value": 0.0,
+      "mean_diff": 0.5735294117647058,
+      "significant_01": true,
+      "significant_05": true
+    },
+    "triangulated_defense_vs_triangulated_defense_ruct": {
+      "p_value": 0.0,
+      "mean_diff": 0.5625,
+      "significant_01": true,
+      "significant_05": true
+    },
+    "triangulated_defense_1.2B_vs_triangulated_defense_ruct": {
+      "p_value": 0.6617,
+      "mean_diff": -0.011029411764705871,
+      "significant_01": false,
+      "significant_05": false
+    }
+  }
+}
