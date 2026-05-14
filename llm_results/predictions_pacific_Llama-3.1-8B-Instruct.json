@@ -1,0 +1,3427 @@
+{
+  "metadata": {
+    "team": "",
+    "model": "../Llama-3.1-8B-Instruct/Llama-3.1-8B-Instruct/",
+    "method": "Llama- triangulated_defense",
+    "defense": "anomaly_shift",
+    "model_type": "isolation_forest",
+    "features": [
+      "cos_delta",
+      "entropy_adv",
+      "entropy_clean",
+      "entropy_delta",
+      "h_similarity",
+      "logit_gap_adv",
+      "logit_gap_clean",
+      "logit_js",
+      "logit_kl",
+      "pred_flipped",
+      "proj_delta",
+      "r_avg_idf",
+      "r_coverage",
+      "top1_prob_adv",
+      "top1_prob_clean"
+    ],
+    "config": {
+      "benchmark": "pacific",
+      "per_turn": true,
+      "num_classes": 2,
+      "train_suffix": ".navCtrl!!!!!!!!!!!!!!!!\u040b(/^\\!\"",
+      "n_suffix_choices": 5
+    },
+    "per_turn": true,
+    "num_classes": 2
+  },
+  "predictions": [
+    {
+      "conv_id": "pacific_0000",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What did total lease liabilities as of 2020 exclude?",
+          "pred": 1,
+          "confidence": 0.6827641913992126,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3172
+        },
+        {
+          "turn_idx": 1,
+          "query": "What were the leases for 2021?",
+          "pred": 1,
+          "confidence": 0.7607368501176075,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2393
+        },
+        {
+          "turn_idx": 2,
+          "query": "Operating leases.",
+          "pred": 1,
+          "confidence": 0.4577196743679942,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5423
+        },
+        {
+          "turn_idx": 3,
+          "query": "What was its change between 2021 and 2022?",
+          "pred": 1,
+          "confidence": 0.2099150937292149,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7901
+        },
+        {
+          "turn_idx": 4,
+          "query": "What was its percentage change between 2024 and 2025?",
+          "pred": 1,
+          "confidence": 0.17871241582679642,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8213
+        },
+        {
+          "turn_idx": 5,
+          "query": "What were the finance leases?",
+          "pred": 1,
+          "confidence": 0.26205231728826517,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7379
+        },
+        {
+          "turn_idx": 6,
+          "query": "2022",
+          "pred": 1,
+          "confidence": 0.5545682902775639,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4454
+        },
+        {
+          "turn_idx": 7,
+          "query": "What was its change between 2022 and 2023?",
+          "pred": 1,
+          "confidence": 0.6769914977850405,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.323
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0001",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Why are performance measures not attached to sign-on and retention rights?",
+          "pred": 1,
+          "confidence": 0.7458494417042824,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2542
+        },
+        {
+          "turn_idx": 1,
+          "query": "Are there any requirements to fulfil to gain access to the performance rights under the Recognition share plan?",
+          "pred": 1,
+          "confidence": 0.11401678509952828,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.886
+        },
+        {
+          "turn_idx": 2,
+          "query": "What is the outstanding number of rights in 2019?",
+          "pred": 0,
+          "confidence": 0.7612910554306501,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.2387
+        },
+        {
+          "turn_idx": 3,
+          "query": "At end of period.",
+          "pred": 1,
+          "confidence": 0.19364576238750764,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8064
+        },
+        {
+          "turn_idx": 4,
+          "query": "What is its average number for 2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.1502683881764787,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8497
+        },
+        {
+          "turn_idx": 5,
+          "query": "What is the difference in the number of rights between 2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.1823911286059976,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8176
+        },
+        {
+          "turn_idx": 6,
+          "query": "Granted during the period.",
+          "pred": 1,
+          "confidence": 0.9260332445747345,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.074
+        },
+        {
+          "turn_idx": 7,
+          "query": "What is the percentage increase in the number of rights 'outstanding at the start of period' in that period?",
+          "pred": 1,
+          "confidence": 0.4126702903258047,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5873
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0002",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What was the market price per share of Prozone at 31 December 2019?",
+          "pred": 0,
+          "confidence": 0.7900638140447952,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.2099
+        },
+        {
+          "turn_idx": 1,
+          "query": "What is the Prozone pre-impairment carrying value at that date?",
+          "pred": 1,
+          "confidence": 0.5530664739615626,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4469
+        },
+        {
+          "turn_idx": 2,
+          "query": "What does investment in associates comprise of?",
+          "pred": 1,
+          "confidence": 0.8116790709861179,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1883
+        },
+        {
+          "turn_idx": 3,
+          "query": "What is the percentage change in the total investment in associates from 2018 to 2019?",
+          "pred": 1,
+          "confidence": 0.5797969090435815,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4202
+        },
+        {
+          "turn_idx": 4,
+          "query": "From 31 December 2018 to 31 December 2019?",
+          "pred": 1,
+          "confidence": 0.33309976508592687,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6669
+        },
+        {
+          "turn_idx": 5,
+          "query": "How about that from 1 January 2018 to 1 January 2019?",
+          "pred": 1,
+          "confidence": 0.8766065059454219,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1234
+        },
+        {
+          "turn_idx": 6,
+          "query": "In which year is there a greater foreign exchange movement?",
+          "pred": 1,
+          "confidence": 0.18874251192976166,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8113
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0003",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the components of net cash flows recorded?",
+          "pred": 1,
+          "confidence": 0.6568966783989914,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.3431
+        },
+        {
+          "turn_idx": 1,
+          "query": "What was the reason for the increase in net cash?",
+          "pred": 1,
+          "confidence": 0.11487309030358483,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8851
+        },
+        {
+          "turn_idx": 2,
+          "query": "Net cash used in investing activities.",
+          "pred": 1,
+          "confidence": 0.6979097556427255,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3021
+        },
+        {
+          "turn_idx": 3,
+          "query": "How about that in net cash provided by operating activities?",
+          "pred": 1,
+          "confidence": 0.8629371862344843,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1371
+        },
+        {
+          "turn_idx": 4,
+          "query": "Which year was its amount higher?",
+          "pred": 1,
+          "confidence": 0.78503627431655,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.215
+        },
+        {
+          "turn_idx": 5,
+          "query": "What was its percentage change from 2017 to 2018?",
+          "pred": 1,
+          "confidence": 0.9153862250370977,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0846
+        },
+        {
+          "turn_idx": 6,
+          "query": "How about that in net cash provided by financing activities?",
+          "pred": 1,
+          "confidence": 0.16363201179758358,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8364
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0004",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Where does the company file income tax returns in?",
+          "pred": 1,
+          "confidence": 0.6138993484918054,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3861
+        },
+        {
+          "turn_idx": 1,
+          "query": "What was the amount of accrued interest or penalties related to uncertain tax positions as of December 31, 2019?",
+          "pred": 1,
+          "confidence": 0.6628933764563945,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3371
+        },
+        {
+          "turn_idx": 2,
+          "query": "Why would the unrecognized tax benefits, if recognized, not impact the company's effective tax rate?",
+          "pred": 1,
+          "confidence": 0.44031444220321136,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5597
+        },
+        {
+          "turn_idx": 3,
+          "query": "What was the average unrecognized tax benefit - beginning balance?",
+          "pred": 1,
+          "confidence": 0.8950570224832786,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1049
+        },
+        {
+          "turn_idx": 4,
+          "query": "Across the 3 year period from 2017 to 2019.",
+          "pred": 1,
+          "confidence": 0.9215655383330061,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0784
+        },
+        {
+          "turn_idx": 5,
+          "query": "Which of the years had its amount of greated than $8,200 thousand?",
+          "pred": 1,
+          "confidence": 0.17203988751499621,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.828
+        },
+        {
+          "turn_idx": 6,
+          "query": "What is its total amount across all 3 years?",
+          "pred": 1,
+          "confidence": 0.7417690205174728,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2582
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0005",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What was the objective of the instruments?",
+          "pred": 1,
+          "confidence": 0.6430413978276888,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.357
+        },
+        {
+          "turn_idx": 1,
+          "query": "What was the maturity date of the Company's Variable Rate Loans?",
+          "pred": 1,
+          "confidence": 0.040973923520400746,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.959
+        },
+        {
+          "turn_idx": 2,
+          "query": "What was the Total interest expense, net presented in the consolidated statements of income in which the effects of cash flow hedges are recorded?",
+          "pred": 0,
+          "confidence": 0.0850511342819027,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.9149
+        },
+        {
+          "turn_idx": 3,
+          "query": "In 2020, 2018 and 2017 respectively.",
+          "pred": 1,
+          "confidence": 0.728432431730574,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2716
+        },
+        {
+          "turn_idx": 4,
+          "query": "In which period was it less than 140 million?",
+          "pred": 1,
+          "confidence": 0.11201748055233052,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.888
+        },
+        {
+          "turn_idx": 5,
+          "query": "What was its change between 2017 and 2018?",
+          "pred": 1,
+          "confidence": 0.8624702392111779,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1375
+        },
+        {
+          "turn_idx": 6,
+          "query": "What was the change in the Amount recognized in other comprehensive (loss) income in that period?",
+          "pred": 1,
+          "confidence": 0.6275355920928253,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3725
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0006",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How many shares PSUs in February 2016?",
+          "pred": 1,
+          "confidence": 0.7983798782221834,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2016
+        },
+        {
+          "turn_idx": 1,
+          "query": "PSUs granted.",
+          "pred": 1,
+          "confidence": 0.6603138254854972,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3397
+        },
+        {
+          "turn_idx": 2,
+          "query": "How about that in December 2019?",
+          "pred": 1,
+          "confidence": 0.4356670359270247,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5643
+        },
+        {
+          "turn_idx": 3,
+          "query": "What is its percentage difference between February 2016 and October 2018?",
+          "pred": 1,
+          "confidence": 0.9391183069796406,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0609
+        },
+        {
+          "turn_idx": 4,
+          "query": "What is its total number in April and December 2019 altogether?",
+          "pred": 1,
+          "confidence": 0.3803346220565632,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6197
+        },
+        {
+          "turn_idx": 5,
+          "query": "How many shares have been vested?",
+          "pred": 1,
+          "confidence": 0.20762301645700854,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7924
+        },
+        {
+          "turn_idx": 6,
+          "query": "2019",
+          "pred": 1,
+          "confidence": 0.5712045632962802,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4288
+        },
+        {
+          "turn_idx": 7,
+          "query": "What is the total number of shares as of December 31, 2019 and 2018?",
+          "pred": 1,
+          "confidence": 0.38724617066100553,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6128
+        },
+        {
+          "turn_idx": 8,
+          "query": "Nonvested shares.",
+          "pred": 1,
+          "confidence": 0.20306557084754218,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7969
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0007",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How was foreign tax credit carryforwards calculated?",
+          "pred": 1,
+          "confidence": 0.702277418598892,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2977
+        },
+        {
+          "turn_idx": 1,
+          "query": "What was the last fiscal year of expiration for tax credit carryforwards? ",
+          "pred": 1,
+          "confidence": 0.1726277273578969,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8274
+        },
+        {
+          "turn_idx": 2,
+          "query": "Domestic-state tax credit carryforwards.",
+          "pred": 1,
+          "confidence": 0.4398422679430062,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5602
+        },
+        {
+          "turn_idx": 3,
+          "query": "What was the amount of domestic-state carryforwards?",
+          "pred": 1,
+          "confidence": 0.3857862429434231,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6142
+        },
+        {
+          "turn_idx": 4,
+          "query": "Income tax net operating loss carryforwards.",
+          "pred": 1,
+          "confidence": 0.8648061411727455,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1352
+        },
+        {
+          "turn_idx": 5,
+          "query": "What was the sum of all of these carryforwards?",
+          "pred": 1,
+          "confidence": 0.8543013049489492,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1457
+        },
+        {
+          "turn_idx": 6,
+          "query": "How about that of all Tax credit carryforwards?",
+          "pred": 1,
+          "confidence": 0.8875291218184996,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1125
+        },
+        {
+          "turn_idx": 7,
+          "query": "What was the domestic-state tax credit carryforwards as a ratio of domestic-federal tax credit carryforwards?",
+          "pred": 1,
+          "confidence": 0.8458686794632923,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1541
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0008",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What was the Net income attributable to American Tower Corporation stockholders?",
+          "pred": 0,
+          "confidence": 0.13156022901898412,
+          "pred_clean": 0,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.8684
+        },
+        {
+          "turn_idx": 1,
+          "query": "2019",
+          "pred": 0,
+          "confidence": 0.7360715351306903,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.2639
+        },
+        {
+          "turn_idx": 2,
+          "query": "What was its percentage change between 2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.8485767857719896,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1514
+        },
+        {
+          "turn_idx": 3,
+          "query": "What was the change in Dilutive securities in that period?",
+          "pred": 1,
+          "confidence": 0.8861056924485959,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1139
+        },
+        {
+          "turn_idx": 4,
+          "query": "What was the weighted average common shares outstanding in 2018?",
+          "pred": 1,
+          "confidence": 0.8482890879485224,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1517
+        },
+        {
+          "turn_idx": 5,
+          "query": "Basic weighted average common shares outstanding.",
+          "pred": 1,
+          "confidence": 0.27118378557838463,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7288
+        },
+        {
+          "turn_idx": 6,
+          "query": "What were the Dividends on preferred stock in 2017?",
+          "pred": 1,
+          "confidence": 0.5711533501845807,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4288
+        },
+        {
+          "turn_idx": 7,
+          "query": "What was the change in net income attributable to American Tower Corporation common stockholders per common share between 2017 and 2018?",
+          "pred": 1,
+          "confidence": 0.9685580446415318,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0314
+        },
+        {
+          "turn_idx": 8,
+          "query": "Basic net income attributable to American Tower Corporation common stockholders per common share.",
+          "pred": 1,
+          "confidence": 0.7746739600552662,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2253
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0009",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What was the net income in 2018?",
+          "pred": 0,
+          "confidence": 0.3780865610130353,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.6219
+        },
+        {
+          "turn_idx": 1,
+          "query": "What was the Weighted-average common shares outstanding in 2017?",
+          "pred": 0,
+          "confidence": 0.5081475923540462,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.4919
+        },
+        {
+          "turn_idx": 2,
+          "query": "Basic",
+          "pred": 1,
+          "confidence": 0.23352098579372327,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7665
+        },
+        {
+          "turn_idx": 3,
+          "query": "Which years does the table provide information for the basic and diluted weighted-average number of shares of common stock?",
+          "pred": 1,
+          "confidence": 0.14191255300553118,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8581
+        },
+        {
+          "turn_idx": 4,
+          "query": "What was the change in the diluted weighted-average number of shares between 2017 and 2018?",
+          "pred": 1,
+          "confidence": 0.37854864377778863,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6215
+        },
+        {
+          "turn_idx": 5,
+          "query": "What was the change in the Assumed conversion between 2017 and 2019?",
+          "pred": 1,
+          "confidence": 0.6586205662659005,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3414
+        },
+        {
+          "turn_idx": 6,
+          "query": "The Assumed conversion of employee stock grants.",
+          "pred": 1,
+          "confidence": 0.5741147015342903,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4259
+        },
+        {
+          "turn_idx": 7,
+          "query": "What was the percentage change in the Net income per diluted share between 2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.531558718752329,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4684
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0010",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What does the table represent?",
+          "pred": 1,
+          "confidence": 0.6766792417817444,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3233
+        },
+        {
+          "turn_idx": 1,
+          "query": "What years are reported by the table?",
+          "pred": 1,
+          "confidence": 0.44815233110670283,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5518
+        },
+        {
+          "turn_idx": 2,
+          "query": "What is the total assets for year 2019?",
+          "pred": 1,
+          "confidence": 0.6494407485483527,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3506
+        },
+        {
+          "turn_idx": 3,
+          "query": "What is its percentage change from 2018 to 2019?",
+          "pred": 1,
+          "confidence": 0.7848611857029565,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2151
+        },
+        {
+          "turn_idx": 4,
+          "query": "What is its average for 2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.32412046977753195,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6759
+        },
+        {
+          "turn_idx": 5,
+          "query": "What is the unrevised value for 2018?",
+          "pred": 1,
+          "confidence": 0.774124235650824,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2259
+        },
+        {
+          "turn_idx": 6,
+          "query": "Food Care.",
+          "pred": 1,
+          "confidence": 0.12164725122541109,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8784
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0011",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are strategic alternative evaluation costs primarily related to?",
+          "pred": 1,
+          "confidence": 0.6825080924089602,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3175
+        },
+        {
+          "turn_idx": 1,
+          "query": "How about Qdoba evaluation consulting costs?",
+          "pred": 1,
+          "confidence": 0.6298681287027141,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3701
+        },
+        {
+          "turn_idx": 2,
+          "query": "What is the total costs incurred?",
+          "pred": 1,
+          "confidence": 0.9244836900993028,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0755
+        },
+        {
+          "turn_idx": 3,
+          "query": "2019",
+          "pred": 1,
+          "confidence": 0.860582537864012,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1394
+        },
+        {
+          "turn_idx": 4,
+          "query": "What is its difference between 2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.08070710424080274,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9193
+        },
+        {
+          "turn_idx": 5,
+          "query": "What is its average for 2017,2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.7216740674165782,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2783
+        },
+        {
+          "turn_idx": 6,
+          "query": "For 2018, what is the percentage of constitution of costs among the total cost?",
+          "pred": 1,
+          "confidence": 0.7406301623852736,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2594
+        },
+        {
+          "turn_idx": 7,
+          "query": "Employee severance and related costs.",
+          "pred": 1,
+          "confidence": 0.35928249579734095,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6407
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0012",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "According to the information, who is Cloudmark?",
+          "pred": 1,
+          "confidence": 0.684216449924147,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3158
+        },
+        {
+          "turn_idx": 1,
+          "query": "How will this acquisition benefit Proofpoint?",
+          "pred": 1,
+          "confidence": 0.7514244607348037,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2486
+        },
+        {
+          "turn_idx": 2,
+          "query": "How long is the estimated useful life for the Goodwill?",
+          "pred": 1,
+          "confidence": 0.2212261217477559,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7788
+        },
+        {
+          "turn_idx": 3,
+          "query": "What is the difference in fair value between current assets and fixed assets?",
+          "pred": 1,
+          "confidence": 0.936601048236212,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0634
+        },
+        {
+          "turn_idx": 4,
+          "query": "What is the average fair value of Order backlog?",
+          "pred": 1,
+          "confidence": 0.9095907071974987,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0904
+        },
+        {
+          "turn_idx": 5,
+          "query": "What is the total fair value of all the liabilities assumed?",
+          "pred": 1,
+          "confidence": 0.8632399423798673,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1368
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0013",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the respective cash amount at June 30 and December 31, 2019?",
+          "pred": 0,
+          "confidence": 0.0847487593175269,
+          "pred_clean": 0,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.9153
+        },
+        {
+          "turn_idx": 1,
+          "query": "What is the change between them?",
+          "pred": 1,
+          "confidence": 0.1242390271883238,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8758
+        },
+        {
+          "turn_idx": 2,
+          "query": "What are the respective working capital adjustment at those two dates?",
+          "pred": 1,
+          "confidence": 0.413981600749049,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.586
+        },
+        {
+          "turn_idx": 3,
+          "query": "How about the total fair value of consideration transferred?",
+          "pred": 1,
+          "confidence": 0.27826493470621927,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7217
+        },
+        {
+          "turn_idx": 4,
+          "query": "What is the percentage change between them?",
+          "pred": 1,
+          "confidence": 0.9101224488095013,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0899
+        },
+        {
+          "turn_idx": 5,
+          "query": "How about that in the working capital adjustment at June 30 and December 31, 2019?",
+          "pred": 1,
+          "confidence": 0.20902138714030039,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.791
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0014",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the number of freehold investment properties on which the Group has obtained external valuations?",
+          "pred": 0,
+          "confidence": 0.2399999589750914,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.76
+        },
+        {
+          "turn_idx": 1,
+          "query": "What is the average freehold valuation for 2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.5970328058649547,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.403
+        },
+        {
+          "turn_idx": 2,
+          "query": "Internal valuation.",
+          "pred": 1,
+          "confidence": 0.9513846664589242,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0486
+        },
+        {
+          "turn_idx": 3,
+          "query": "What was the leasehold external and internal valuation in 2018?",
+          "pred": 1,
+          "confidence": 0.4313261573663981,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5687
+        },
+        {
+          "turn_idx": 4,
+          "query": "How about 2019?",
+          "pred": 1,
+          "confidence": 0.31971262894446095,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6803
+        },
+        {
+          "turn_idx": 5,
+          "query": "What was the change in the leasehold external valuation % from 2018 to 2019?",
+          "pred": 1,
+          "confidence": 0.4941431327218021,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5059
+        },
+        {
+          "turn_idx": 6,
+          "query": "In which year was its value less than 50%?",
+          "pred": 1,
+          "confidence": 0.7740383013202544,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.226
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0015",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What does the distribution of trade receivables and contract assets follow?",
+          "pred": 1,
+          "confidence": 0.7521350243624101,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2479
+        },
+        {
+          "turn_idx": 1,
+          "query": "What is proportion of the 10 largest customers in total trade receivables and contract assets in 2019?",
+          "pred": 1,
+          "confidence": 0.7166007509381993,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2834
+        },
+        {
+          "turn_idx": 2,
+          "query": "What is the total past due for 2019?",
+          "pred": 1,
+          "confidence": 1.0,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0
+        },
+        {
+          "turn_idx": 3,
+          "query": "What is the difference in low and medium country risk due?",
+          "pred": 1,
+          "confidence": 0.5713940050886243,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4286
+        },
+        {
+          "turn_idx": 4,
+          "query": "1-90 days past due.",
+          "pred": 1,
+          "confidence": 0.7123263088732515,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2877
+        },
+        {
+          "turn_idx": 5,
+          "query": "What is the difference between 1-90 and 91-180 days past due?",
+          "pred": 1,
+          "confidence": 0.803420757841947,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1966
+        },
+        {
+          "turn_idx": 6,
+          "query": "In low risk country.",
+          "pred": 1,
+          "confidence": 0.5710208019154729,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.429
+        },
+        {
+          "turn_idx": 7,
+          "query": "How about that between 181-360 and >360 due for all countries?",
+          "pred": 1,
+          "confidence": 0.6008163725853709,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3992
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0016",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What was the income from vessel operations for Teekay LNG in 2019?",
+          "pred": 0,
+          "confidence": 0.6347203037371115,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.3653
+        },
+        {
+          "turn_idx": 1,
+          "query": "How about that in 2018?",
+          "pred": 0,
+          "confidence": 0.3038309927704529,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.6962
+        },
+        {
+          "turn_idx": 2,
+          "query": "What was the increase in the write-down in that year?",
+          "pred": 1,
+          "confidence": 0.6399520708107096,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.36
+        },
+        {
+          "turn_idx": 3,
+          "query": "What is the increase/ (decrease) in Voyage expenses from, 2019 to 2018?",
+          "pred": 1,
+          "confidence": 0.8384151802156979,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1616
+        },
+        {
+          "turn_idx": 4,
+          "query": "How about that in Revenues?",
+          "pred": 1,
+          "confidence": 0.9390682989787977,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0609
+        },
+        {
+          "turn_idx": 5,
+          "query": "In which year was its amount less than 600,000 thousands?",
+          "pred": 1,
+          "confidence": 0.8246495140163608,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1754
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0017",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What program was initiated during fiscal 2019?",
+          "pred": 1,
+          "confidence": 0.10360696746925768,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8964
+        },
+        {
+          "turn_idx": 1,
+          "query": "What charges does the table summarize for the fiscal 2019 program?",
+          "pred": 1,
+          "confidence": 0.10834211141986172,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8917
+        },
+        {
+          "turn_idx": 2,
+          "query": "What are the segments for which the expected, incurred, and remaining charges for the fiscal 2019 program are recorded?",
+          "pred": 1,
+          "confidence": 0.974747156766457,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0253
+        },
+        {
+          "turn_idx": 3,
+          "query": "In which segment was the Charges the largest?",
+          "pred": 1,
+          "confidence": 0.8403378683393758,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1597
+        },
+        {
+          "turn_idx": 4,
+          "query": "The Remaining Expected Charges.",
+          "pred": 1,
+          "confidence": 0.8310427173214758,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.169
+        },
+        {
+          "turn_idx": 5,
+          "query": "What was the difference in total expected charges between Transportation Solutions and Industrial Solutions?",
+          "pred": 1,
+          "confidence": 0.8816415763474561,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1184
+        },
+        {
+          "turn_idx": 6,
+          "query": "What was the average amount of that charges per segment?",
+          "pred": 1,
+          "confidence": 0.8407320884447205,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1593
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0018",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How was the fair value of the options determined?",
+          "pred": 1,
+          "confidence": 0.1383263710082664,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8617
+        },
+        {
+          "turn_idx": 1,
+          "query": "In which years was the number of shares in TORM plc calculated for?",
+          "pred": 1,
+          "confidence": 0.7716251684284642,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2284
+        },
+        {
+          "turn_idx": 2,
+          "query": "How many RSUs were granted during the period to other management?",
+          "pred": 1,
+          "confidence": 0.10930385540281318,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8907
+        },
+        {
+          "turn_idx": 3,
+          "query": "2017",
+          "pred": 1,
+          "confidence": 0.27607523908299103,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7239
+        },
+        {
+          "turn_idx": 4,
+          "query": "Which year has the most number of that amount?",
+          "pred": 1,
+          "confidence": 0.9546755486946794,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0453
+        },
+        {
+          "turn_idx": 5,
+          "query": "What was the change in its number in 2019 from 2018?",
+          "pred": 1,
+          "confidence": 0.724159257773102,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2758
+        },
+        {
+          "turn_idx": 6,
+          "query": "What was it in percentage?",
+          "pred": 1,
+          "confidence": 0.7795201906567825,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2205
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0019",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Which market is the common stock traded at?",
+          "pred": 1,
+          "confidence": 0.18392827130317446,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8161
+        },
+        {
+          "turn_idx": 1,
+          "query": "What symbol does it adopt in the market?",
+          "pred": 1,
+          "confidence": 0.14024835330696228,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8598
+        },
+        {
+          "turn_idx": 2,
+          "query": "How many cash dividends were declared in fiscal 2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.10079171080059879,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8992
+        },
+        {
+          "turn_idx": 3,
+          "query": "What is the difference between the high and low price?",
+          "pred": 1,
+          "confidence": 0.16137530714551185,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8386
+        },
+        {
+          "turn_idx": 4,
+          "query": "In September 29, 2019.",
+          "pred": 1,
+          "confidence": 0.2047066561267049,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7953
+        },
+        {
+          "turn_idx": 5,
+          "query": "What is the percentage increase in the high price?",
+          "pred": 1,
+          "confidence": 0.45454852242453103,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5455
+        },
+        {
+          "turn_idx": 6,
+          "query": "From July 7, 2019 to September 29, 2019.",
+          "pred": 1,
+          "confidence": 0.6209985612556896,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.379
+        },
+        {
+          "turn_idx": 7,
+          "query": "How about the low prices between September 30, 2018 and July 8, 2018?",
+          "pred": 1,
+          "confidence": 0.4890098691113718,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.511
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0020",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Which product offerings were acquired with the EIS Business in 2017?",
+          "pred": 1,
+          "confidence": 0.08808329847309027,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9119
+        },
+        {
+          "turn_idx": 1,
+          "query": "How much was the accrued expenses associated with the Horizon Clinicals and Series2000 Revenue Cycle businesses on the consolidated balance sheets as of December 31, 2018?",
+          "pred": 1,
+          "confidence": 0.05141750491908004,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9486
+        },
+        {
+          "turn_idx": 2,
+          "query": "What was the revenue in 2018?",
+          "pred": 1,
+          "confidence": 0.33234113130686116,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6677
+        },
+        {
+          "turn_idx": 3,
+          "query": "The Software delivery, support and maintenance revenue.",
+          "pred": 1,
+          "confidence": 0.9052097897320749,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0948
+        },
+        {
+          "turn_idx": 4,
+          "query": "What is its change between 2017 and 2018?",
+          "pred": 1,
+          "confidence": 0.7706600841368083,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2293
+        },
+        {
+          "turn_idx": 5,
+          "query": "What is the change in its Cost between 2018 and 2017?",
+          "pred": 1,
+          "confidence": 0.8565455026682978,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1435
+        },
+        {
+          "turn_idx": 6,
+          "query": "How about that in Cost of revenue of Client services?",
+          "pred": 1,
+          "confidence": 0.9007729207292285,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0992
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0021",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the change in the projected benefit obligation of the benefit plans recognized as?",
+          "pred": 1,
+          "confidence": 0.02547487902510348,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9745
+        },
+        {
+          "turn_idx": 1,
+          "query": "What is the remaining estimated life of plan participants?",
+          "pred": 1,
+          "confidence": 0.6021998851845194,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.3978
+        },
+        {
+          "turn_idx": 2,
+          "query": "In which years was the revised mortality tables and projection scales released by the Society of Actuaries adopted?",
+          "pred": 0,
+          "confidence": 0.01574552390593098,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.9843
+        },
+        {
+          "turn_idx": 3,
+          "query": "What is the total special termination benefits charge?",
+          "pred": 1,
+          "confidence": 0.8057221366832831,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1943
+        },
+        {
+          "turn_idx": 4,
+          "query": "In 2018 and 2019.",
+          "pred": 1,
+          "confidence": 0.4752717075285229,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5247
+        },
+        {
+          "turn_idx": 5,
+          "query": "What is the percentage change in cost in 2019 from 2018?",
+          "pred": 1,
+          "confidence": 0.16013311306294098,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8399
+        },
+        {
+          "turn_idx": 6,
+          "query": "Interest cost.",
+          "pred": 1,
+          "confidence": 0.7483643019415365,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2516
+        },
+        {
+          "turn_idx": 7,
+          "query": "Which year has the lowest service cost?",
+          "pred": 1,
+          "confidence": 0.4461844235918515,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5538
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0022",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How are the deferred costs amortised?",
+          "pred": 1,
+          "confidence": 0.050195206646686974,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9498
+        },
+        {
+          "turn_idx": 1,
+          "query": "How long is the period of expected benefit?",
+          "pred": 1,
+          "confidence": 0.8243351678856367,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1757
+        },
+        {
+          "turn_idx": 2,
+          "query": "What are the years included in the table?",
+          "pred": 1,
+          "confidence": 0.5937798315735905,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.4062
+        },
+        {
+          "turn_idx": 3,
+          "query": "What is the percentage change in the costs from 2018 to 2019?",
+          "pred": 1,
+          "confidence": 0.7972069621070692,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2028
+        },
+        {
+          "turn_idx": 4,
+          "query": "The research and development costs incurred.",
+          "pred": 1,
+          "confidence": 0.7205748496262068,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2794
+        },
+        {
+          "turn_idx": 5,
+          "query": "How about that in the total expense relating to operating leases?",
+          "pred": 1,
+          "confidence": 0.8315419112368235,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1685
+        },
+        {
+          "turn_idx": 6,
+          "query": "And that in the finance costs expensed?",
+          "pred": 1,
+          "confidence": 0.8628157596332322,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1372
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0023",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What led to increase in other income, net of expenses in 2019?",
+          "pred": 1,
+          "confidence": 0.6576618889670893,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3423
+        },
+        {
+          "turn_idx": 1,
+          "query": "How about 2018?",
+          "pred": 1,
+          "confidence": 0.6583159577832014,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3417
+        },
+        {
+          "turn_idx": 2,
+          "query": "What was the other income, net of expenses?",
+          "pred": 1,
+          "confidence": 0.19787233091211054,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8021
+        },
+        {
+          "turn_idx": 3,
+          "query": "2017",
+          "pred": 1,
+          "confidence": 0.22337469194289128,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7766
+        },
+        {
+          "turn_idx": 4,
+          "query": "What is the increase/ (decrease) in Research and development funding?",
+          "pred": 1,
+          "confidence": 0.178079441530819,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8219
+        },
+        {
+          "turn_idx": 5,
+          "query": "From 2017 to 2019.",
+          "pred": 1,
+          "confidence": 0.7115600032043283,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2884
+        },
+        {
+          "turn_idx": 6,
+          "query": "What is its average in that period? ",
+          "pred": 1,
+          "confidence": 0.19386018015692863,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8061
+        },
+        {
+          "turn_idx": 7,
+          "query": "How about that of gain on sale of businesses and non-current assets?",
+          "pred": 1,
+          "confidence": 0.732208451452231,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2678
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0024",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the  one-time transition tax on accumulated unrepatriated foreign earnings during the December 2017 quarter?",
+          "pred": 1,
+          "confidence": 0.8007877895681444,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1992
+        },
+        {
+          "turn_idx": 1,
+          "query": "What do capital leases reflect?",
+          "pred": 1,
+          "confidence": 0.3575800835445285,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6424
+        },
+        {
+          "turn_idx": 2,
+          "query": "What do the purchase obligations consist of?",
+          "pred": 1,
+          "confidence": 0.46624380897122086,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5338
+        },
+        {
+          "turn_idx": 3,
+          "query": "What is the percentage of that of more than 5 years in the total?",
+          "pred": 1,
+          "confidence": 0.4788724138776562,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5211
+        },
+        {
+          "turn_idx": 4,
+          "query": "How about that of the operating leases?",
+          "pred": 1,
+          "confidence": 0.47854514009527593,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5215
+        },
+        {
+          "turn_idx": 5,
+          "query": "What is the percentage of capital leases in the total liabilities?",
+          "pred": 1,
+          "confidence": 0.47978736401066735,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5202
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0025",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How much exchange gains did the Group report for the year ended 31 December 2019?",
+          "pred": 1,
+          "confidence": 0.0810381314548212,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.919
+        },
+        {
+          "turn_idx": 1,
+          "query": "What was the amount of USD denominated monetary assets as at 31 December 2019?",
+          "pred": 1,
+          "confidence": 0.07605930021694651,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9239
+        },
+        {
+          "turn_idx": 2,
+          "query": "Monetary assets, current.",
+          "pred": 1,
+          "confidence": 0.8279214746140515,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1721
+        },
+        {
+          "turn_idx": 3,
+          "query": "How about non-USD denominated current monetary assets?",
+          "pred": 1,
+          "confidence": 0.15626260464938868,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8437
+        },
+        {
+          "turn_idx": 4,
+          "query": "What was the total USD denominated monetary assets as at 31 December 2018?",
+          "pred": 1,
+          "confidence": 0.9468427363740961,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0532
+        },
+        {
+          "turn_idx": 5,
+          "query": "How about 2019?",
+          "pred": 1,
+          "confidence": 0.7768200541014307,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2232
+        },
+        {
+          "turn_idx": 6,
+          "query": "How about non-USD denominated current monetary assets as at 31 December 2019?",
+          "pred": 1,
+          "confidence": 0.5542002537697129,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4458
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0026",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How many years is the minimum lifespan of the land and rights-of-way?",
+          "pred": 1,
+          "confidence": 0.7971367257328275,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2029
+        },
+        {
+          "turn_idx": 1,
+          "query": "What is the total depreciation expense incurred by the company between 2017 to 2019?",
+          "pred": 1,
+          "confidence": 0.6944667177182531,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3055
+        },
+        {
+          "turn_idx": 2,
+          "query": "What is the asset impairment loss recognised by the company on PPE between 2017 to 2019?",
+          "pred": 1,
+          "confidence": 0.5538529658291576,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4461
+        },
+        {
+          "turn_idx": 3,
+          "query": "What is the portion of depreciation expense associated with cost of providing services?",
+          "pred": 1,
+          "confidence": 0.9623680039602728,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0376
+        },
+        {
+          "turn_idx": 4,
+          "query": "2019",
+          "pred": 1,
+          "confidence": 0.4671109169343517,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5329
+        },
+        {
+          "turn_idx": 5,
+          "query": "What is the change in accumulated depreciation for PPE between December 31, 2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.5875104945775196,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4125
+        },
+        {
+          "turn_idx": 6,
+          "query": "What is the total network equiption in that period?",
+          "pred": 1,
+          "confidence": 0.3921231976694468,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6079
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0027",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the company's ongoing involvement limited to?",
+          "pred": 1,
+          "confidence": 0.7325198892676371,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2675
+        },
+        {
+          "turn_idx": 1,
+          "query": "What has the component of accounts receivable that consisted of unbilled contract receivables as reported under ASC 605 been reclassified to? ",
+          "pred": 1,
+          "confidence": 0.7879501501453083,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.212
+        },
+        {
+          "turn_idx": 2,
+          "query": "What types of accounts receivable are there?",
+          "pred": 1,
+          "confidence": 0.1421688053433462,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8578
+        },
+        {
+          "turn_idx": 3,
+          "query": "In which year was the accounts receivable larger?",
+          "pred": 1,
+          "confidence": 0.6612376851484103,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3388
+        },
+        {
+          "turn_idx": 4,
+          "query": "The billed accounts receivable",
+          "pred": 1,
+          "confidence": 0.8637078059231181,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1363
+        },
+        {
+          "turn_idx": 5,
+          "query": "What is the sum of amounts billed due on U.S. federal government contracts in 2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.8391278021484032,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1609
+        },
+        {
+          "turn_idx": 6,
+          "query": "What is the average annual amount of current accounts receivable in those years?",
+          "pred": 1,
+          "confidence": 0.4033018696402736,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5967
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0028",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the implication for reserving debit elements?",
+          "pred": 1,
+          "confidence": 0.8600808171366152,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1399
+        },
+        {
+          "turn_idx": 1,
+          "query": "What was the reserve amount in 2019?",
+          "pred": 1,
+          "confidence": 0.4716708930254294,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5283
+        },
+        {
+          "turn_idx": 2,
+          "query": "Legal reserve.",
+          "pred": 1,
+          "confidence": 0.8506159554850853,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1494
+        },
+        {
+          "turn_idx": 3,
+          "query": "What was the cash dividend per share in that year?",
+          "pred": 1,
+          "confidence": 0.5637068928694567,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4363
+        },
+        {
+          "turn_idx": 4,
+          "query": "What is the average Legal reserve within Appropriation of earnings?",
+          "pred": 1,
+          "confidence": 0.7775749581567035,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2224
+        },
+        {
+          "turn_idx": 5,
+          "query": "What is its increase/ (decrease) from 2018 to 2019?",
+          "pred": 1,
+          "confidence": 0.9255326032843992,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0745
+        },
+        {
+          "turn_idx": 6,
+          "query": "How about that in Cash dividends within Appropriation of earnings?",
+          "pred": 1,
+          "confidence": 0.903504054019744,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0965
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0029",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What does the table show?",
+          "pred": 1,
+          "confidence": 0.10574449243024864,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8943
+        },
+        {
+          "turn_idx": 1,
+          "query": "What are the financial items listed in the table?",
+          "pred": 1,
+          "confidence": 0.43837724064839034,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5616
+        },
+        {
+          "turn_idx": 2,
+          "query": "How much is the salaries and fees ?",
+          "pred": 1,
+          "confidence": 0.8783307663157991,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1217
+        },
+        {
+          "turn_idx": 3,
+          "query": "2019",
+          "pred": 1,
+          "confidence": 0.8358347021377917,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1642
+        },
+        {
+          "turn_idx": 4,
+          "query": "What is its average amount between 2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.8907632719311726,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1092
+        },
+        {
+          "turn_idx": 5,
+          "query": "How about that of incentive schemes?",
+          "pred": 1,
+          "confidence": 0.7578708267114935,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2421
+        },
+        {
+          "turn_idx": 6,
+          "query": "What is the difference between these two average amount?",
+          "pred": 1,
+          "confidence": 0.8993547273445185,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1006
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0030",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What was the revenue in the third quarter?",
+          "pred": 0,
+          "confidence": 0.39510556897744387,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.6049
+        },
+        {
+          "turn_idx": 1,
+          "query": "2019",
+          "pred": 1,
+          "confidence": 0.650518241904729,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3495
+        },
+        {
+          "turn_idx": 2,
+          "query": "How about that in the fiscal 2018?",
+          "pred": 1,
+          "confidence": 0.2871566612687615,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7128
+        },
+        {
+          "turn_idx": 3,
+          "query": "What is its change between the second and first quarter in the fiscal year 2019?",
+          "pred": 1,
+          "confidence": 0.9767860016875171,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0232
+        },
+        {
+          "turn_idx": 4,
+          "query": "How much is its amount in the first quarter of Fiscal 2018 as a percentage of the total in that year?",
+          "pred": 1,
+          "confidence": 0.6831919076516038,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3168
+        },
+        {
+          "turn_idx": 5,
+          "query": "What was the gross margin in the fiscal 2019 second quarter?",
+          "pred": 1,
+          "confidence": 0.9307573057877975,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0692
+        },
+        {
+          "turn_idx": 6,
+          "query": "What is the change in the Total Gross Margin?",
+          "pred": 1,
+          "confidence": 0.5993649258545812,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.4006
+        },
+        {
+          "turn_idx": 7,
+          "query": "Between Fiscal 2018 and 2019.",
+          "pred": 1,
+          "confidence": 0.5460117620222418,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.454
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0031",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Why did operating income decrease in fiscal 2019?",
+          "pred": 1,
+          "confidence": 0.6713081231536205,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3287
+        },
+        {
+          "turn_idx": 1,
+          "query": "How much did operating income in the transportation solutions segment change by in 2019?",
+          "pred": 1,
+          "confidence": 0.11304149362895355,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.887
+        },
+        {
+          "turn_idx": 2,
+          "query": "In which years was this amount calculated for?",
+          "pred": 1,
+          "confidence": 0.8986497545032376,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1014
+        },
+        {
+          "turn_idx": 3,
+          "query": "In which year was the amount of acquisition and integration costs larger?",
+          "pred": 1,
+          "confidence": 0.30916412181114705,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6908
+        },
+        {
+          "turn_idx": 4,
+          "query": "What was its change in 2019 from 2018?",
+          "pred": 1,
+          "confidence": 0.29136442182413924,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7086
+        },
+        {
+          "turn_idx": 5,
+          "query": "What was it in percentage?",
+          "pred": 1,
+          "confidence": 0.7333864708486524,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2666
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0032",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What was the increase in free cash flow from 2018 to 2019 driven by?",
+          "pred": 1,
+          "confidence": 0.10684892565086002,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8932
+        },
+        {
+          "turn_idx": 1,
+          "query": "What are the major capital investments in 2019?",
+          "pred": 1,
+          "confidence": 0.0,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 1.0
+        },
+        {
+          "turn_idx": 2,
+          "query": "What was the total amount paid out in final dividends (for FY2018)?",
+          "pred": 0,
+          "confidence": 0.17769163077847538,
+          "pred_clean": 0,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.8223
+        },
+        {
+          "turn_idx": 3,
+          "query": "How many major components are there in the cash flow (affecting net change in cash balance)?",
+          "pred": 1,
+          "confidence": 0.5230981665546415,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4769
+        },
+        {
+          "turn_idx": 4,
+          "query": "What is the average net change in cash balance across the 2 years?",
+          "pred": 0,
+          "confidence": 0.22380904296565185,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.7762
+        },
+        {
+          "turn_idx": 5,
+          "query": "How much of the investing cash outflow was attributed to acquisitions in 2018?",
+          "pred": 1,
+          "confidence": 0.18908132516539378,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8109
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0033",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What was the amount of depreciation expense?",
+          "pred": 1,
+          "confidence": 0.6832899119301804,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.3167
+        },
+        {
+          "turn_idx": 1,
+          "query": "2019",
+          "pred": 1,
+          "confidence": 0.6551909293005387,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3448
+        },
+        {
+          "turn_idx": 2,
+          "query": "In which years was the  Property, Plant, and Equipment, Net calculated for?",
+          "pred": 1,
+          "confidence": 0.3585797776111558,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6414
+        },
+        {
+          "turn_idx": 3,
+          "query": "In which year was its amount larger?",
+          "pred": 1,
+          "confidence": 0.19754476514004282,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8025
+        },
+        {
+          "turn_idx": 4,
+          "query": "What was its change in 2019 from 2018?",
+          "pred": 1,
+          "confidence": 0.4736916638026226,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5263
+        },
+        {
+          "turn_idx": 5,
+          "query": "What was it in percentage?",
+          "pred": 1,
+          "confidence": 0.6905237759461088,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3095
+        },
+        {
+          "turn_idx": 6,
+          "query": "What were the components under Property, plant, and equipment, gross?",
+          "pred": 1,
+          "confidence": 0.7718207167114133,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2282
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0034",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "As of 2019, what is the amount of money accrued for the payment of interest and penalties?",
+          "pred": 1,
+          "confidence": 0.11586326128460656,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8841
+        },
+        {
+          "turn_idx": 1,
+          "query": "What are the amounts of interest and penalties recognized by the company for fiscal years ended April 30, 2019 and 2018 respectively?",
+          "pred": 1,
+          "confidence": 0.7155559985587434,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2844
+        },
+        {
+          "turn_idx": 2,
+          "query": "What is the Balance for 2019?",
+          "pred": 1,
+          "confidence": 0.12573283884377007,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8743
+        },
+        {
+          "turn_idx": 3,
+          "query": "Balance at the beginning of the fiscal year.",
+          "pred": 1,
+          "confidence": 0.46169546499833836,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5383
+        },
+        {
+          "turn_idx": 4,
+          "query": "What is its change between fiscal years 2019 and 2018?",
+          "pred": 1,
+          "confidence": 0.9207051536771641,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0793
+        },
+        {
+          "turn_idx": 5,
+          "query": "Which fiscal year has a higher ending balance at the end of the year?",
+          "pred": 1,
+          "confidence": 0.4445142494436227,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5555
+        },
+        {
+          "turn_idx": 6,
+          "query": "What is its average for fiscal years 2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.6556611271879627,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3443
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0035",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What does the table represent?",
+          "pred": 1,
+          "confidence": 0.7336086796694911,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2664
+        },
+        {
+          "turn_idx": 1,
+          "query": "Which periods are highlighted in the table?",
+          "pred": 1,
+          "confidence": 0.23860557721106868,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7614
+        },
+        {
+          "turn_idx": 2,
+          "query": "How many periods are there?",
+          "pred": 1,
+          "confidence": 0.7165957968811913,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2834
+        },
+        {
+          "turn_idx": 3,
+          "query": "The table highlights the maturities of what types of lease liabilities?",
+          "pred": 1,
+          "confidence": 0.2899423568620295,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.7101
+        },
+        {
+          "turn_idx": 4,
+          "query": "What is the sum of finance leases?",
+          "pred": 1,
+          "confidence": 0.9343633282759453,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0656
+        },
+        {
+          "turn_idx": 5,
+          "query": "From 2020 to 2024.",
+          "pred": 1,
+          "confidence": 0.61715650567083,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3828
+        },
+        {
+          "turn_idx": 6,
+          "query": "What is the percentage change in the amount of leases in 2021 from 2020?",
+          "pred": 1,
+          "confidence": 0.7662224365130853,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2338
+        },
+        {
+          "turn_idx": 7,
+          "query": "Operating leases.",
+          "pred": 1,
+          "confidence": 0.7944499668420748,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2056
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0036",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the respective depreciation expense from continuing operations in 2019 and 2018 respectively?",
+          "pred": 1,
+          "confidence": 0.09050828081809004,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.9095
+        },
+        {
+          "turn_idx": 1,
+          "query": "How about that related to internal use software costs?",
+          "pred": 0,
+          "confidence": 0.23535210103910653,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.7646
+        },
+        {
+          "turn_idx": 2,
+          "query": "What are the respective amounts capitalized to internal use software related to continuing operations in those two years?",
+          "pred": 1,
+          "confidence": 0.6600078292867757,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.34
+        },
+        {
+          "turn_idx": 3,
+          "query": "What is their total amount?",
+          "pred": 1,
+          "confidence": 0.11602121003712274,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.884
+        },
+        {
+          "turn_idx": 4,
+          "query": "How about that of computer equipment and software?",
+          "pred": 1,
+          "confidence": 0.46641174071458114,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5336
+        },
+        {
+          "turn_idx": 5,
+          "query": "What is the average value of computer equipment and software in that period?",
+          "pred": 1,
+          "confidence": 0.6976475400502893,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3024
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0037",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What was the weighted average market value per ordinary share for PSP options exercised in 2019?",
+          "pred": 1,
+          "confidence": 0.7472949945563883,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2527
+        },
+        {
+          "turn_idx": 1,
+          "query": "What was the number of options in 2019?",
+          "pred": 1,
+          "confidence": 0.5549340064329326,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4451
+        },
+        {
+          "turn_idx": 2,
+          "query": "Options granted.",
+          "pred": 1,
+          "confidence": 0.8090339113065788,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.191
+        },
+        {
+          "turn_idx": 3,
+          "query": "For which years were the number of options outstanding at 31 March calculated in?",
+          "pred": 1,
+          "confidence": 0.3272812480112115,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6727
+        },
+        {
+          "turn_idx": 4,
+          "query": "How many items in the table had values provided in 2019 but not in 2018?",
+          "pred": 1,
+          "confidence": 0.9343900543992046,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0656
+        },
+        {
+          "turn_idx": 5,
+          "query": "What was the change in the amount Outstanding in 2019 from 2018?",
+          "pred": 1,
+          "confidence": 0.8511322986682248,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1489
+        },
+        {
+          "turn_idx": 6,
+          "query": "Outstanding at 1 April.",
+          "pred": 1,
+          "confidence": 0.5816606015746788,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4183
+        },
+        {
+          "turn_idx": 7,
+          "query": "What was it in percentage?",
+          "pred": 1,
+          "confidence": 0.551887366401041,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4481
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0038",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How much was the company's income before income tax expense?",
+          "pred": 0,
+          "confidence": 0.03220526864241635,
+          "pred_clean": 0,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.9678
+        },
+        {
+          "turn_idx": 1,
+          "query": "2019",
+          "pred": 1,
+          "confidence": 0.5526371175743746,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4474
+        },
+        {
+          "turn_idx": 2,
+          "query": "Which years does the table provide information for Components of income tax expense? ",
+          "pred": 1,
+          "confidence": 0.16821942064735673,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8318
+        },
+        {
+          "turn_idx": 3,
+          "query": "How many years did the income tax expense exceed $2 thousand? ",
+          "pred": 1,
+          "confidence": 0.382150693315617,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.6178
+        },
+        {
+          "turn_idx": 4,
+          "query": "The Current income tax expense.",
+          "pred": 1,
+          "confidence": 0.8192714190739483,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1807
+        },
+        {
+          "turn_idx": 5,
+          "query": "What was the deferred income tax expense in 2019?",
+          "pred": 1,
+          "confidence": 0.4151550355479102,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5848
+        },
+        {
+          "turn_idx": 6,
+          "query": "The Federal deferred income tax expense.",
+          "pred": 1,
+          "confidence": 0.18282628516821087,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8172
+        },
+        {
+          "turn_idx": 7,
+          "query": "What was its change between 2018 and 2019?",
+          "pred": 1,
+          "confidence": 0.5816384451004415,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.4184
+        },
+        {
+          "turn_idx": 8,
+          "query": "What was the percentage change in the Income tax expense in that period?",
+          "pred": 1,
+          "confidence": 0.4925601624859548,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5074
+        }
+      ]
+    },
+    {
+      "conv_id": "pacific_0039",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How does the company define ROIC?",
+          "pred": 0,
+          "confidence": 0.4293908377337138,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.5706
+        },
+        {
+          "turn_idx": 1,
+          "query": "How often does the company review their internal calculation of WACC?",
+          "pred": 1,
+          "confidence": 0.47063906825202195,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.5294
+        },
+        {
+          "turn_idx": 2,
+          "query": "What was the average invested capital in 2018?",
+          "pred": 0,
+          "confidence": 0.8650873339872776,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.1349
+        },
+        {
+          "turn_idx": 3,
+          "query": "What was its percentage change from 2018 to 2019?",
+          "pred": 0,
+          "confidence": 0.2137198283738473,
+          "pred_clean": 0,
+          "pred_adv": 1,
+          "defense_flag": true,
+          "defended_pred": 0,
+          "anomaly_score": 0.7863
+        },
+        {
+          "turn_idx": 4,
+          "query": "How about that in the WACC?",
+          "pred": 1,
+          "confidence": 0.7986613072133261,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2013
+        },
+        {
+          "turn_idx": 5,
+          "query": "What was the change in the Adjusted operating income (tax effected) in that period?",
+          "pred": 1,
+          "confidence": 0.19847801990474356,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 0.8015
+        }
+      ]
+    }
+  ]
+}
