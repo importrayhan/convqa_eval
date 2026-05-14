@@ -1,9 +1,8 @@
 {
   "benchmark": "pacific",
   "track": "cnp",
-  "test": "randomization",
-  "n_iter": 10000,
   "n_queries": 272,
+  "n_systems": 3,
   "systems": {
     "triangulated_defense": {
       "mean": 0.7830882352941176,
@@ -20,22 +19,58 @@
   },
   "pairwise": {
     "triangulated_defense_vs_triangulated_defense_1.2B": {
-      "p_value": 0.0,
       "mean_diff": 0.5735294117647058,
-      "significant_01": true,
-      "significant_05": true
+      "p_ttest": 6.177642806344403e-26,
+      "p_wilcoxon": 1.1223001173978672e-21,
+      "p_randomization": 0.0,
+      "p_bootstrap": 0.0
     },
     "triangulated_defense_vs_triangulated_defense_ruct": {
-      "p_value": 0.0,
       "mean_diff": 0.5625,
-      "significant_01": true,
-      "significant_05": true
+      "p_ttest": 5.043019251079037e-27,
+      "p_wilcoxon": 2.1348803688858075e-22,
+      "p_randomization": 0.0,
+      "p_bootstrap": 0.0
     },
     "triangulated_defense_1.2B_vs_triangulated_defense_ruct": {
-      "p_value": 0.6617,
       "mean_diff": -0.011029411764705871,
-      "significant_01": false,
-      "significant_05": false
+      "p_ttest": 0.513689180968753,
+      "p_wilcoxon": 0.5126907602619233,
+      "p_randomization": 0.6617,
+      "p_bootstrap": 0.5778
+    }
+  },
+  "friedman": {
+    "chi2": 178.85393258426942,
+    "p_value": 1.4533225292066375e-39
+  },
+  "agreement": {
+    "fleiss_kappa": -0.4327651515151519,
+    "kendalls_w": 0.06817782463538921,
+    "pairwise_kappa": {
+      "triangulated_defense_vs_triangulated_defense_1.2B": 0.0001381940797654524,
+      "triangulated_defense_vs_triangulated_defense_ruct": 0.002968063635284346,
+      "triangulated_defense_1.2B_vs_triangulated_defense_ruct": -0.007052186177715081
+    }
+  },
+  "nll_efficiency": {
+    "triangulated_defense": {
+      "nll": 0.6084,
+      "h_label": 0.5084,
+      "efficiency": -0.1965,
+      "nll_normalized": 1.1965
+    },
+    "triangulated_defense_1.2B": {
+      "nll": 0.8097,
+      "h_label": 0.5084,
+      "efficiency": -0.5925,
+      "nll_normalized": 1.5925
+    },
+    "triangulated_defense_ruct": {
+      "nll": 1.1076,
+      "h_label": 0.5084,
+      "efficiency": -1.1784,
+      "nll_normalized": 2.1784
     }
   }
 }
