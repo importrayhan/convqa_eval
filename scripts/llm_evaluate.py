@@ -397,7 +397,7 @@ def _load_suffix_choices(suffix_file: str, single_suffix: str) -> List[str]:
     return suffixes if suffixes else [single_suffix or ""]
 
 
-def _compute_shift(h_clean, h_adv, logits_clean, logits_adv,
+def _compute_shift_old(h_clean, h_adv, logits_clean, logits_adv,
                    d_hat, r_features, num_classes):
     """Compute the 16-dim shift vector between clean and suffix runs."""
     proj_c = float(np.dot(h_clean, d_hat))
@@ -436,6 +436,190 @@ def _compute_shift(h_clean, h_adv, logits_clean, logits_adv,
         "r_avg_idf": r_features.get("avg_idf", 0),
         "r_coverage": r_features.get("coverage", 0),
     }, flipped > 0.5, pred_c, pred_a
+
+
+def _compute_shift(h_clean, h_adv, logits_clean, logits_adv,
+                   d_hat, r_features, num_classes):
+    """Compute 14-dim shift vector. pred_flipped EXCLUDED (reviewer fix).
+
+    Returns: (shift_dict, is_flipped: bool, pred_clean: int, pred_adv: int)
+    The bool is_flipped is used ONLY for partitioning, never as a feature.
+    """
+    proj_c = float(np.dot(h_clean, d_hat))
+    proj_a = float(np.dot(h_adv, d_hat))
+    hn_c, hn_a = np.linalg.norm(h_clean), np.linalg.norm(h_adv)
+    cos_c = proj_c / max(hn_c, 1e-8)
+    cos_a = proj_a / max(hn_a, 1e-8)
+    h_sim = float(np.dot(h_clean, h_adv) / (max(hn_c, 1e-8) * max(hn_a, 1e-8)))
+
+    n_lab = max(num_classes, 4)
+    cp = np.clip([logits_clean.get(f"label_{i}_prob", 1.0/n_lab)
+                  for i in range(n_lab)], 1e-8, 1)
+    ap = np.clip([logits_adv.get(f"label_{i}_prob", 1.0/n_lab)
+                  for i in range(n_lab)], 1e-8, 1)
+    cp, ap = cp/cp.sum(), ap/ap.sum()
+    kl = float(np.sum(cp * np.log(cp / ap)))
+    js = float(0.5*np.sum(cp*np.log(2*cp/(cp+ap))) +
+               0.5*np.sum(ap*np.log(2*ap/(cp+ap))))
+    pred_c, pred_a = int(np.argmax(cp)), int(np.argmax(ap))
+    flipped = pred_c != pred_a  # bool, NOT included in shift dict
+
+    shift = {
+        "cos_delta": cos_c - cos_a,
+        "proj_delta": proj_c - proj_a,
+        "h_similarity": h_sim,
+        "logit_kl": kl,
+        "logit_js": js,
+        # *** pred_flipped REMOVED — reviewer fix #1 ***
+        "entropy_clean": logits_clean.get("label_entropy", 0),
+        "entropy_adv": logits_adv.get("label_entropy", 0),
+        "entropy_delta": logits_clean.get("label_entropy", 0) - logits_adv.get("label_entropy", 0),
+        "top1_prob_clean": logits_clean.get("top1_prob", 0),
+        "top1_prob_adv": logits_adv.get("top1_prob", 0),
+        "logit_gap_clean": logits_clean.get("logit_gap", 0),
+        "logit_gap_adv": logits_adv.get("logit_gap", 0),
+        "r_avg_idf": r_features.get("avg_idf", 0),
+        "r_coverage": r_features.get("coverage", 0),
+    }
+    return shift, flipped, pred_c, pred_a
+
+class ShiftDenoiser:
+    """Learns D(h_suffix) → h_clean. Includes train/val visualization."""
+
+    def __init__(self):
+        self.model = None
+        self.is_trained = False
+        self.train_history = {"loss": [], "cos_train": [], "cos_val": []}
+
+    def train(self, h_clean_list, h_suffix_list, epochs=100, lr=5e-4,
+              val_fraction=0.15):
+        """Train with held-out validation for denoiser quality check."""
+        import torch
+        import torch.nn as nn
+
+        n = min(len(h_clean_list), len(h_suffix_list))
+        if n < 4:
+            log.warning("Denoiser: too few pairs"); return
+
+        # Train/val split
+        n_val = max(2, int(n * val_fraction))
+        n_train = n - n_val
+        d = h_clean_list[0].shape[-1]
+
+        H_c = torch.tensor(np.vstack(h_clean_list[:n]), dtype=torch.float32)
+        H_s = torch.tensor(np.vstack(h_suffix_list[:n]), dtype=torch.float32)
+        H_c_train, H_c_val = H_c[:n_train], H_c[n_train:]
+        H_s_train, H_s_val = H_s[:n_train], H_s[n_train:]
+
+        bottleneck = min(d, 256)
+        self.model = nn.Sequential(
+            nn.Linear(d, bottleneck), nn.GELU(), nn.LayerNorm(bottleneck),
+            nn.Linear(bottleneck, bottleneck), nn.GELU(),
+            nn.Linear(bottleneck, d))
+        optimizer = torch.optim.AdamW(self.model.parameters(), lr=lr)
+
+        self.model.train()
+        for epoch in range(epochs):
+            R = self.model(H_s_train)
+            loss = nn.functional.mse_loss(H_s_train - R, H_c_train)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+            # Track metrics
+            self.train_history["loss"].append(float(loss.item()))
+            with torch.no_grad():
+                cos_tr = nn.functional.cosine_similarity(
+                    H_s_train - self.model(H_s_train), H_c_train, dim=1).mean()
+                cos_vl = nn.functional.cosine_similarity(
+                    H_s_val - self.model(H_s_val), H_c_val, dim=1).mean()
+                self.train_history["cos_train"].append(float(cos_tr))
+                self.train_history["cos_val"].append(float(cos_vl))
+
+            if epoch % 25 == 0:
+                log.info(f"  Denoiser epoch {epoch}: MSE={loss.item():.6f}  "
+                         f"cos_train={cos_tr:.4f}  cos_val={cos_vl:.4f}")
+
+        self.model.eval()
+        self.is_trained = True
+
+        final_cos_tr = self.train_history["cos_train"][-1]
+        final_cos_vl = self.train_history["cos_val"][-1]
+        log.info(f"  Denoiser trained: n_train={n_train}, n_val={n_val}  "
+                 f"cos_train={final_cos_tr:.4f}  cos_val={final_cos_vl:.4f}")
+
+    def denoise(self, h_input):
+        """Estimate h_clean from h_input."""
+        import torch
+        if not self.is_trained:
+            return h_input
+        x = torch.tensor(h_input, dtype=torch.float32)
+        if x.dim() == 1:
+            x = x.unsqueeze(0)
+        with torch.no_grad():
+            return (x - self.model(x)).squeeze(0).numpy()
+
+    def plot_training(self, output_dir="llm_results", model_name=""):
+        """Visualize denoiser training: loss curve + train/val cosine."""
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        from matplotlib import rcParams
+        from pathlib import Path
+
+        rcParams.update({"font.family": "serif", "font.size": 11})
+
+        fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
+
+        epochs = range(len(self.train_history["loss"]))
+
+        # Panel 1: Loss curve
+        ax = axes[0]
+        ax.plot(epochs, self.train_history["loss"], color="#1565C0", lw=2)
+        ax.set_xlabel("Epoch", fontsize=12)
+        ax.set_ylabel("MSE Loss", fontsize=12)
+        ax.set_title("(a) Denoiser Training Loss", fontsize=13, fontweight="bold")
+        ax.grid(True, alpha=0.15)
+        ax.set_yscale("log")
+
+        # Panel 2: Train vs Val cosine similarity
+        ax = axes[1]
+        ax.plot(epochs, self.train_history["cos_train"],
+                color="#2E7D32", lw=2, label="Train")
+        ax.plot(epochs, self.train_history["cos_val"],
+                color="#C62828", lw=2, label="Validation", linestyle="--")
+        ax.set_xlabel("Epoch", fontsize=12)
+        ax.set_ylabel("cos(D(h_suffix), h_clean)", fontsize=12)
+        ax.set_title("(b) Denoiser Recovery Quality", fontsize=13,
+                     fontweight="bold")
+        ax.legend(fontsize=10)
+        ax.grid(True, alpha=0.15)
+        ax.set_ylim(0, 1.05)
+
+        # Annotate final values
+        final_tr = self.train_history["cos_train"][-1]
+        final_vl = self.train_history["cos_val"][-1]
+        ax.axhline(final_vl, color="#C62828", alpha=0.3, ls=":")
+        ax.text(len(epochs)*0.7, final_vl + 0.03,
+                f"val={final_vl:.3f}", fontsize=10, color="#C62828")
+
+        gap = final_tr - final_vl
+        if gap > 0.05:
+            ax.text(len(epochs)*0.7, final_tr - 0.05,
+                    f"gap={gap:.3f} (overfit risk)",
+                    fontsize=9, color="#FF6F00")
+
+        fig.suptitle(f"Shift Denoiser — {model_name}",
+                     fontsize=14, fontweight="bold")
+        fig.tight_layout(rect=[0, 0, 1, 0.95])
+
+        out = Path(output_dir)
+        out.mkdir(parents=True, exist_ok=True)
+        p = out / "denoiser_training.png"
+        fig.savefig(p, dpi=200, bbox_inches="tight", facecolor="white")
+        plt.close(fig)
+        log.info(f"Denoiser plot: {p}")
+        return str(p)
 
 
 def run_defend(args, model, tokenizer):
@@ -569,6 +753,10 @@ def run_defend(args, model, tokenizer):
                 train_h_clean_pairs.append(out["h_clean"])
                 train_h_adv_pairs.append(out["h_adv"])
 
+    #log.info("\\nTraining shift denoiser D(h_suffix) → h_clean...")
+    #denoiser = ShiftDenoiser()
+    #denoiser.train(train_h_clean_pairs, train_h_adv_pairs, epochs=100)
+
     shift_keys = sorted(train_shifts[0].keys()) if train_shifts else []
     X_train = np.array([[s[k] for k in shift_keys] for s in train_shifts])
     scaler = StandardScaler()
@@ -594,6 +782,59 @@ def run_defend(args, model, tokenizer):
     # ── Phase 2: Test (random suffix from pool) ──────────────────────
     log.info(f"\nPhase 2: Test ({len(raw_test)} convs, "
              f"{len(suffix_choices)} suffix choices)...")
+    def process_turn_inference(conv, rec, suffix, denoiser):
+        '''Single-pass: run LLM on prompt+suffix, denoise to get h_clean.
+
+        Args:
+            conv: conversation dict
+            rec: turn record from parse_sip_for_qpp
+            suffix: the test adversarial suffix to probe with
+            denoiser: trained ShiftDenoiser
+        '''
+        convs_list = conv.get("conversations", conv.get("turns", []))
+        gpt_indices = [i for i, c in enumerate(convs_list)
+                       if c.get("from", c.get("role", "")) == "gpt"]
+        if rec["turn_idx"] >= len(gpt_indices):
+            return None
+        gpt_idx = gpt_indices[rec["turn_idx"]]
+
+        # Build prompt WITH the test suffix (simulates attacked input)
+        adv_msgs = build_classification_prompt(
+            conv, gpt_idx, args.num_classes,
+            adversarial_suffix=suffix)
+
+        # Single LLM pass on the suffix-appended prompt
+        h_dict = extract_hidden_states(model, tokenizer, [adv_msgs],
+                                        layers=[layer], pool=args.pool)
+        if layer not in h_dict or not len(h_dict[layer]):
+            return None
+        h_input = h_dict[layer][0]
+        logits_input = extract_prediction_logits(
+            model, tokenizer, adv_msgs, args.num_classes)
+
+        # Estimate h_clean via denoiser (replaces second LLM pass)
+        h_clean_est = denoiser.denoise(h_input)
+
+        # Build "denoised logits" — use the input logits for both
+        # (the denoiser operates in hidden space, not logit space;
+        #  logit-level features compare input vs denoised-estimate)
+        logits_clean_est = logits_input  # approximation
+
+        r = compute_channel_r(rec["query"], rec["observations"],
+                               scorer=scorer)
+        shift, flipped, pred_c, pred_a = _compute_shift(
+            h_clean_est, h_input, logits_clean_est, logits_input,
+            d_hat, r, args.num_classes)
+
+        return {
+            "shift": shift, "flipped": flipped,
+            "pred_clean": pred_c, "pred_adv": pred_a,
+            "query": rec["query"], "label": rec["label"],
+            "h_clean": h_clean_est, "h_adv": h_input,
+            "turn_idx": rec["turn_idx"],
+            "observations": rec.get("observations", []),
+        }
+
     test_results = []
     for ci, conv in enumerate(tqdm(raw_test, desc="Test")):
         conv_id = conv.get("id", f"{args.benchmark}_{ci:04d}")
