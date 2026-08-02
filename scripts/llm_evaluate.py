@@ -754,8 +754,8 @@ def run_defend(args, model, tokenizer):
                 train_h_adv_pairs.append(out["h_adv"])
 
     #log.info("\\nTraining shift denoiser D(h_suffix) → h_clean...")
-    #denoiser = ShiftDenoiser()
-    #denoiser.train(train_h_clean_pairs, train_h_adv_pairs, epochs=100)
+    denoiser = ShiftDenoiser()
+    denoiser.train(train_h_clean_pairs, train_h_adv_pairs, epochs=100)
 
     shift_keys = sorted(train_shifts[0].keys()) if train_shifts else []
     X_train = np.array([[s[k] for k in shift_keys] for s in train_shifts])
