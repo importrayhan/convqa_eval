@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "team": "",
+    "model": "../Qwen3-0.6B/",
+    "method": "triangulated_defense",
+    "defense": "anomaly_shift",
+    "model_type": "isolation_forest",
+    "features": [
+      "cos_delta",
+      "entropy_adv",
+      "entropy_clean",
+      "entropy_delta",
+      "h_similarity",
+      "logit_gap_adv",
+      "logit_gap_clean",
+      "logit_js",
+      "logit_kl",
+      "proj_delta",
+      "r_avg_idf",
+      "r_coverage",
+      "top1_prob_adv",
+      "top1_prob_clean"
+    ],
+    "config": {
+      "benchmark": "clariq",
+      "per_turn": false,
+      "num_classes": 2,
+      "train_suffix": "\u0406!!!\u4f59\u540d-Clause!!!!!!!!{\r\n!!!orig-",
+      "n_suffix_choices": 4
+    },
+    "per_turn": false,
+    "num_classes": 2
+  },
+  "n_predictions": 269,
+  "n_unmatched": 0,
+  "clarification": {
+    "f1_weighted": 0.8054681452007092,
+    "f1_macro": 0.4929390315503229,
+    "accuracy": 0.7732342007434945,
+    "precision_w": 0.8440162035107607,
+    "recall_w": 0.7732342007434945
+  },
+  "defense": {
+    "asr": 1.0,
+    "tp": 0,
+    "fp": 3,
+    "fn": 0,
+    "tn": 266,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "accuracy": 0.9888475836431226
+  },
+  "defended_clarification": {
+    "f1_weighted": 0.8054681452007092,
+    "f1_macro": 0.4929390315503229,
+    "accuracy": 0.7732342007434945
+  }
+}

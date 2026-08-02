@@ -1,0 +1,51 @@
+{
+  "benchmark": "clariq",
+  "track": "cnp",
+  "n_queries": 269,
+  "n_systems": 2,
+  "systems": {
+    "triangulated_defense": {
+      "mean": 0.7732342007434945,
+      "std": 0.41873986142241554
+    },
+    "triangulated_defense_1.2B": {
+      "mean": 0.7100371747211895,
+      "std": 0.4537448459598637
+    }
+  },
+  "pairwise": {
+    "triangulated_defense_vs_triangulated_defense_1.2B": {
+      "mean_diff": 0.06319702602230493,
+      "p_ttest": 0.08111649856914994,
+      "p_wilcoxon": 0.08113063648894811,
+      "p_randomization": 0.0949,
+      "p_bootstrap": 0.0868
+    }
+  },
+  "friedman": {
+    "chi2": 0,
+    "p_value": 1.0,
+    "note": "need >=3 systems"
+  },
+  "agreement": {
+    "fleiss_kappa": -0.050673244937815214,
+    "kendalls_w": 0.3099709784411277,
+    "pairwise_kappa": {
+      "triangulated_defense_vs_triangulated_defense_1.2B": -0.039370398991336986
+    }
+  },
+  "nll_efficiency": {
+    "triangulated_defense": {
+      "nll": 0.6614,
+      "h_label": 0.292,
+      "efficiency": -1.265,
+      "nll_normalized": 2.265
+    },
+    "triangulated_defense_1.2B": {
+      "nll": 0.8662,
+      "h_label": 0.292,
+      "efficiency": -1.9663,
+      "nll_normalized": 2.9663
+    }
+  }
+}
