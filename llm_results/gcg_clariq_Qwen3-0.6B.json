@@ -1,0 +1,30 @@
+{
+  "mode": "batch",
+  "benchmark": "clariq",
+  "model_path": "../Qwen3-0.6B/",
+  "n_prompts": 10,
+  "target_label": 0,
+  "suffix": "\u0406!!!\u4f59\u540d-Clause!!!!!!!!{\r\n!!!orig-",
+  "gcg_steps": 8,
+  "loss_history": [
+    5.434375,
+    3.0671875,
+    2.396875,
+    2.221875,
+    2.14375,
+    2.0578125,
+    1.8578125,
+    1.3921875
+  ],
+  "successes_history": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    7
+  ],
+  "elapsed_seconds": 285.45143246650696
+}

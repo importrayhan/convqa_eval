@@ -1,0 +1,24 @@
+{
+  "n_total": 450,
+  "n_flipped": 181,
+  "n_flagged": 374,
+  "clarification": {
+    "clean_f1_w": 0.29593734530099614,
+    "adversarial_f1_w": 0.4544950933839823,
+    "defended_f1_w": 0.29593734530099614,
+    "degradation_pp": -15.86,
+    "recovery_pp": -15.86,
+    "recovery_pct": -1585577480.8
+  },
+  "detection": {
+    "asr": 0.0,
+    "tp": 181,
+    "fp": 193,
+    "fn": 0,
+    "tn": 76,
+    "precision": 0.484,
+    "recall": 1.0,
+    "f1": 0.6523,
+    "accuracy": 0.5711
+  }
+}

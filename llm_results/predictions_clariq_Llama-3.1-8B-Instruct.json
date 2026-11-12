@@ -1,0 +1,4340 @@
+{
+  "metadata": {
+    "team": "",
+    "model": "../Llama-3.1-8B-Instruct/Llama-3.1-8B-Instruct/",
+    "method": "triangulated_defense",
+    "defense": "anomaly_shift",
+    "model_type": "isolation_forest",
+    "features": [
+      "cos_delta",
+      "entropy_adv",
+      "entropy_clean",
+      "entropy_delta",
+      "h_similarity",
+      "logit_gap_adv",
+      "logit_gap_clean",
+      "logit_js",
+      "logit_kl",
+      "proj_delta",
+      "r_avg_idf",
+      "r_coverage",
+      "top1_prob_adv",
+      "top1_prob_clean"
+    ],
+    "config": {
+      "benchmark": "clariq",
+      "per_turn": false,
+      "num_classes": 2,
+      "train_suffix": "!!220 \u043d\u0430\u0437\u043d\u0430(__('(',!!!!\u0652********************,:)!\u0e47\u0e19\u0e2d!\u0091);\n!!",
+      "n_suffix_choices": 4
+    },
+    "per_turn": false,
+    "num_classes": 2
+  },
+  "predictions": [
+    {
+      "conv_id": "clariq_0000",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is a raspberry pi? I would like to know more about raspberry pi",
+          "pred": 1,
+          "confidence": 0.4332625048955292,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.5667
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0001",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What software does a raspberry pi use? I would like to know more about raspberry pi",
+          "pred": 1,
+          "confidence": 0.9668770781938109,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0331
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0002",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are hardware options for a raspberry pi? I would like to know more about raspberry pi",
+          "pred": 1,
+          "confidence": 0.9358103707755066,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0642
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0003",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How much does a basic raspberry pi cost? I would like to know more about raspberry pi",
+          "pred": 1,
+          "confidence": 0.7016728404032349,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2983
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0004",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find info about the raspberry pi foundation. I would like to know more about raspberry pi",
+          "pred": 1,
+          "confidence": 0.9327822299510211,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0672
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0005",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find a picture of a raspberry pi. I would like to know more about raspberry pi",
+          "pred": 1,
+          "confidence": 0.8826219046452153,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1174
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0006",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find the home page of the USS Carl Vinson (CVN70) carrier. Give me information on uss carl vinson.",
+          "pred": 0,
+          "confidence": 0.8717919327985318,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.1282
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0007",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Where can I get a cruise book for the USS Carl Vinson? Give me information on uss carl vinson.",
+          "pred": 1,
+          "confidence": 0.9638867066488943,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0361
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0008",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the home port for the USS Carl Vinson? Give me information on uss carl vinson.",
+          "pred": 1,
+          "confidence": 0.8309239133367479,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1691
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0009",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find the home page of the USS Carl Vinson ombudsman. Give me information on uss carl vinson.",
+          "pred": 1,
+          "confidence": 0.8740404525085816,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.126
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0010",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the official PGA rules for golf? What is most importan rule of golf",
+          "pred": 1,
+          "confidence": 0.9318177740989161,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0682
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0011",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the pros and cons of using wind power. I'm looking for wind power",
+          "pred": 1,
+          "confidence": 0.759781817093084,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2402
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0012",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on wind power in the USA. I'm looking for wind power",
+          "pred": 1,
+          "confidence": 0.9117594549535918,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0882
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0013",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on wind power companies. I'm looking for wind power",
+          "pred": 1,
+          "confidence": 0.7760416303868695,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.224
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0014",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on residential (home) wind power. I'm looking for wind power",
+          "pred": 0,
+          "confidence": 0.7151323335341522,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.2849
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0015",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on how wind turbines work. I'm looking for wind power",
+          "pred": 1,
+          "confidence": 0.33485207455893296,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.6651
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0016",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find pictures of wind turbines used for wind power. I'm looking for wind power",
+          "pred": 1,
+          "confidence": 0.9564878293504411,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0435
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0017",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find pictures of a wind farm. I'm looking for wind power",
+          "pred": 1,
+          "confidence": 0.7934180205130414,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2066
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0018",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the treatment options for BPH (benign prostatic hyperplasia)? Tell me about bph treatment",
+          "pred": 1,
+          "confidence": 0.8587860130986523,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1412
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0019",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Which medications are used for BPH? Tell me about bph treatment",
+          "pred": 1,
+          "confidence": 0.857090652520754,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1429
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0020",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What surgical options are used to treat BPH? Tell me about bph treatment",
+          "pred": 1,
+          "confidence": 0.9294968567330573,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0705
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0021",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are some lifestyle measures for managing BPH? Tell me about bph treatment",
+          "pred": 1,
+          "confidence": 0.7293509211683613,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2706
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0022",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the symptoms of BPH? Tell me about bph treatment",
+          "pred": 1,
+          "confidence": 0.9343019688879809,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0657
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0023",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the causes of BPH? Tell me about bph treatment",
+          "pred": 1,
+          "confidence": 0.895996529504514,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.104
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0024",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the side effects of BPH treatments? Tell me about bph treatment",
+          "pred": 1,
+          "confidence": 0.9400472674633237,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.06
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0025",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What went into writing/publishing the book Doctor Zhivago? tell me more about Doctor Zhivago",
+          "pred": 1,
+          "confidence": 0.9602386050337178,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0398
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0026",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find a synopsis of Doctor Zhivago. tell me more about Doctor Zhivago",
+          "pred": 1,
+          "confidence": 0.7741696480743084,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2258
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0027",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Who got an Academy Award nomination for Doctor Zhivago? tell me more about Doctor Zhivago",
+          "pred": 1,
+          "confidence": 0.9013283687319333,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0987
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0028",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Who's in the cast of the Doctor Zhivago movie? tell me more about Doctor Zhivago",
+          "pred": 1,
+          "confidence": 0.7958936315939873,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2041
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0029",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Who was Boris Pasternak and how did his life affect his book? tell me more about Doctor Zhivago",
+          "pred": 1,
+          "confidence": 0.8537531111583483,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1462
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0030",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What DVD versions of the Doctor Zhivago movie are available? tell me more about Doctor Zhivago",
+          "pred": 0,
+          "confidence": 0.7412531730848017,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.2587
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0031",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find job openings for land surveyors. I'm interested to know about land surveyor",
+          "pred": 1,
+          "confidence": 0.9284441731201987,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0716
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0032",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What equipment and tools does a land surveyor use in his job? I'm interested to know about land surveyor",
+          "pred": 1,
+          "confidence": 0.7911631803102364,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2088
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0033",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What education does one need to become a land surveyor? I'm interested to know about land surveyor",
+          "pred": 1,
+          "confidence": 0.8748803850992173,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1251
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0034",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Which schools provide training to become a land surveyor? I'm interested to know about land surveyor",
+          "pred": 1,
+          "confidence": 0.716801067215415,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2832
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0035",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What salary range does a land surveyor receive? I'm interested to know about land surveyor",
+          "pred": 1,
+          "confidence": 0.7745908744121556,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2254
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0036",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the best golf gps device? golf gps",
+          "pred": 1,
+          "confidence": 0.919424494553422,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0806
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0037",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Compare Bushnell, Callaway and Garmin golf gps systems. golf gps",
+          "pred": 1,
+          "confidence": 0.9292468461280813,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0708
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0038",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Is there a golf gps app for the Iphone? golf gps",
+          "pred": 1,
+          "confidence": 0.8389261130200354,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1611
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0039",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on handheld golf gps devices. golf gps",
+          "pred": 1,
+          "confidence": 0.8990835790601063,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1009
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0040",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Is there a golf gps system that can be used world wide? golf gps",
+          "pred": 1,
+          "confidence": 0.9537909348255537,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0462
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0041",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Where can I get a used golf gps device? golf gps",
+          "pred": 1,
+          "confidence": 0.9315577371380306,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0684
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0042",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on home theater room design. Tell me about home theater systems.",
+          "pred": 0,
+          "confidence": 0.8797495857078041,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.1203
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0043",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What home theater systems does Bose offer? Tell me about home theater systems.",
+          "pred": 1,
+          "confidence": 0.963172992286482,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0368
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0044",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about home theater receivers. Tell me about home theater systems.",
+          "pred": 1,
+          "confidence": 0.9275963940456239,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0724
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0045",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about wireless home theater systems. Tell me about home theater systems.",
+          "pred": 1,
+          "confidence": 0.7840249825069776,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.216
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0046",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find reviews of home theater systems. Tell me about home theater systems.",
+          "pred": 1,
+          "confidence": 0.8913357532640946,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1087
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0047",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the symptoms of carpal tunnel syndrome (CTS)? I'm looking for information on carpal tunnel syndrome",
+          "pred": 1,
+          "confidence": 0.9226890150298764,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0773
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0048",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How is CTS treated? I'm looking for information on carpal tunnel syndrome",
+          "pred": 1,
+          "confidence": 0.8585257841281027,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1415
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0049",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How is CTS diagnosed? I'm looking for information on carpal tunnel syndrome",
+          "pred": 1,
+          "confidence": 0.8838024348099365,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1162
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0050",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find the causes of CTS. I'm looking for information on carpal tunnel syndrome",
+          "pred": 1,
+          "confidence": 0.961254063485911,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0387
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0051",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Which exercises can bring relief from CTS? I'm looking for information on carpal tunnel syndrome",
+          "pred": 1,
+          "confidence": 0.9895792484786479,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0104
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0052",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Which activities are prevalent among CTS sufferers? I'm looking for information on carpal tunnel syndrome",
+          "pred": 1,
+          "confidence": 0.8836062907660299,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1164
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0053",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the options for surgically correcting CTS? I'm looking for information on carpal tunnel syndrome",
+          "pred": 1,
+          "confidence": 0.5853919584423128,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.4146
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0054",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the recovery prospects for CTS surgical patients? I'm looking for information on carpal tunnel syndrome",
+          "pred": 1,
+          "confidence": 0.908496408310263,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0915
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0055",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find the phone numbers for units within the Maryland Department of Natural Resources. Info on maryland department of natural resources",
+          "pred": 0,
+          "confidence": 0.7445570190780404,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.2554
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0056",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How do you get a Maryland fishing license? Info on maryland department of natural resources",
+          "pred": 1,
+          "confidence": 0.9163460717757737,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0837
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0057",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What information is available about Maryland parks and recreation? Info on maryland department of natural resources",
+          "pred": 1,
+          "confidence": 0.8114690874662688,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1885
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0058",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the dates for Maryland hunting season? Info on maryland department of natural resources",
+          "pred": 1,
+          "confidence": 0.7694385262913148,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2306
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0059",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about the Maryland Department of Natural Resources police. Info on maryland department of natural resources",
+          "pred": 1,
+          "confidence": 0.8440300317964275,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.156
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0060",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find Maryland DNR fishing reports. Info on maryland department of natural resources",
+          "pred": 1,
+          "confidence": 0.7704311260445948,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2296
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0061",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What movies has Nicolas Cage appeared in? which are famous movies where Nicolas Cage appeared?",
+          "pred": 1,
+          "confidence": 0.5759372340247648,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.4241
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0062",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the next movie Nicolas Cage will appear in? which are famous movies where Nicolas Cage appeared?",
+          "pred": 1,
+          "confidence": 0.8647998233037766,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1352
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0063",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What was the movie Nicolas Cage appeared in that was released in 2011? which are famous movies where Nicolas Cage appeared?",
+          "pred": 1,
+          "confidence": 0.7549456066554466,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2451
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0064",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What solar water fountains are available for gardens. Tell me information about solar water fountains.",
+          "pred": 1,
+          "confidence": 0.9091785925577174,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0908
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0065",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What solar water fountains are available for bird baths. Tell me information about solar water fountains.",
+          "pred": 1,
+          "confidence": 0.964567283813024,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0354
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0066",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What type of pumps are used for solar water fountains? Tell me information about solar water fountains.",
+          "pred": 1,
+          "confidence": 0.9589481948041687,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0411
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0067",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find solar water fountains for sale. Tell me information about solar water fountains.",
+          "pred": 1,
+          "confidence": 0.9540807829773621,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0459
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0068",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Who are the NBA all-time record holders? I'm interested in NBA records",
+          "pred": 1,
+          "confidence": 0.8215748967400528,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1784
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0069",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Get details on NBA single game records. I'm interested in NBA records",
+          "pred": 1,
+          "confidence": 0.6728288715334794,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3272
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0070",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Who holds the NBA record for most assists? I'm interested in NBA records",
+          "pred": 1,
+          "confidence": 0.45379143758733886,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.5462
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0071",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Who holds the NBA career scoring record? I'm interested in NBA records",
+          "pred": 1,
+          "confidence": 0.9658245962098494,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0342
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0072",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What NBA records does Michael Jordan hold? I'm interested in NBA records",
+          "pred": 1,
+          "confidence": 0.9835820707068841,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0164
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0073",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the symptoms and signs of male menopause? I'm looking for information on male menopause",
+          "pred": 1,
+          "confidence": 0.9771138930341274,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0229
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0074",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on male menopause medication. I'm looking for information on male menopause",
+          "pred": 1,
+          "confidence": 0.9733757557953561,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0266
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0075",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the definition of male menopause? I'm looking for information on male menopause",
+          "pred": 1,
+          "confidence": 0.9192317938547607,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0808
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0076",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the medical term for male menopause? I'm looking for information on male menopause",
+          "pred": 1,
+          "confidence": 0.9462266072264706,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0538
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0077",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on male menopause supplements. I'm looking for information on male menopause",
+          "pred": 1,
+          "confidence": 0.9073148601935948,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0927
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0078",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find Pittsburgh Steelers merchandise for sale. I'm looking for black and gold.",
+          "pred": 1,
+          "confidence": 0.7609498862401453,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2391
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0079",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about Purdue University sports program. I'm looking for black and gold.",
+          "pred": 1,
+          "confidence": 0.9056845119899228,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0943
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0080",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on Black Hills gold jewelry. I'm looking for black and gold.",
+          "pred": 1,
+          "confidence": 0.7379760699080771,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.262
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0081",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What attractions are there in Traverse City, Michigan? Tell me about traverse city.",
+          "pred": 1,
+          "confidence": 0.9266851159129793,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0733
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0082",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Get information about Traverse City, Michigan real estate. Tell me about traverse city.",
+          "pred": 1,
+          "confidence": 0.9211401849581305,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0789
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0083",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about hotels in Traverse City, Michigan. Tell me about traverse city.",
+          "pred": 1,
+          "confidence": 0.7608543628355586,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2391
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0084",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about the Traverse City Cherry Festival. Tell me about traverse city.",
+          "pred": 1,
+          "confidence": 0.7892866629937824,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2107
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0085",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the zip code for Traverse City, Michigan? Tell me about traverse city.",
+          "pred": 1,
+          "confidence": 0.9534782421634546,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0465
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0086",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about the Traverse City Record-Eagle. Tell me about traverse city.",
+          "pred": 1,
+          "confidence": 0.9902010321990837,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0098
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0087",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the world's biggest dog? tell me about world's biggest dog",
+          "pred": 1,
+          "confidence": 0.9090960130167152,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0909
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0088",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What commercial hair dyes are available? Tell me about hair dye.",
+          "pred": 1,
+          "confidence": 0.9919655226431922,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.008
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0089",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on making homemade hair dye products. Tell me about hair dye.",
+          "pred": 1,
+          "confidence": 0.9224509632862596,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0775
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0090",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Where can I find organic or chemical free hair dye products? Tell me about hair dye.",
+          "pred": 1,
+          "confidence": 0.809893289067716,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1901
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0091",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What hair dye options should be considered during pregnancy? Tell me about hair dye.",
+          "pred": 1,
+          "confidence": 0.9130103257126951,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.087
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0092",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find reviews of hair dye removers. Tell me about hair dye.",
+          "pred": 1,
+          "confidence": 0.9024589057270971,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0975
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0093",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How do you get a ham radio license? How do you get a ham radio license?",
+          "pred": 1,
+          "confidence": 0.7898669766224201,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2101
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0094",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the ham radio license classes? How do you get a ham radio license?",
+          "pred": 1,
+          "confidence": 0.8734741090816133,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1265
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0095",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How do you build a ham radio station? How do you get a ham radio license?",
+          "pred": 1,
+          "confidence": 0.911756978981238,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0882
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0096",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on ham radio antennas. How do you get a ham radio license?",
+          "pred": 1,
+          "confidence": 0.9642015643437175,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0358
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0097",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the ham radio call signs? How do you get a ham radio license?",
+          "pred": 1,
+          "confidence": 0.8748646763448662,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1251
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0098",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find the web site of Ham Radio Outlet. How do you get a ham radio license?",
+          "pred": 1,
+          "confidence": 0.9503300207198735,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0497
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0099",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about a lump in the throat caused by the thyroid. Find me information about a lump in the throat.",
+          "pred": 1,
+          "confidence": 0.9972622720591655,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0027
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0100",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are some of the causes for a lump in the throat? Find me information about a lump in the throat.",
+          "pred": 1,
+          "confidence": 0.9361938915135718,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0638
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0101",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are some remedies for a lump in the throat? Find me information about a lump in the throat.",
+          "pred": 1,
+          "confidence": 0.5860259664617518,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.414
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0102",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How does anxiety cause the feeling of a lump in the throat? Find me information about a lump in the throat.",
+          "pred": 1,
+          "confidence": 0.782745605216542,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2173
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0103",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about difficulty in swallowing caused by a lump in the throat. Find me information about a lump in the throat.",
+          "pred": 1,
+          "confidence": 0.949346645716847,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0507
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0104",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Which beans can be substituted for cannellini beans? cannellini beans",
+          "pred": 1,
+          "confidence": 0.7599353109014969,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2401
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0105",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How do you cook dried cannellini beans? cannellini beans",
+          "pred": 1,
+          "confidence": 0.37756510991394754,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.6224
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0106",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find recipes using cannellini beans. cannellini beans",
+          "pred": 1,
+          "confidence": 0.5210992220300017,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.4789
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0107",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the nutritional facts for cannellini beans? cannellini beans",
+          "pred": 0,
+          "confidence": 0.8201536959201579,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.1798
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0108",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find pictures of the Afghanistan flag. Find information about afghanistan flag",
+          "pred": 1,
+          "confidence": 0.572130269807321,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.4279
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0109",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What does the Afghanistan flag's national emblem represent? Find information about afghanistan flag",
+          "pred": 1,
+          "confidence": 0.6857765894483241,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3142
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0110",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What does the Afghanistan flag's Arabic inscription mean? Find information about afghanistan flag",
+          "pred": 1,
+          "confidence": 0.7115281270176058,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2885
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0111",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How can I purchase an Afghanistan flag? Find information about afghanistan flag",
+          "pred": 1,
+          "confidence": 0.9656822491312331,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0343
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0112",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find restaurants in Old Town Scottsdale, AZ. old town scottsdale",
+          "pred": 1,
+          "confidence": 0.7942146144350912,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2058
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0113",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Where is Fashion Square in Scottsdale? old town scottsdale",
+          "pred": 1,
+          "confidence": 0.8850526329252469,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1149
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0114",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What restaurants are on Roosevelt Island (NY)? roosevelt island",
+          "pred": 1,
+          "confidence": 0.4043494573642903,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.5957
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0115",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find the Roosevelt Island tram schedule. roosevelt island",
+          "pred": 1,
+          "confidence": 0.7017645121248028,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2982
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0116",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the history of the Roosevelt Island tram? roosevelt island",
+          "pred": 1,
+          "confidence": 0.9070065744895035,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.093
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0117",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find a map of Roosevelt Island (NY). roosevelt island",
+          "pred": 1,
+          "confidence": 0.7387035358223359,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2613
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0118",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find real estate listings for Roosevelt Island (NY). roosevelt island",
+          "pred": 1,
+          "confidence": 0.6781727302747935,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3218
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0119",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Where can I watch the full \"Rain Main\" movie online? Tell me about rain main.",
+          "pred": 1,
+          "confidence": 0.9444266233345069,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0556
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0120",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about the real person on which the Rain Man movie is based. Tell me about rain main.",
+          "pred": 1,
+          "confidence": 0.9262438846811653,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0738
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0121",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find movie reviews of \"Rain Man\". Tell me about rain main.",
+          "pred": 1,
+          "confidence": 0.9495563018045303,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0504
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0122",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find quotes from the \"Rain Man\" movie. Tell me about rain main.",
+          "pred": 1,
+          "confidence": 0.0,
+          "pred_clean": 1,
+          "pred_adv": 0,
+          "defense_flag": true,
+          "defended_pred": 1,
+          "anomaly_score": 1.0
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0123",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find the lyrics to Eminem's \"Rain Man\". Tell me about rain main.",
+          "pred": 1,
+          "confidence": 0.7045801329332773,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2954
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0124",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the shelf life of a chicken egg---that is, how old can it be and still be safe to eat? What is the shelf life of an egg?",
+          "pred": 1,
+          "confidence": 0.9637520857663753,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0362
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0125",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is an occupational therapist? What is an occupational therapist?",
+          "pred": 1,
+          "confidence": 0.8750919880844006,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1249
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0126",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find job openings for occupational therapists. What is an occupational therapist?",
+          "pred": 1,
+          "confidence": 0.9150028092369653,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.085
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0127",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are typical salaries for occupational therapists? What is an occupational therapist?",
+          "pred": 1,
+          "confidence": 0.9202357360645221,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0798
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0128",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about occupational therapy for a child. What is an occupational therapist?",
+          "pred": 1,
+          "confidence": 0.9256051936263894,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0744
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0129",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the requirements to become an occupational therapist? What is an occupational therapist?",
+          "pred": 1,
+          "confidence": 0.9151420983328493,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0849
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0130",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What treatments are available for a tooth abscess? What treatments are available for a tooth abscess?",
+          "pred": 1,
+          "confidence": 0.8672939851175686,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1327
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0131",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the dangers/complications of leaving a tooth abscess untreated? What treatments are available for a tooth abscess?",
+          "pred": 1,
+          "confidence": 0.8212689507970928,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1787
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0132",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the concerns with extracting an abscessed tooth? What treatments are available for a tooth abscess?",
+          "pred": 1,
+          "confidence": 0.7605471921727063,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2395
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0133",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Which antibiotics are used to treat a tooth abscess. What treatments are available for a tooth abscess?",
+          "pred": 0,
+          "confidence": 0.6578161210079374,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.3422
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0134",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find the causes and risk factors of Barrett's Esophagus. Tell me about barrett's esophagus",
+          "pred": 1,
+          "confidence": 0.7922202714046114,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2078
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0135",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What treatments are available for Barrett's Esophagus? Tell me about barrett's esophagus",
+          "pred": 1,
+          "confidence": 0.8297250842196804,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1703
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0136",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the recommended diet for Barrett's Esophagus? Tell me about barrett's esophagus",
+          "pred": 1,
+          "confidence": 0.7114015919320598,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2886
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0137",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Is there a link between Barrett's Esophagus and cancer? Tell me about barrett's esophagus",
+          "pred": 1,
+          "confidence": 0.8182298045670231,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1818
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0138",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find symptoms of Barrett's Esophagus. Tell me about barrett's esophagus",
+          "pred": 1,
+          "confidence": 0.7617993624345389,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2382
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0139",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find pictures of Barrett's Esophagus. Tell me about barrett's esophagus",
+          "pred": 0,
+          "confidence": 0.905682913754754,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.0943
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0140",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find Barret's Esophagus studies performed at the Mayo Clinic. Tell me about barrett's esophagus",
+          "pred": 1,
+          "confidence": 0.7549525868566276,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.245
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0141",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about teddy bear picnics. Tell me about teddy bears.",
+          "pred": 1,
+          "confidence": 0.9121751864198121,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0878
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0142",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Show me teddy bears made by Gund. Tell me about teddy bears.",
+          "pred": 1,
+          "confidence": 0.9556410707443992,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0444
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0143",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find giant teddy bears. Tell me about teddy bears.",
+          "pred": 1,
+          "confidence": 0.7309603376994378,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.269
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0144",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Locate information about teddy bears by Steiff. Tell me about teddy bears.",
+          "pred": 1,
+          "confidence": 0.8210198082957011,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.179
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0145",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Where can I buy teddy bears wholesale? Tell me about teddy bears.",
+          "pred": 1,
+          "confidence": 0.9483250454185546,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0517
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0146",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find summaries of \"Holes\" by Louis Sachar. Find information about holes by louis sachar",
+          "pred": 0,
+          "confidence": 0.7139636141956787,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.286
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0147",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find lesson plans or classroom activities related to \"Holes\" by Louis Sachar. Find information about holes by louis sachar",
+          "pred": 1,
+          "confidence": 0.924769803737739,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0752
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0148",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find reviews of the movie \"Holes\". Find information about holes by louis sachar",
+          "pred": 1,
+          "confidence": 0.3274418793358773,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.6726
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0149",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Who are the characters in the book \"Holes\" by Louis Sachar? Find information about holes by louis sachar",
+          "pred": 0,
+          "confidence": 0.9256990697113926,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.0743
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0150",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find pictures of a hip roof. Find information on hip roof",
+          "pred": 1,
+          "confidence": 0.4651876517989546,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.5348
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0151",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on hip roof trusses. Find information on hip roof",
+          "pred": 1,
+          "confidence": 0.92352520159719,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0765
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0152",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "I'm looking for engineering drawings of a hip roof. Find information on hip roof",
+          "pred": 1,
+          "confidence": 0.872456535604192,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1275
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0153",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the advantages and disadvantages of a hip roof over other roof types? Find information on hip roof",
+          "pred": 1,
+          "confidence": 0.7731311689018455,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2269
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0154",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How do you identify carpenter bees and how are they different from other bees? What is special about Carpenter bees?",
+          "pred": 1,
+          "confidence": 0.6783168040484344,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3217
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0155",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How and where do carpenter bees make their nests? What is special about Carpenter bees?",
+          "pred": 1,
+          "confidence": 0.8491123111888214,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1509
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0156",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How does one get rid of carpenter bees? What is special about Carpenter bees?",
+          "pred": 1,
+          "confidence": 0.7328675566410039,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2671
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0157",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What damage can a carpenter bee do to a home or structure? What is special about Carpenter bees?",
+          "pred": 1,
+          "confidence": 0.9327870125764206,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0672
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0158",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find a picture of a carpenter bee. What is special about Carpenter bees?",
+          "pred": 1,
+          "confidence": 0.8218471627507293,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1782
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0159",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Do carpenter bees sting? What is special about Carpenter bees?",
+          "pred": 1,
+          "confidence": 0.8764683454627031,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1235
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0160",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find a list of the major battles of the American Revolution. tell me more about the american revolutionary",
+          "pred": 1,
+          "confidence": 0.9814649967300493,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0185
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0161",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find a time line of the American Revolution. tell me more about the american revolutionary",
+          "pred": 1,
+          "confidence": 0.7487533873061167,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2512
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0162",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find images of the American Revolution. tell me more about the american revolutionary",
+          "pred": 1,
+          "confidence": 0.9247515276325522,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0752
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0163",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What were the causes of the American revolutionary war? tell me more about the american revolutionary",
+          "pred": 1,
+          "confidence": 0.6812972110945554,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3187
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0164",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the history of the American revolutionary war? tell me more about the american revolutionary",
+          "pred": 1,
+          "confidence": 0.9002887929313874,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0997
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0165",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What were the ten worst tornadoes in the USA? What were the worst tornadoes in the USA?",
+          "pred": 1,
+          "confidence": 0.8742968028885422,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1257
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0166",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Where is tornado alley? What were the worst tornadoes in the USA?",
+          "pred": 1,
+          "confidence": 0.6422317331034979,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3578
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0167",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What damage can an F5 tornado do? What were the worst tornadoes in the USA?",
+          "pred": 1,
+          "confidence": 0.9052752912948858,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0947
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0168",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on tornado shelters. What were the worst tornadoes in the USA?",
+          "pred": 1,
+          "confidence": 0.9336694437904071,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0663
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0169",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What wind speed defines an F5 tornado? What were the worst tornadoes in the USA?",
+          "pred": 1,
+          "confidence": 0.8262552081711013,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1737
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0170",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the lyrics to the song Feliz Navidad? What are the lyrics to feliz navidad?",
+          "pred": 1,
+          "confidence": 0.6044803688742759,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3955
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0171",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How is running beneficial to the health of the human body? What are the benefits of running?",
+          "pred": 1,
+          "confidence": 0.7414672085872438,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2585
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0172",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about Marshall County Schools in West Virginia. Find information about marshall county schools.",
+          "pred": 1,
+          "confidence": 0.9307945895798682,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0692
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0173",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find the Marshall County Schools in Kentucky school calendar Find information about marshall county schools.",
+          "pred": 1,
+          "confidence": 0.8925774226088883,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1074
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0174",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find quotes from Sun Tzu. I'm interested in sun tzu",
+          "pred": 1,
+          "confidence": 0.8738333841332228,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1262
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0175",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find commentary on Sun Tzu's \"The Art of War\". I'm interested in sun tzu",
+          "pred": 1,
+          "confidence": 0.9241738331373189,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0758
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0176",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How does Sun Tzu's \"The Art of War\" apply to business? I'm interested in sun tzu",
+          "pred": 1,
+          "confidence": 0.8354819407532786,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1645
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0177",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find comparisons of Sun Tzu and Machiavelli. I'm interested in sun tzu",
+          "pred": 1,
+          "confidence": 0.7729765711628661,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.227
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0178",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are examples of the philosophy of Sun Tzu? I'm interested in sun tzu",
+          "pred": 1,
+          "confidence": 0.8766313693904705,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1234
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0179",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What activities are good for middle-school-aged children to celebrate Halloween? Tell me about halloween activities for middle school",
+          "pred": 1,
+          "confidence": 0.8291859446060482,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1708
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0180",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find data on how to generally interpret dreams. How can I interpret my dreams",
+          "pred": 1,
+          "confidence": 0.8898149778649719,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1102
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0181",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What do dreams about flying mean? How can I interpret my dreams",
+          "pred": 1,
+          "confidence": 0.9055740793519201,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0944
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0182",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What do dreams about water mean? How can I interpret my dreams",
+          "pred": 1,
+          "confidence": 0.9022256412498391,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0978
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0183",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What do dreams about teeth mean? How can I interpret my dreams",
+          "pred": 1,
+          "confidence": 0.9280130712763902,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.072
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0184",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What do dreams about spiders mean? How can I interpret my dreams",
+          "pred": 1,
+          "confidence": 0.8306478812344139,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1694
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0185",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What do dreams about being chased mean? How can I interpret my dreams",
+          "pred": 1,
+          "confidence": 0.8541456577225705,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1459
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0186",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What do dreams about death mean? How can I interpret my dreams",
+          "pred": 1,
+          "confidence": 0.7144942458831263,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2855
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0187",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find Wilson (Wilson's) Disease Association web site. Give me information on wilson's disease.",
+          "pred": 1,
+          "confidence": 0.8801003608848519,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1199
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0188",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the symptoms of Wilson's disease? Give me information on wilson's disease.",
+          "pred": 1,
+          "confidence": 0.9110010047652256,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.089
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0189",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the relationship between Wilson's disease and zinc? Give me information on wilson's disease.",
+          "pred": 1,
+          "confidence": 0.6621111983512686,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3379
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0190",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What diet should a person with Wilson's disease follow? Give me information on wilson's disease.",
+          "pred": 1,
+          "confidence": 0.8834371571063322,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1166
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0191",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find pictures of the Kayser-Fleischer ring that is a sign of Wilson's disease. Give me information on wilson's disease.",
+          "pred": 1,
+          "confidence": 0.9455695926755143,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0544
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0192",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Is there a genetic basis to Wilson's disease? Give me information on wilson's disease.",
+          "pred": 1,
+          "confidence": 0.9284458122335427,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0716
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0193",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about golf schools. Find information on golf instruction.",
+          "pred": 1,
+          "confidence": 0.9005380073605347,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0995
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0194",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find vacation packages that include golf instruction. Find information on golf instruction.",
+          "pred": 1,
+          "confidence": 0.9672055736491532,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0328
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0195",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What golf instructional videos (DVDs) are available? Find information on golf instruction.",
+          "pred": 0,
+          "confidence": 0.930588137679457,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.0694
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0196",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find online instructions/tips for putting. Find information on golf instruction.",
+          "pred": 1,
+          "confidence": 0.9484318105518227,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0516
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0197",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find lessons on the basics of setup and grip for golf. Find information on golf instruction.",
+          "pred": 1,
+          "confidence": 0.9066623692753081,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0933
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0198",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find details regarding the casualties of the USS Cole bombing Tell me about USS Cole.",
+          "pred": 1,
+          "confidence": 0.75058511056551,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2494
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0199",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Get details on the bombing of the USS Cole. Tell me about USS Cole.",
+          "pred": 1,
+          "confidence": 0.8722955197657871,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1277
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0200",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What were the results of the investigation of the USS Cole bombing? Tell me about USS Cole.",
+          "pred": 1,
+          "confidence": 0.8318538962183518,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1681
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0201",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find the names of the victims of the USS Cole bombing. Tell me about USS Cole.",
+          "pred": 1,
+          "confidence": 0.9279397544875722,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0721
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0202",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What methods were used for the recovery of the USS Cole? Tell me about USS Cole.",
+          "pred": 1,
+          "confidence": 0.8308532083723187,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1691
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0203",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How has African American music influenced history, including cultural history? how has african american music influence history",
+          "pred": 1,
+          "confidence": 0.8331654003883049,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1668
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0204",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the names of the cast members of the television show \"Bewitched\"? What is bewitched cast?",
+          "pred": 1,
+          "confidence": 0.8801774433331545,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1198
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0205",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the names of the cast members of the movie \"Bewitched\"? What is bewitched cast?",
+          "pred": 1,
+          "confidence": 0.3419125834882971,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.6581
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0206",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the lyrics to the theme song for \"Mister Rogers' Neighborhood\"? Find information about mister rogers",
+          "pred": 1,
+          "confidence": 0.9478575119785203,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0521
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0207",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find biographical information for Fred Rogers. Find information about mister rogers",
+          "pred": 1,
+          "confidence": 0.966549034500475,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0335
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0208",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What characters inhabited Mister Rogers' Neighborhood? Find information about mister rogers",
+          "pred": 1,
+          "confidence": 0.8857150242959784,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1143
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0209",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find quotes from Mister Rogers. Find information about mister rogers",
+          "pred": 1,
+          "confidence": 0.9512262642295229,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0488
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0210",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find Mister Rogers videos. Find information about mister rogers",
+          "pred": 1,
+          "confidence": 0.9125514417823167,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0874
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0211",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What songs were sung on \"Mister Rogers' Neighborhood\"? Find information about mister rogers",
+          "pred": 1,
+          "confidence": 0.9234653728572898,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0765
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0212",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information about Mister Rogers' Purple Panda. Find information about mister rogers",
+          "pred": 1,
+          "confidence": 0.7872844714598687,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2127
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0213",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find books on game theory. Tell me about game theory.",
+          "pred": 1,
+          "confidence": 0.7991247460589674,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2009
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0214",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How did John Nash contribute to game theory? Tell me about game theory.",
+          "pred": 1,
+          "confidence": 1.0,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0215",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What's the timeline for the evolution of game theory? Tell me about game theory.",
+          "pred": 0,
+          "confidence": 0.9711272936340655,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.0289
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0216",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How is game theory defined? Tell me about game theory.",
+          "pred": 1,
+          "confidence": 0.8079850944037693,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.192
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0217",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find seminars, symposia, workshops, and/or courses on game theory. Tell me about game theory.",
+          "pred": 1,
+          "confidence": 0.7965255956910459,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2035
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0218",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are examples of problems game theory can be used to solve? Tell me about game theory.",
+          "pred": 1,
+          "confidence": 0.7891341630509912,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2109
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0219",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is a ketogenic diet? What is a ketogenic diet?",
+          "pred": 1,
+          "confidence": 0.3470004035211536,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.653
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0220",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find recipes for a ketogenic diet What is a ketogenic diet?",
+          "pred": 1,
+          "confidence": 0.972280998331211,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0277
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0221",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the side effects of a ketogenic diet? What is a ketogenic diet?",
+          "pred": 1,
+          "confidence": 0.8074462206207953,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1926
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0222",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How does a ketogenic diet help with epilepsy? What is a ketogenic diet?",
+          "pred": 1,
+          "confidence": 0.9093101752950216,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0907
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0223",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How does a ketogenic diet help with weight loss? What is a ketogenic diet?",
+          "pred": 1,
+          "confidence": 0.930828007228738,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0692
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0224",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find a ketogenic diet food list. What is a ketogenic diet?",
+          "pred": 1,
+          "confidence": 0.7793389494545984,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2207
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0225",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What interplanetary missions has NASA implemented or has planned? Tell me about nasa interplanetary missions",
+          "pred": 1,
+          "confidence": 0.7075666161780975,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2924
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0226",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Which foods are rich in magnesium? I'm interested in magnesium rich foods",
+          "pred": 1,
+          "confidence": 0.9887288377025034,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0113
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0227",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the symptoms of a magnesium deficiency? I'm interested in magnesium rich foods",
+          "pred": 0,
+          "confidence": 0.9176257887050286,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.0824
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0228",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the effects of too much magnesium? I'm interested in magnesium rich foods",
+          "pred": 1,
+          "confidence": 0.9894161811587304,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0106
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0229",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find quotes from Fidel Castro. I'm interested in Fidel Castro",
+          "pred": 0,
+          "confidence": 0.9067531633885091,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.0932
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0230",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find biographical information about Fidel Castro. I'm interested in Fidel Castro",
+          "pred": 1,
+          "confidence": 0.9029889217603074,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.097
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0231",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the relationship between Ozzie Guillen and Fidel Castro? I'm interested in Fidel Castro",
+          "pred": 0,
+          "confidence": 0.6141349304385552,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.3859
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0232",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on the health of Fidel Castro. I'm interested in Fidel Castro",
+          "pred": 1,
+          "confidence": 0.8424459570997733,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1576
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0233",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Who are Fidel Castro's family members? I'm interested in Fidel Castro",
+          "pred": 1,
+          "confidence": 0.7601110519012289,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2399
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0234",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the benefits of yoga for kids? tell me about benefits of yoga",
+          "pred": 1,
+          "confidence": 0.8593838925556687,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1406
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0235",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on yoga for seniors. tell me about benefits of yoga",
+          "pred": 0,
+          "confidence": 0.8698250096439281,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.1302
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0236",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Does yoga help with weight loss? tell me about benefits of yoga",
+          "pred": 0,
+          "confidence": 0.9064740098150992,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.0935
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0237",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the benefits of various yoga poses? tell me about benefits of yoga",
+          "pred": 1,
+          "confidence": 0.9278597180827659,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0721
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0238",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the benefits of yoga during pregnancy? tell me about benefits of yoga",
+          "pred": 1,
+          "confidence": 0.8730503257652703,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1269
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0239",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How does yoga benefit runners? tell me about benefits of yoga",
+          "pred": 1,
+          "confidence": 0.8862200551037029,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1138
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0240",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find the benefits of yoga nidra. tell me about benefits of yoga",
+          "pred": 1,
+          "confidence": 0.8061632116160087,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1938
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0241",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How do you identify a Norway Spruce? Tell me about norway spruce.",
+          "pred": 1,
+          "confidence": 0.44493839058889284,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.5551
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0242",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the diseases of the Norway Spruce? Tell me about norway spruce.",
+          "pred": 0,
+          "confidence": 0.8969353132910003,
+          "pred_clean": 0,
+          "pred_adv": 0,
+          "defense_flag": false,
+          "defended_pred": 0,
+          "anomaly_score": 0.1031
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0243",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find information on planting and growing Norway Spruce trees. Tell me about norway spruce.",
+          "pred": 1,
+          "confidence": 0.5875625255744954,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.4124
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0244",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find pictures of Norway Spruce trees. Tell me about norway spruce.",
+          "pred": 1,
+          "confidence": 0.9317398515220052,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0683
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0245",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are some cities/destinations within the Sangre de Cristo mountains region? tell me about sangre de cristo mountains",
+          "pred": 1,
+          "confidence": 0.8654052952140752,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1346
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0246",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are recreational activities available within the Sangre de Cristo mountains region? tell me about sangre de cristo mountains",
+          "pred": 1,
+          "confidence": 0.8133989554650028,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1866
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0247",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find photos of the Sangre de Cristo mountains. tell me about sangre de cristo mountains",
+          "pred": 1,
+          "confidence": 0.9531119187177841,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0469
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0248",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the skiing possibilities in the Sangre de Cristo mountains? tell me about sangre de cristo mountains",
+          "pred": 1,
+          "confidence": 0.7267127658595822,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2733
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0249",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Is there a pass within the Sangre de Cristo mountain range? tell me about sangre de cristo mountains",
+          "pred": 1,
+          "confidence": 0.8134879038114176,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1865
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0250",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find ranches for sale in the Sangre de Cristo mountains area. tell me about sangre de cristo mountains",
+          "pred": 1,
+          "confidence": 0.9075041538376478,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0925
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0251",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What hiking is available in the Sangre de Cristo mountains? tell me about sangre de cristo mountains",
+          "pred": 1,
+          "confidence": 0.9309515634549288,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.069
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0252",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the names of some flowering plants? tell me more flowering plants",
+          "pred": 1,
+          "confidence": 0.9361689123210715,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0638
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0253",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is the definition of a flowering plant? tell me more flowering plants",
+          "pred": 1,
+          "confidence": 0.8791859040145453,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1208
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0254",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Which flowering plants do well in the shade? tell me more flowering plants",
+          "pred": 1,
+          "confidence": 0.6497083420557159,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.3503
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0255",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "When did flowering plants first appear? tell me more flowering plants",
+          "pred": 1,
+          "confidence": 0.990012141872363,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.01
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0256",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find pictures of flowering plants. tell me more flowering plants",
+          "pred": 1,
+          "confidence": 0.7768604434231853,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2231
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0257",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "How can one prevent altitude sickness? Tell me about altitude sickness.",
+          "pred": 1,
+          "confidence": 0.9527703287910726,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0472
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0258",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is altitude sickness? Tell me about altitude sickness.",
+          "pred": 1,
+          "confidence": 0.929832312312632,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0702
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0259",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the treatments for altitude sickness? Tell me about altitude sickness.",
+          "pred": 1,
+          "confidence": 0.8292406392297177,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1708
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0260",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "In which cities is high altitude sickness more likely to occur? Tell me about altitude sickness.",
+          "pred": 1,
+          "confidence": 0.5985921582538354,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.4014
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0261",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What are the medical or health care practices followed by members of the Jehovah's Witnesses religion? I'm interested in the topic of medical care and jehovah's witnesses",
+          "pred": 1,
+          "confidence": 0.8860909631297058,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1139
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0262",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is pink slime? What is pink slime in ground beef",
+          "pred": 1,
+          "confidence": 0.811398819881596,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.1886
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0263",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Who sells ground beef with pink slime in it? What is pink slime in ground beef",
+          "pred": 1,
+          "confidence": 0.9298104932782225,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0702
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0264",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What restaurants use pink slime? What is pink slime in ground beef",
+          "pred": 1,
+          "confidence": 0.7909246766588549,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2091
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0265",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find pictures of pink slime. What is pink slime in ground beef",
+          "pred": 1,
+          "confidence": 0.6740408902604054,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.326
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0266",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "What is ammonia used for in pink slime? What is pink slime in ground beef",
+          "pred": 1,
+          "confidence": 0.7633775214704418,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.2366
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0267",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Is pink slime used in school lunches? What is pink slime in ground beef",
+          "pred": 1,
+          "confidence": 0.9230781575934597,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.0769
+        }
+      ]
+    },
+    {
+      "conv_id": "clariq_0268",
+      "turns": [
+        {
+          "turn_idx": 0,
+          "query": "Find a page that explains how to compute the mean of a set of numbers. How to compute the mean of a set of numbers",
+          "pred": 1,
+          "confidence": 0.9230258270984824,
+          "pred_clean": 1,
+          "pred_adv": 1,
+          "defense_flag": false,
+          "defended_pred": 1,
+          "anomaly_score": 0.077
+        }
+      ]
+    }
+  ]
+}

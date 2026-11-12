@@ -1,0 +1,47 @@
+{
+  "benchmark": "pacific",
+  "model_path": "../Llama-3.1-8B-Instruct/Llama-3.1-8B-Instruct/",
+  "num_classes": 2,
+  "per_turn": true,
+  "total_predictions": 1982,
+  "unparseable": 0,
+  "metrics": {
+    "accuracy": 0.21695257315842584,
+    "precision": 0.6747894631934322,
+    "recall": 0.21695257315842584,
+    "f1": 0.1818528010205188,
+    "auc_roc": 0.0,
+    "false_positive_rates": {
+      "clear": 0.140625,
+      "ambiguous": 0.9067388688327317
+    },
+    "per_class": {
+      "precision": [
+        0.775,
+        0.15432098765432098
+      ],
+      "recall": [
+        0.09326113116726835,
+        0.859375
+      ],
+      "f1": [
+        0.16648764769065522,
+        0.2616555661274976
+      ],
+      "support": [
+        1662,
+        320
+      ]
+    },
+    "confusion_matrix": [
+      [
+        155,
+        1507
+      ],
+      [
+        45,
+        275
+      ]
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "benchmark": "ambrosia",
+  "model_path": "../Qwen3-0.6B/",
+  "num_classes": 2,
+  "per_turn": true,
+  "total_predictions": 3819,
+  "unparseable": 3788,
+  "metrics": {
+    "accuracy": 0.6983503534956795,
+    "precision": 0.5488713801346261,
+    "recall": 0.6983503534956795,
+    "f1": 0.5754431765336826,
+    "auc_roc": 0.0,
+    "false_positive_rates": {
+      "clear": 0.999129677980853,
+      "ambiguous": 0.00149812734082397
+    },
+    "per_class": {
+      "precision": [
+        0.6990036706869428,
+        0.2
+      ],
+      "recall": [
+        0.998501872659176,
+        0.0008703220191470844
+      ],
+      "f1": [
+        0.8223318938926588,
+        0.0017331022530329288
+      ],
+      "support": [
+        2670,
+        1149
+      ]
+    },
+    "confusion_matrix": [
+      [
+        2666,
+        4
+      ],
+      [
+        1148,
+        1
+      ]
+    ]
+  }
+}

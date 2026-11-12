@@ -1,0 +1,47 @@
+{
+  "benchmark": "pacific",
+  "model_path": "../Qwen3-0.6B/",
+  "num_classes": 2,
+  "per_turn": true,
+  "total_predictions": 1982,
+  "unparseable": 1941,
+  "metrics": {
+    "accuracy": 0.8355196770938446,
+    "precision": 0.7232186946960333,
+    "recall": 0.8355196770938446,
+    "f1": 0.7643481423774285,
+    "auc_roc": 0.0,
+    "false_positive_rates": {
+      "clear": 0.996875,
+      "ambiguous": 0.00421179302045728
+    },
+    "per_class": {
+      "precision": [
+        0.8383991894630193,
+        0.125
+      ],
+      "recall": [
+        0.9957882069795427,
+        0.003125
+      ],
+      "f1": [
+        0.9103410341034104,
+        0.006097560975609756
+      ],
+      "support": [
+        1662,
+        320
+      ]
+    },
+    "confusion_matrix": [
+      [
+        1655,
+        7
+      ],
+      [
+        319,
+        1
+      ]
+    ]
+  }
+}

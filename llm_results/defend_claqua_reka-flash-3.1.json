@@ -1,0 +1,16 @@
+{
+  "benchmark": "claqua",
+  "model_path": "../reka-flash-3.1/",
+  "defense": "anomaly_shift",
+  "model_type": "isolation_forest",
+  "train_suffix": " o!!!!!!171!!551 THR privilege Swimming O!!!!!",
+  "n_suffix_choices": 5,
+  "n_train": 450,
+  "n_train_flipped": 0,
+  "n_test": 450,
+  "n_test_normal": 450,
+  "n_test_flipped": 0,
+  "metrics": {
+    "note": "clean=450, adv=0"
+  }
+}

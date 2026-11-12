@@ -1,0 +1,30 @@
+{
+  "mode": "batch",
+  "benchmark": "simmic",
+  "model_path": "../Llama-3.1-8B-Instruct/Llama-3.1-8B-Instruct/",
+  "n_prompts": 28,
+  "target_label": 1,
+  "suffix": "!!!!!!!!emade!!!!!!!!!!!",
+  "gcg_steps": 8,
+  "loss_history": [
+    3.4609375,
+    3.9146205357142856,
+    4.626116071428571,
+    4.763392857142857,
+    4.739955357142857,
+    4.599330357142857,
+    4.481026785714286,
+    4.002790178571429
+  ],
+  "successes_history": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    16
+  ],
+  "elapsed_seconds": 193.56926155090332
+}

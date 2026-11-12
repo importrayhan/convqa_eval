@@ -1,0 +1,79 @@
+{
+  "benchmark": "clariq",
+  "model_path": "../LFM2-1.2B/",
+  "defense": "anomaly_shift",
+  "model_type": "isolation_forest",
+  "n_train": 550,
+  "n_train_flipped": 2,
+  "n_test": 269,
+  "n_test_normal": 268,
+  "n_test_flipped": 1,
+  "metrics": {
+    "tpr": 1.0,
+    "fpr": 0.0037313432835820895,
+    "f1": 0.6666666666666666,
+    "precision": 0.5,
+    "recall": 1.0,
+    "auroc": 1.0
+  },
+  "comparison": {
+    "Ours": {
+      "asr": 0.0,
+      "fp": 1,
+      "tp": 1,
+      "fn": 0,
+      "tn": 267,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "accuracy": 0.9962825278810409
+    },
+    "Unguarded": {
+      "asr": 1.0,
+      "fp": 0,
+      "tp": 0,
+      "fn": 1,
+      "tn": 268,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "accuracy": 0.9962825278810409
+    },
+    "PromptGuard-2": {
+      "asr": 1.0,
+      "fp": 0,
+      "tp": 0,
+      "fn": 1,
+      "tn": 268,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "accuracy": 0.9962825278810409
+    },
+    "GammaGuard": {
+      "asr": 1.0,
+      "fp": 229,
+      "tp": 0,
+      "fn": 1,
+      "tn": 39,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "accuracy": 0.1449814126394052
+    },
+    "PG2+Ours": {
+      "asr": 0.0,
+      "fp": 1,
+      "tp": 1,
+      "fn": 0,
+      "tn": 267,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "accuracy": 0.9962825278810409,
+      "avg_latency_ms": 148.64924140136037,
+      "p50_latency_ms": 88.13595771789551,
+      "p95_latency_ms": 109.62843894958495
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "benchmark": "ambrosia",
+  "model_path": "../Qwen3-0.6B/",
+  "defense": "anomaly_shift",
+  "model_type": "isolation_forest",
+  "n_train": 619,
+  "n_train_flipped": 0,
+  "n_test": 2264,
+  "n_test_normal": 2227,
+  "n_test_flipped": 37,
+  "metrics": {
+    "tpr": 1.0,
+    "fpr": 0.5882352941176471,
+    "f1": 0.05346820809248555,
+    "precision": 0.02746844840386043,
+    "recall": 1.0,
+    "auroc": 0.8118666488670979
+  },
+  "comparison": {
+    "Ours": {
+      "asr": 0.0,
+      "fp": 1310,
+      "tp": 37,
+      "fn": 0,
+      "tn": 917,
+      "precision": 0.02746844840386043,
+      "recall": 1.0,
+      "f1": 0.05346820809248555,
+      "accuracy": 0.4213780918727915
+    },
+    "Unguarded": {
+      "asr": 1.0,
+      "fp": 0,
+      "tp": 0,
+      "fn": 37,
+      "tn": 2227,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "accuracy": 0.9836572438162544
+    },
+    "PromptGuard-2": {
+      "asr": 1.0,
+      "fp": 1,
+      "tp": 0,
+      "fn": 37,
+      "tn": 2226,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "accuracy": 0.9832155477031802
+    },
+    "GammaGuard": {
+      "asr": 0.3513513513513513,
+      "fp": 16,
+      "tp": 24,
+      "fn": 13,
+      "tn": 2211,
+      "precision": 0.6,
+      "recall": 0.6486486486486487,
+      "f1": 0.6233766233766234,
+      "accuracy": 0.9871908127208481
+    },
+    "PG2+Ours": {
+      "asr": 0.0,
+      "fp": 1310,
+      "tp": 37,
+      "fn": 0,
+      "tn": 917,
+      "precision": 0.02746844840386043,
+      "recall": 1.0,
+      "f1": 0.05346820809248555,
+      "accuracy": 0.4213780918727915,
+      "avg_latency_ms": 97.44334010269111,
+      "p50_latency_ms": 80.27219772338867,
+      "p95_latency_ms": 104.52347993850705
+    }
+  }
+}

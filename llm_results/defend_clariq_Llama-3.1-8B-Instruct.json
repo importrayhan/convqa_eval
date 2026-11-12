@@ -1,0 +1,79 @@
+{
+  "benchmark": "clariq",
+  "model_path": "../Llama-3.1-8B-Instruct/Llama-3.1-8B-Instruct/",
+  "defense": "anomaly_shift",
+  "model_type": "isolation_forest",
+  "n_train": 638,
+  "n_train_flipped": 2,
+  "n_test": 269,
+  "n_test_normal": 268,
+  "n_test_flipped": 1,
+  "metrics": {
+    "tpr": 1.0,
+    "fpr": 0.0,
+    "f1": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "auroc": 1.0
+  },
+  "comparison": {
+    "Ours": {
+      "asr": 0.0,
+      "fp": 0,
+      "tp": 1,
+      "fn": 0,
+      "tn": 268,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "accuracy": 1.0
+    },
+    "Unguarded": {
+      "asr": 1.0,
+      "fp": 0,
+      "tp": 0,
+      "fn": 1,
+      "tn": 268,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "accuracy": 0.9962825278810409
+    },
+    "PromptGuard-2": {
+      "asr": 0.0,
+      "fp": 0,
+      "tp": 1,
+      "fn": 0,
+      "tn": 268,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "accuracy": 1.0
+    },
+    "GammaGuard": {
+      "asr": 1.0,
+      "fp": 1,
+      "tp": 0,
+      "fn": 1,
+      "tn": 267,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "accuracy": 0.9925650557620818
+    },
+    "PG2+Ours": {
+      "asr": 0.0,
+      "fp": 0,
+      "tp": 1,
+      "fn": 0,
+      "tn": 268,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "avg_latency_ms": 3137.289376950175,
+      "p50_latency_ms": 3140.700101852417,
+      "p95_latency_ms": 3809.5870971679688
+    }
+  }
+}

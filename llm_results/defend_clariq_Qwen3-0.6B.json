@@ -1,0 +1,14 @@
+{
+  "benchmark": "clariq",
+  "model_path": "../Qwen3-0.6B/",
+  "defense": "anomaly_shift",
+  "model_type": "isolation_forest",
+  "n_train": 450,
+  "n_train_flipped": 0,
+  "n_test": 269,
+  "n_test_normal": 269,
+  "n_test_flipped": 0,
+  "metrics": {
+    "note": "clean=269, adv=0"
+  }
+}

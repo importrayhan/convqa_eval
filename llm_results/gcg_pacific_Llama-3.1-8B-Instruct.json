@@ -1,0 +1,26 @@
+{
+  "mode": "batch",
+  "benchmark": "pacific",
+  "model_path": "../Llama-3.1-8B-Instruct/Llama-3.1-8B-Instruct/",
+  "n_prompts": 55,
+  "target_label": 1,
+  "suffix": ".navCtrl!!!!!!!!!!!!!!!!\u040b(/^\\!\"\n\n",
+  "gcg_steps": 6,
+  "loss_history": [
+    1.8526988636363637,
+    1.5396306818181817,
+    1.17890625,
+    1.048934659090909,
+    0.92421875,
+    0.7482954545454545
+  ],
+  "successes_history": [
+    16,
+    55,
+    45,
+    44,
+    43,
+    44
+  ],
+  "elapsed_seconds": 2026.7965378761292
+}
